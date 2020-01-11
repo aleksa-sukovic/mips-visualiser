@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    base_angular:
+        container_name: mips-visualiser
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/var/www'
+        ports:
+            - '4200:4200'

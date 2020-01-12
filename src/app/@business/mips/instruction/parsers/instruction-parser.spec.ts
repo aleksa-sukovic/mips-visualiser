@@ -1,6 +1,7 @@
 import { RegisterInstructionParser } from './register-instruction-parser';
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
+import { ImmediateInstructionParser } from './immediate-instruction-parser';
 
 describe('Register instruction parser', () => {
     let parser: RegisterInstructionParser;
@@ -54,5 +55,40 @@ describe('Register instruction parser', () => {
         const instruction = 'add $1, $nope, $3';
 
         expect(() => parser.parse(instruction)).toThrow(new RegisterNotFoundException('$nope'));
+    });
+});
+
+describe('Immediate instruction parser', () => {
+    let parser: ImmediateInstructionParser;
+
+    beforeAll(() => {
+        parser = new ImmediateInstructionParser();
+    });
+
+    it('recognizes I-type instructions', ()  => {
+        const instruction1 = 'addi $1, $2, 15';
+        const instruction2 = 'addi $2, $3, -145';
+        const instruction3 = 'addi $v0, $v1, +76';
+
+        expect(parser.match(instruction1)).toBe(true);
+        expect(parser.match(instruction2)).toBe(true);
+        expect(parser.match(instruction3)).toBe(true);
+    });
+
+    it('dismisses instructions of inappropriate type', ()  => {
+        const instruction1 = 'add $1, $2, $3';
+        const instruction2 = 'j 5096';
+        const instruction3 = 'sw $x, 0($y)';
+
+        expect(parser.match(instruction1)).toBe(false);
+        expect(parser.match(instruction2)).toBe(false);
+        expect(parser.match(instruction3)).toBe(false);
+    });
+
+    it('parses I-type instruction', () => {
+        const instruction = 'addi $1, $v1, 15';
+        const binary = '001000,00001,00011,0000000000001111';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });
 });

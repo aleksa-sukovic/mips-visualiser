@@ -7,9 +7,9 @@ export abstract class InstructionParser
     public abstract parse (instruction: string): string;
     public abstract regex (): RegExp;
 
-    public match (instruction: string): boolean
+    public match (value: string): boolean
     {
-        instruction = instruction.replace(/\s\s+/g, ' ');
+        const instruction = value.replace(/\s\s+/g, ' ').toLowerCase();
 
         return this.regex().test(instruction);
     }
@@ -17,7 +17,7 @@ export abstract class InstructionParser
     protected instruction (value: string): Instruction
     {
         for (const instruction of config.instructions) {
-            if (value.startsWith(instruction.alias)) {
+            if (value.startsWith(instruction.alias + ' ')) {
                 return instruction;
             }
         }

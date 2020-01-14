@@ -6,6 +6,8 @@ export default {
         new Instruction('add', '000000'),
         new Instruction('addi', '001000'),
         new Instruction('j', '000010'),
+        new Instruction('beq', '000100'),
+        new Instruction('bne', '000101'),
     ],
     registers: [
         new Register(['$0', '$zero'], '00000'),

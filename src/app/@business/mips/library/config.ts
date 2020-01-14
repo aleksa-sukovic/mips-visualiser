@@ -1,15 +1,14 @@
 import { Register } from '../register/models/register';
-import { Instruction } from '../instruction/instruction';
 
 export default {
     instructions: [
-        new Instruction('add', '000000'),
-        new Instruction('addi', '001000'),
-        new Instruction('j', '000010'),
-        new Instruction('beq', '000100'),
-        new Instruction('bne', '000101'),
-        new Instruction('lw', '100011'),
-        new Instruction('sw', '101011'),
+        { alias: 'add', opcode: '000000' },
+        { alias: 'addi', opcode: '001000' },
+        { alias: 'j', opcode: '000010' },
+        { alias: 'beq', opcode: '000100' },
+        { alias: 'bne', opcode: '000101' },
+        { alias: 'lw', opcode: '100011' },
+        { alias: 'sw', opcode: '101011' },
     ],
     registers: [
         new Register(['$0', '$zero'], '00000'),

@@ -1,21 +1,14 @@
 export class Instruction
 {
-    protected _alias: string;
-    protected _opcode: string;
+    protected _binary: string;
 
-    public constructor (alias: string, opcode: string)
+    public constructor (binary: string)
     {
-        this._alias = alias;
-        this._opcode = opcode;
+        this.binary = binary;
     }
 
-    public get alias (): string
+    public set binary (value: string)
     {
-        return this._alias;
-    }
-
-    public get opcode (): string
-    {
-        return this._opcode;
+        this._binary = value;
     }
 }

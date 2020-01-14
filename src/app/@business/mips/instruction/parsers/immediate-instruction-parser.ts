@@ -6,6 +6,14 @@ import { BinaryConverter } from '../../library/binary-converter/binary-converter
 
 export class ImmediateInstructionParser extends InstructionParser
 {
+    private converter: BinaryConverter;
+
+    public constructor ()
+    {
+        super();
+        this.converter = new BinaryConverter();
+    }
+
     public parse (value: string): string
     {
         const args = this.arguments(value);
@@ -14,7 +22,7 @@ export class ImmediateInstructionParser extends InstructionParser
         const rt = this.register(args[1]).binary;
         const immediate = this.number(args[2]);
 
-        return this.instruction(value).opcode + rs + rt + BinaryConverter.fromBase10(immediate, 16);
+        return this.instruction(value).opcode + rs + rt + this.converter.binary(immediate, 16);
     }
 
     protected arguments (value: string): string[]

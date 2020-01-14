@@ -2,6 +2,7 @@ import { RegisterInstructionParser } from './register-instruction-parser';
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 import { ImmediateInstructionParser } from './immediate-instruction-parser';
+import { OverflowException } from '../../library/exceptions/overflow-exception';
 
 describe('Register instruction parser', () => {
     let parser: RegisterInstructionParser;
@@ -90,5 +91,37 @@ describe('Immediate instruction parser', () => {
         const binary = '001000,00001,00011,0000000000001111';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('parses I-type instruction with negative immediate field', () => {
+        const instruction = 'addi $1, $2, -15';
+        const binary = '001000,00001,00010,1111111111110001';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('parses I-type instruction with positive immediate field', () => {
+        const instruction = 'addi $1, $2, 16';
+        const binary = '001000,00001,00010,0000000000010000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('throws exception if immediate value is out of bounds', () => {
+        const instruction = 'addi $1, $2, 12345678910';
+
+        expect(() => parser.parse(instruction)).toThrow(new OverflowException(12345678910, 16));
+    });
+
+    it('throws exception if register is not found', () => {
+        const instruction = 'addi $1, $a, 1024';
+
+        expect(() => parser.parse(instruction)).toThrow(new RegisterNotFoundException('$a'));
+    });
+
+    it('throws exception if instruction is not found', () => {
+        const instruction = 'nope $1, $2, $3';
+
+        expect(() => parser.parse(instruction)).toThrow(new InstructionNotFoundException('nope $1, $2, $3'));
     });
 });

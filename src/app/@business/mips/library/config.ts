@@ -4,7 +4,8 @@ import { Instruction } from '../instruction/instruction';
 export default {
     instructions: [
         new Instruction('add', '000000'),
-        new Instruction('addi', '001000')
+        new Instruction('addi', '001000'),
+        new Instruction('j', '000010'),
     ],
     registers: [
         new Register(['$0', '$zero'], '00000'),

@@ -3,6 +3,7 @@ import { InstructionNotFoundException } from '../exceptions/instruction-not-foun
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 import { ImmediateInstructionParser } from './immediate-instruction-parser';
 import { OverflowException } from '../../library/exceptions/overflow-exception';
+import { JumpInstructionParser } from './jump-instruction-parser';
 
 describe('Register instruction parser', () => {
     let parser: RegisterInstructionParser;
@@ -123,5 +124,34 @@ describe('Immediate instruction parser', () => {
         const instruction = 'nope $1, $2, $3';
 
         expect(() => parser.parse(instruction)).toThrow(new InstructionNotFoundException('nope $1, $2, $3'));
+    });
+});
+
+describe('Jump instruction parser', () => {
+    let parser: JumpInstructionParser;
+
+    beforeAll(() => {
+        parser = new JumpInstructionParser();
+    });
+
+    it('recognizes J-type instructions', () => {
+        const instruction = 'j 2056';
+
+        expect(parser.match(instruction)).toBe(true);
+    });
+
+    it('dismisses instructions of inappropriate type', ()  => {
+        const instruction1 = 'add $1, $2, $3';
+        const instruction2 = 'sw $x, 0($y)';
+
+        expect(parser.match(instruction1)).toBe(false);
+        expect(parser.match(instruction2)).toBe(false);
+    });
+
+    it('parses J-type instruction', () => {
+        const instruction = 'j 16';
+        const binary = '000010,00000000000000000000010000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });
 });

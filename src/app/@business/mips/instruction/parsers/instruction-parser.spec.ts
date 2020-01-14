@@ -4,6 +4,7 @@ import { RegisterNotFoundException } from '../exceptions/register-not-found-exce
 import { ImmediateInstructionParser } from './immediate-instruction-parser';
 import { OverflowException } from '../../library/exceptions/overflow-exception';
 import { JumpInstructionParser } from './jump-instruction-parser';
+import { DataTransferInstructionParser } from './data-transfer-instruction-parser';
 
 describe('Register instruction parser', () => {
     let parser: RegisterInstructionParser;
@@ -153,5 +154,60 @@ describe('Jump instruction parser', () => {
         const binary = '000010,00000000000000000000010000';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+});
+
+
+describe('Data transfer instruction parser', () => {
+    let parser: DataTransferInstructionParser;
+
+    beforeAll(() => {
+        parser = new DataTransferInstructionParser();
+    });
+
+    it('recognizes I-type instructions', () => {
+        const instruction1 = 'lw $1, 1024($2)';
+        const instruction2 = 'sw $v0, 0($1)';
+        const instruction3 = 'lw $1, -256($0)';
+
+        expect(parser.match(instruction1)).toBe(true);
+        expect(parser.match(instruction2)).toBe(true);
+        expect(parser.match(instruction3)).toBe(true);
+    });
+
+    it('dismisses instructions of inappropriate type', ()  => {
+        const instruction1 = 'add $1, $2, $3';
+        const instruction2 = 'beq $x, $y, 1024';
+        const instruction3 = 'j 5096';
+
+        expect(parser.match(instruction1)).toBe(false);
+        expect(parser.match(instruction2)).toBe(false);
+        expect(parser.match(instruction3)).toBe(false);
+    });
+
+    it('parses J-type instruction', () => {
+        const instruction = 'lw $1, 8($2)';
+        const binary = '100011,00010,00001,0000000000001000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('parses J-type instruction with negative offset', () => {
+        const instruction = 'sw $1, -8($2)';
+        const binary = '101011,00010,00001,1111111111111000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('throws exception if register is not found', () => {
+        const instruction = 'sw $n, -8($2)';
+
+        expect(() => parser.parse(instruction)).toThrow(new RegisterNotFoundException('$n'));
+    });
+
+    it('throws exception if immediate value is out of bounds', () => {
+        const instruction = 'sw $1, 12345678910($0)';
+
+        expect(() => parser.parse(instruction)).toThrow(new OverflowException(12345678910, 16));
     });
 });

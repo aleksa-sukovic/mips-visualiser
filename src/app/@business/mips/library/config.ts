@@ -8,6 +8,8 @@ export default {
         new Instruction('j', '000010'),
         new Instruction('beq', '000100'),
         new Instruction('bne', '000101'),
+        new Instruction('lw', '100011'),
+        new Instruction('sw', '101011'),
     ],
     registers: [
         new Register(['$0', '$zero'], '00000'),

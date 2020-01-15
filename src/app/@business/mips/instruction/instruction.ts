@@ -36,4 +36,9 @@ export class Instruction
     {
         return this._binary.substring(21, 26);
     }
+
+    public get funct (): string
+    {
+        return this._binary.substring(26, 32);
+    }
 }

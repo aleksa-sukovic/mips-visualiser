@@ -31,4 +31,11 @@ describe('Instruction', () => {
 
         expect(instruction.shamt).toBe('11000');
     });
+
+    it('parses funct field', () => {
+        const binary = '000000,00001,00010,00011,11000,101010';
+        const instruction = InstructionFactory.fromBinary(binary.replace(/,/g, ''));
+
+        expect(instruction.funct).toBe('101010');
+    });
 });

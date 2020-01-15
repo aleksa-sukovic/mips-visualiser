@@ -24,4 +24,11 @@ describe('Instruction', () => {
 
         expect(instruction.rd).toBe('00011');
     });
+
+    it('parses shamt field', () => {
+        const binary = '000000,00001,00010,00011,11000,000000';
+        const instruction = InstructionFactory.fromBinary(binary.replace(/,/g, ''));
+
+        expect(instruction.shamt).toBe('11000');
+    });
 });

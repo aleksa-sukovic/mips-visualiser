@@ -31,4 +31,9 @@ export class Instruction
     {
         return this._binary.substring(16, 21);
     }
+
+    public get shamt (): string
+    {
+        return this._binary.substring(21, 26);
+    }
 }

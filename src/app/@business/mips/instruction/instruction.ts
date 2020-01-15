@@ -11,4 +11,9 @@ export class Instruction
     {
         this._binary = value;
     }
+
+    public get op (): string
+    {
+        return this._binary.substr(0, 6);
+    }
 }

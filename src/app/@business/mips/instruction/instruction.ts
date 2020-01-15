@@ -21,4 +21,9 @@ export class Instruction
     {
         return this._binary.substring(6, 11);
     }
+
+    public get rt (): string
+    {
+        return this._binary.substring(11, 16);
+    }
 }

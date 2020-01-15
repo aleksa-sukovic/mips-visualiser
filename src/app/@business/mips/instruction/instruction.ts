@@ -41,4 +41,9 @@ export class Instruction
     {
         return this._binary.substring(26, 32);
     }
+
+    public get offset (): string
+    {
+        return this._binary.substring(16, 32);
+    }
 }

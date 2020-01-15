@@ -45,4 +45,11 @@ describe('Instruction', () => {
 
         expect(instruction.offset).toBe('1000000000000011');
     });
+
+    it('parses 26-bit address', () => {
+        const binary = '000000,11000000000000000000000011';
+        const instruction = InstructionFactory.fromBinary(binary.replace(/,/g, ''));
+
+        expect(instruction.address).toBe('11000000000000000000000011');
+    });
 });

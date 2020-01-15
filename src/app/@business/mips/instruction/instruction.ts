@@ -46,4 +46,9 @@ export class Instruction
     {
         return this._binary.substring(16, 32);
     }
+
+    public get address (): string
+    {
+        return this._binary.substring(6, 32);
+    }
 }

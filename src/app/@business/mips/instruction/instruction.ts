@@ -14,6 +14,11 @@ export class Instruction
 
     public get op (): string
     {
-        return this._binary.substr(0, 6);
+        return this._binary.substring(0, 6);
+    }
+
+    public get rs (): string
+    {
+        return this._binary.substring(6, 11);
     }
 }

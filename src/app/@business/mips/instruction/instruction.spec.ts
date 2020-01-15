@@ -18,4 +18,10 @@ describe('Instruction', () => {
 
         expect(instruction.rt).toBe('00010');
     });
+
+    it('parses RD field', () => {
+        const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+
+        expect(instruction.rd).toBe('00011');
+    });
 });

@@ -38,4 +38,11 @@ describe('Instruction', () => {
 
         expect(instruction.funct).toBe('101010');
     });
+
+    it('parses 16-bit offset', () => {
+        const binary = '0000000000000000,1000000000000011';
+        const instruction = InstructionFactory.fromBinary(binary.replace(/,/g, ''));
+
+        expect(instruction.offset).toBe('1000000000000011');
+    });
 });

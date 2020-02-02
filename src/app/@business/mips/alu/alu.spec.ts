@@ -12,4 +12,10 @@ describe('ALU', () => {
         expect(alu.op1).toBe('0101');
         expect(alu.op2).toBe('1001');
     });
+
+    it('sets operation field', () => {
+        alu.operation = '000000';
+
+        expect(alu.operation).toBe('000000');
+    });
 });

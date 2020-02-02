@@ -12,6 +12,7 @@ export class CPU
     protected _memory: Memory;
     protected _clocks: Clock[];
     protected _currentClock: number;
+    protected _$pc: Register;
     private _$0: Register;
     private _$1: Register;
     private _$2: Register;
@@ -52,6 +53,7 @@ export class CPU
         this._memory = new Memory();
         this._clocks = [];
         this._currentClock = 0;
+        this._$pc = new Register([], '', '0000');
         this._$0 = new Register(['$zero'], '00000');
         this._$1 = new Register(['$at'], '00001');
         this._$2 = new Register(['$v0'], '00010');
@@ -99,12 +101,10 @@ export class CPU
         this._clocks[this._currentClock++].execute(this);
     }
 
-
     public done (): boolean
     {
         return this._currentClock === this._clocks.length;
     }
-
 
     public get alu ()
     {
@@ -119,6 +119,11 @@ export class CPU
     public get memory ()
     {
         return this._memory;
+    }
+
+    public get $pc (): Register
+    {
+        return this._$pc;
     }
 
     public get $0 (): Register

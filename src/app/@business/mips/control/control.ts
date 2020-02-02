@@ -5,6 +5,8 @@ export class Control
     protected _lorD: string;
     protected _memRead: string;
     protected _memWrite: string;
+    protected _irRegister: string;
+    protected _memToReg: string;
 
     public set pcWrite (value: string)
     {
@@ -54,5 +56,25 @@ export class Control
     public get memWrite ()
     {
         return this._memWrite;
+    }
+
+    public set irRegister (value: string)
+    {
+        this._irRegister = value;
+    }
+
+    public get irRegister ()
+    {
+        return this._irRegister;
+    }
+
+    public set memToReg (value: string)
+    {
+        this._memToReg = value;
+    }
+
+    public get memToReg ()
+    {
+        return this._memToReg;
     }
 }

@@ -10,4 +10,10 @@ fdescribe('Control Unit', () => {
 
         expect(control.pcWrite).toBe('1');
     });
+
+    it('sets pc write cond', () => {
+        control.pcWriteCond = '0';
+
+        expect(control.pcWriteCond).toBe('0');
+    });
 });

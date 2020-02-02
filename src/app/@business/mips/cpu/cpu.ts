@@ -17,7 +17,7 @@ export class CPU
 
     public constructor ()
     {
-        this._alu = new ALU();
+        this._alu = new ALU(config.word_length);
         this._control = new Control();
         this._memory = new Memory();
         this._clocks = [];

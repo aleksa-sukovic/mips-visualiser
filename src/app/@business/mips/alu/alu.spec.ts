@@ -4,8 +4,7 @@ describe('ALU', () => {
     let alu;
 
     beforeEach(() => {
-        alu = new ALU();
-        alu.registerLength = 4;
+        alu = new ALU(4);
     });
 
     it('sets op1 and op2', () => {

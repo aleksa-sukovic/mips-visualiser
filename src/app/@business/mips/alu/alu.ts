@@ -8,17 +8,17 @@ export class ALU
     protected _op1: string;
     protected _op2: string;
     protected _zero: string;
-    protected _registerLength: number;
+    protected _wordLength: number;
     protected _converter: BinaryConverter;
 
-    public constructor (registerLength: number = 3)
+    public constructor (wordLength: number = 3)
     {
         this._op1 = '0';
         this._op2 = '0';
         this._funct = '000000';
         this._op = '010';
         this._zero = '0';
-        this._registerLength = registerLength;
+        this._wordLength = wordLength;
         this._converter = new BinaryConverter();
     }
 
@@ -54,14 +54,14 @@ export class ALU
     {
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 + op2, this._registerLength);
+        this._result = this._converter.binary(op1 + op2, this._wordLength);
     }
 
     private subtract (): void
     {
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 - op2, this._registerLength);
+        this._result = this._converter.binary(op1 - op2, this._wordLength);
     }
 
     private and (): void
@@ -94,7 +94,7 @@ export class ALU
         const op2 = this._converter.number(this.op2);
         const result = op1 < op2 ? '1' : '0';
 
-        this._result = this._converter.pad(result, this._registerLength);
+        this._result = this._converter.pad(result, this._wordLength);
     }
 
     public get op1 (): string
@@ -106,7 +106,7 @@ export class ALU
    {
        const pad = value.startsWith('1') ? '1' : '0';
 
-       this._op1 = this._converter.pad(value, this._registerLength, pad);
+       this._op1 = this._converter.pad(value, this._wordLength, pad);
    }
 
     public get op2 (): string
@@ -118,7 +118,7 @@ export class ALU
     {
         const pad = value.startsWith('1') ? '1' : '0';
 
-        this._op2 = this._converter.pad(value, this._registerLength, pad);
+        this._op2 = this._converter.pad(value, this._wordLength, pad);
     }
 
     public get op (): string
@@ -144,11 +144,6 @@ export class ALU
     public get zero ()
     {
         return this._zero;
-    }
-
-    public set registerLength (value: number)
-    {
-        this._registerLength = value;
     }
 
     public get result (): string

@@ -1,6 +1,7 @@
 import { Register } from '../register/models/register';
 
 export default {
+    word_length: 32,
     instructions: [
         { alias: 'add', opcode: '000000' },
         { alias: 'addi', opcode: '001000' },
@@ -12,6 +13,7 @@ export default {
     ],
     registers: [
         new Register(['$pc'], '', '00000'),
+        new Register(['$target'], '', '00000'),
         new Register(['$0', '$zero'], '00000'),
         new Register(['$1', '$at'], '00001'),
         new Register(['$2', '$v0'], '00010'),

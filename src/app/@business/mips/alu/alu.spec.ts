@@ -24,4 +24,14 @@ describe('ALU', () => {
 
         expect(alu.funct).toBe('001010');
     });
+
+    it('adds number when operation is 00', () => {
+        alu.op1 = '001';
+        alu.op2 = '010';
+        alu.operation = '00';
+
+        alu.execute();
+
+        expect(alu.result).toBe('011');
+    });
 });

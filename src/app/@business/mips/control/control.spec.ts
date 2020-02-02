@@ -30,4 +30,16 @@ fdescribe('Control Unit', () => {
         expect(control.memRead).toBe('1');
         expect(control.memWrite).toBe('0');
     });
+
+    it('sets irRegister', () => {
+        control.irRegister = '1';
+
+        expect(control.irRegister).toBe('1');
+    });
+
+    it('sets memToReg', () => {
+        control.memToReg = '1';
+
+        expect(control.memToReg).toBe('1');
+    });
 });

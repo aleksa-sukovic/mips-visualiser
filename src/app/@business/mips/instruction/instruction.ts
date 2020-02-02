@@ -1,10 +1,19 @@
+import { Clock } from '../clock/clock';
+
 export class Instruction
 {
     protected _binary: string;
+    protected _clocks: Clock[];
 
     public constructor (binary: string)
     {
         this.binary = binary;
+        this._clocks = [];
+    }
+
+    public get clocks (): Clock[]
+    {
+        return this._clocks;
     }
 
     public set binary (value: string)

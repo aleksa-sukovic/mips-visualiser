@@ -10,6 +10,8 @@ export class Control
     protected _pcSource: string;
     protected _targetWrite: string;
     protected _aluOp: string;
+    protected _aluSelA: string;
+    protected _aluSelB: string;
 
     public constructor ()
     {
@@ -23,6 +25,8 @@ export class Control
         this._pcSource = '00';
         this._targetWrite = '0';
         this._aluOp = '00';
+        this._aluSelA = '0';
+        this._aluSelB = '00';
     }
 
     public set pcWrite (value: string)
@@ -123,5 +127,25 @@ export class Control
     public get aluOp ()
     {
         return this._aluOp;
+    }
+
+    public set aluSelA (value: string)
+    {
+        this._aluSelA = value;
+    }
+
+    public get aluSelA ()
+    {
+        return this._aluSelA;
+    }
+
+    public set aluSelB (value: string)
+    {
+        this._aluSelB = value;
+    }
+
+    public get aluSelB ()
+    {
+        return this._aluSelB;
     }
 }

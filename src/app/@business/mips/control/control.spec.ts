@@ -16,4 +16,10 @@ fdescribe('Control Unit', () => {
 
         expect(control.pcWriteCond).toBe('0');
     });
+
+    it('sets lorD', () => {
+        control.lorD = '1';
+
+        expect(control.lorD).toBe('1');
+    });
 });

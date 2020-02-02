@@ -2,7 +2,7 @@ import { BinaryConverter } from '../library/binary-converter/binary-converter';
 
 export class ALU
 {
-    protected _operation: string;
+    protected _op: string;
     protected _funct: string;
     protected _result: string;
     protected _op1: string;
@@ -14,17 +14,17 @@ export class ALU
         this._op1 = '0';
         this._op2 = '0';
         this._funct = '000000';
-        this._operation = '010';
+        this._op = '010';
         this._converter = new BinaryConverter();
     }
 
     public execute (): void
     {
-        if (this.operation === '00') {
+        if (this.op === '00') {
             this.add();
-        } else if (this.operation.endsWith('1')) {
+        } else if (this.op.endsWith('1')) {
             this.subtract();
-        } else if (this.operation.startsWith('1')) {
+        } else if (this.op.startsWith('1')) {
             this.operationFromFunct();
         }
     }
@@ -86,14 +86,14 @@ export class ALU
         this._op2 = value;
     }
 
-    public get operation (): string
+    public get op (): string
     {
-        return this._operation;
+        return this._op;
     }
 
-    public set operation (value: string)
+    public set op (value: string)
     {
-        this._operation = value;
+        this._op = value;
     }
 
     public get funct (): string

@@ -13,10 +13,10 @@ describe('ALU', () => {
         expect(alu.op2).toBe('1001');
     });
 
-    it('sets operation field', () => {
-        alu.operation = '000000';
+    it('sets op field', () => {
+        alu.op = '000000';
 
-        expect(alu.operation).toBe('000000');
+        expect(alu.op).toBe('000000');
     });
 
     it('sets funct field', () => {
@@ -25,20 +25,20 @@ describe('ALU', () => {
         expect(alu.funct).toBe('001010');
     });
 
-    it('adds input when operation is 00', () => {
+    it('adds input when op is 00', () => {
         alu.op1 = '001';
         alu.op2 = '010';
-        alu.operation = '00';
+        alu.op = '00';
 
         alu.execute();
 
         expect(alu.result).toBe('011');
     });
 
-    it('subtracts input when operation is x1', () => {
+    it('subtracts input when op is x1', () => {
         alu.op1 = '010';
         alu.op2 = '001';
-        alu.operation = 'x1';
+        alu.op = 'x1';
 
         alu.execute();
 
@@ -48,7 +48,7 @@ describe('ALU', () => {
     it('adds input based on funct field', () => {
         alu.op1 = '000';
         alu.op2 = '001';
-        alu.operation = '1x';
+        alu.op = '1x';
         alu.funct = '000000';
 
         alu.execute();
@@ -59,7 +59,7 @@ describe('ALU', () => {
     it('subtract input based on funct field', () => {
         alu.op1 = '0100';
         alu.op2 = '0010';
-        alu.operation = '1x';
+        alu.op = '1x';
         alu.funct = 'xx0010';
 
         alu.execute();
@@ -70,7 +70,7 @@ describe('ALU', () => {
     it('does bitwise AND based on funct field', () => {
         alu.op1 = '1111';
         alu.op2 = '1010';
-        alu.operation = '1x';
+        alu.op = '1x';
         alu.funct = 'xx0100';
 
         alu.execute();

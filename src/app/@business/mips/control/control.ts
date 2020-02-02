@@ -3,6 +3,8 @@ export class Control
     protected _pcWrite: string;
     protected _pcWriteCond: string;
     protected _lorD: string;
+    protected _memRead: string;
+    protected _memWrite: string;
 
     public set pcWrite (value: string)
     {
@@ -32,5 +34,25 @@ export class Control
     public get lorD ()
     {
         return this._lorD;
+    }
+
+    public set memRead (value: string)
+    {
+        this._memRead = value;
+    }
+
+    public get memRead ()
+    {
+        return this._memRead;
+    }
+
+    public set memWrite (value: string)
+    {
+        this._memWrite = value;
+    }
+
+    public get memWrite ()
+    {
+        return this._memWrite;
     }
 }

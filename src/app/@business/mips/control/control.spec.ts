@@ -22,4 +22,12 @@ fdescribe('Control Unit', () => {
 
         expect(control.lorD).toBe('1');
     });
+
+    it('sets memRead and memWrite', () => {
+        control.memRead = '1';
+        control.memWrite = '0';
+
+        expect(control.memRead).toBe('1');
+        expect(control.memWrite).toBe('0');
+    });
 });

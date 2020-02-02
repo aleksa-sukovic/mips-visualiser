@@ -25,4 +25,9 @@ export class Register
     {
         return this._value;
     }
+
+    public set value (value: string)
+    {
+        this._value = value;
+    }
 }

@@ -29,6 +29,17 @@ export class ALU
         }
     }
 
+    private operationFromFunct (): void
+    {
+        if (this.funct.endsWith('0000')) {
+            this.add();
+        } else if (this.funct.endsWith('0010')) {
+            this.subtract();
+        } else if (this.funct.endsWith('0100')) {
+            this.and();
+        }
+    }
+
     private add (): void
     {
         const op1 = this._converter.number(this.op1);
@@ -43,12 +54,15 @@ export class ALU
         this._result = this._converter.binary(op1 - op2, this.op1.length);
     }
 
-    private operationFromFunct (): void
+    private and (): void
     {
-        if (this.funct.endsWith('0000')) {
-            this.add();
-        } else if (this.funct.endsWith('0010')) {
-            this.subtract();
+        const length = this.op1.length;
+        this._result = '';
+
+        for (let i = length - 1; i >= 0; i--) {
+            const bit = this.op1[i] === '1' && this.op2[i] === '1' ? '1' : '0';
+
+            this._result = bit + this._result;
         }
     }
 

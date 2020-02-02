@@ -66,4 +66,15 @@ describe('ALU', () => {
 
         expect(alu.result).toBe('0010');
     });
+
+    it('does bitwise AND based on funct field', () => {
+        alu.op1 = '1111';
+        alu.op2 = '1010';
+        alu.operation = '1x';
+        alu.funct = 'xx0100';
+
+        alu.execute();
+
+        expect(alu.result).toBe('1010');
+    });
 });

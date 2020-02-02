@@ -48,4 +48,16 @@ fdescribe('Control Unit', () => {
 
         expect(control.pcSource).toBe('0');
     });
+
+    it('sets targetWrite', () => {
+        control.targetWrite = '1';
+
+        expect(control.targetWrite).toBe('1');
+    });
+
+    it('sets aluOp', () => {
+        control.aluOp = '1';
+
+        expect(control.aluOp).toBe('1');
+    });
 });

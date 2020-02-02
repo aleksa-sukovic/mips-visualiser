@@ -3,7 +3,10 @@ import {ALU} from './alu';
 describe('ALU', () => {
     let alu;
 
-    beforeEach(() => alu = new ALU());
+    beforeEach(() => {
+        alu = new ALU();
+        alu.registerLength = 4;
+    });
 
     it('sets op1 and op2', () => {
         alu.op1 = '0101';
@@ -26,34 +29,34 @@ describe('ALU', () => {
     });
 
     it('adds input when op is 00', () => {
-        alu.op1 = '001';
-        alu.op2 = '010';
+        alu.op1 = '0001';
+        alu.op2 = '0010';
         alu.op = '00';
 
         alu.execute();
 
-        expect(alu.result).toBe('011');
+        expect(alu.result).toBe('0011');
     });
 
     it('subtracts input when op is x1', () => {
-        alu.op1 = '010';
-        alu.op2 = '001';
+        alu.op1 = '0010';
+        alu.op2 = '0001';
         alu.op = 'x1';
 
         alu.execute();
 
-        expect(alu.result).toBe('001');
+        expect(alu.result).toBe('0001');
     });
 
     it('adds input based on funct field', () => {
-        alu.op1 = '000';
-        alu.op2 = '001';
+        alu.op1 = '0000';
+        alu.op2 = '0001';
         alu.op = '1x';
         alu.funct = '000000';
 
         alu.execute();
 
-        expect(alu.result).toBe('001');
+        expect(alu.result).toBe('0001');
     });
 
     it('subtract input based on funct field', () => {
@@ -87,5 +90,28 @@ describe('ALU', () => {
         alu.execute();
 
         expect(alu.result).toBe('1111');
+    });
+
+    it('sets result to 1 if op1 < than op2 (SLT)', () => {
+        alu.op1 = '0001';
+        alu.op2 = '0010';
+        alu.op = '1x';
+        alu.funct = 'xx1010';
+
+        alu.execute();
+
+        expect(alu.result).toBe('0001');
+    });
+
+
+    it('sets result to 0 if op1 >= than op2 (SLT)', () => {
+        alu.op1 = '0010';
+        alu.op2 = '0000';
+        alu.op = '1x';
+        alu.funct = 'xx1010';
+
+        alu.execute();
+
+        expect(alu.result).toBe('0000');
     });
 });

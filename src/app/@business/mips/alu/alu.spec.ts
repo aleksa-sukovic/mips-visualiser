@@ -25,7 +25,7 @@ describe('ALU', () => {
         expect(alu.funct).toBe('001010');
     });
 
-    it('adds number when operation is 00', () => {
+    it('adds input when operation is 00', () => {
         alu.op1 = '001';
         alu.op2 = '010';
         alu.operation = '00';
@@ -33,5 +33,15 @@ describe('ALU', () => {
         alu.execute();
 
         expect(alu.result).toBe('011');
+    });
+
+    it('subtracts input when operation is 01', () => {
+        alu.op1 = '010';
+        alu.op2 = '001';
+        alu.operation = '01';
+
+        alu.execute();
+
+        expect(alu.result).toBe('001');
     });
 });

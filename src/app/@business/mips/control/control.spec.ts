@@ -1,6 +1,6 @@
 import { Control } from './control';
 
-fdescribe('Control Unit', () => {
+describe('Control Unit', () => {
     let control: Control = null;
 
     beforeAll(() => control = new Control());
@@ -44,9 +44,9 @@ fdescribe('Control Unit', () => {
     });
 
     it('sets pcSource', () => {
-        control.pcSource = '0';
+        control.pcSource = '01';
 
-        expect(control.pcSource).toBe('0');
+        expect(control.pcSource).toBe('01');
     });
 
     it('sets targetWrite', () => {
@@ -68,8 +68,20 @@ fdescribe('Control Unit', () => {
     });
 
     it('sets aluSelB', () => {
-        control.aluSelB = '1';
+        control.aluSelB = '11';
 
-        expect(control.aluSelB).toBe('1');
+        expect(control.aluSelB).toBe('11');
+    });
+
+    it('sets regWrite', () => {
+        control.regWrite = '1';
+
+        expect(control.regWrite).toBe('1');
+    });
+
+    it('sets regDst', () => {
+        control.regDst = '1';
+
+        expect(control.regDst).toBe('1');
     });
 });

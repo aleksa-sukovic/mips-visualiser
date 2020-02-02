@@ -1,6 +1,7 @@
 export class ALU
 {
     protected _operation: string;
+    protected _funct: string;
     protected _result: string;
     protected _op1: string;
     protected _op2: string;
@@ -9,25 +10,27 @@ export class ALU
     {
         this._op1 = '0';
         this._op2 = '0';
+        this._funct = 'xxxxxx';
         this._operation = '010';
     }
 
     public execute (): string
     {
         switch (this.operation) {
-            case '000':
+            case '000': // AND
                 break;
-            case '001':
+            case '001': // OR
                 break;
-            case '010':
+            case '010': // ADD
                 break;
-            case '110':
+            case '110': // SUBTRACT
                 break;
-            case '111':
+            case '111': // SET ON LESS THAN
                 break;
             default:
                 //
         }
+        return '';
     }
 
     public get op1 (): string
@@ -58,6 +61,16 @@ export class ALU
     public set operation (value: string)
     {
         this._operation = value;
+    }
+
+    public get funct (): string
+    {
+        return this._funct;
+    }
+
+    public set funct (value: string)
+    {
+        this._funct = value;
     }
 
     public get result (): string

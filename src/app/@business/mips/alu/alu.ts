@@ -1,3 +1,5 @@
+import {BinaryConverter} from "../library/binary-converter/binary-converter";
+
 export class ALU
 {
     protected _operation: string;
@@ -5,32 +7,51 @@ export class ALU
     protected _result: string;
     protected _op1: string;
     protected _op2: string;
+    protected _converter: BinaryConverter;
 
     public constructor ()
     {
         this._op1 = '0';
         this._op2 = '0';
-        this._funct = 'xxxxxx';
+        this._funct = '000000';
         this._operation = '010';
+        this._converter = new BinaryConverter();
     }
 
     public execute (): string
     {
+        if (this.operation === '00') {
+            this.add();
+        } else if (this.operation.endsWith('1')) {
+            // SUB
+        } else if (this.operation.startsWith('1')) {
+            return this.operationFromFunct();
+        }
+    }
+
+    private add (): void
+    {
+        const op1 = this._converter.number(this.op1);
+        const op2 = this._converter.number(this.op2);
+        this._result = this._converter.binary(op1 + op2);
+    }
+
+    private operationFromFunct (): string
+    {
         switch (this.operation) {
             case '000': // AND
-                break;
+                return '';
             case '001': // OR
-                break;
+                return '';
             case '010': // ADD
-                break;
+                return '';
             case '110': // SUBTRACT
-                break;
+                return '';
             case '111': // SET ON LESS THAN
-                break;
+                return '';
             default:
-                //
+                return '';
         }
-        return '';
     }
 
     public get op1 (): string

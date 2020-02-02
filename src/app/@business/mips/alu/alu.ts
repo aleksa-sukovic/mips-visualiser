@@ -7,6 +7,7 @@ export class ALU
     protected _result: string;
     protected _op1: string;
     protected _op2: string;
+    protected _registerLength: number;
     protected _converter: BinaryConverter;
 
     public constructor ()
@@ -15,6 +16,7 @@ export class ALU
         this._op2 = '0';
         this._funct = '000000';
         this._op = '010';
+        this._registerLength = 3;
         this._converter = new BinaryConverter();
     }
 
@@ -39,6 +41,8 @@ export class ALU
             this.and();
         } else if (this.funct.endsWith('0101')) {
             this.or();
+        } else if (this.funct.endsWith('1010')) {
+            this.slt();
         }
     }
 
@@ -46,14 +50,14 @@ export class ALU
     {
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 + op2, this.op1.length);
+        this._result = this._converter.binary(op1 + op2, this._registerLength);
     }
 
     private subtract (): void
     {
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 - op2, this.op1.length);
+        this._result = this._converter.binary(op1 - op2, this._registerLength);
     }
 
     private and (): void
@@ -80,6 +84,15 @@ export class ALU
         }
     }
 
+    private slt (): void
+    {
+        const op1 = this._converter.number(this.op1);
+        const op2 = this._converter.number(this.op2);
+        const result = op1 < op2 ? '1' : '0';
+
+        this._result = this._converter.pad(result, this._registerLength);
+    }
+
     public get op1 (): string
     {
         return this._op1;
@@ -87,7 +100,9 @@ export class ALU
 
    public set op1 (value: string)
    {
-       this._op1 = value;
+       const pad = value.startsWith('1') ? '1' : '0';
+
+       this._op1 = this._converter.pad(value, this._registerLength, pad);
    }
 
     public get op2 (): string
@@ -97,7 +112,9 @@ export class ALU
 
     public set op2 (value: string)
     {
-        this._op2 = value;
+        const pad = value.startsWith('1') ? '1' : '0';
+
+        this._op2 = this._converter.pad(value, this._registerLength, pad);
     }
 
     public get op (): string
@@ -118,6 +135,11 @@ export class ALU
     public set funct (value: string)
     {
         this._funct = value;
+    }
+
+    public set registerLength (value: number)
+    {
+        this._registerLength = value;
     }
 
     public get result (): string

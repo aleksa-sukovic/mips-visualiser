@@ -35,13 +35,35 @@ describe('ALU', () => {
         expect(alu.result).toBe('011');
     });
 
-    it('subtracts input when operation is 01', () => {
+    it('subtracts input when operation is x1', () => {
         alu.op1 = '010';
         alu.op2 = '001';
-        alu.operation = '01';
+        alu.operation = 'x1';
 
         alu.execute();
 
         expect(alu.result).toBe('001');
+    });
+
+    it('adds input based on funct field', () => {
+        alu.op1 = '000';
+        alu.op2 = '001';
+        alu.operation = '1x';
+        alu.funct = '000000';
+
+        alu.execute();
+
+        expect(alu.result).toBe('001');
+    });
+
+    it('subtract input based on funct field', () => {
+        alu.op1 = '0100';
+        alu.op2 = '0010';
+        alu.operation = '1x';
+        alu.funct = 'xx0010';
+
+        alu.execute();
+
+        expect(alu.result).toBe('0010');
     });
 });

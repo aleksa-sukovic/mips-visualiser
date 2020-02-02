@@ -8,6 +8,8 @@ export class Control
     protected _irWrite: string;
     protected _memToReg: string;
     protected _pcSource: string;
+    protected _targetWrite: string;
+    protected _aluOp: string;
 
     public constructor ()
     {
@@ -19,6 +21,8 @@ export class Control
         this._irWrite = '0';
         this._memToReg = '0';
         this._pcSource = '00';
+        this._targetWrite = '0';
+        this._aluOp = '00';
     }
 
     public set pcWrite (value: string)
@@ -99,5 +103,25 @@ export class Control
     public get pcSource ()
     {
         return this._pcSource;
+    }
+
+    public set targetWrite (value: string)
+    {
+        this._targetWrite = value;
+    }
+
+    public get targetWrite ()
+    {
+        return this._targetWrite;
+    }
+
+    public set aluOp (value: string)
+    {
+        this._aluOp = value;
+    }
+
+    public get aluOp ()
+    {
+        return this._aluOp;
     }
 }

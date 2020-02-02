@@ -5,15 +5,20 @@ export class Instruction
     protected _binary: string;
     protected _clocks: Clock[];
 
-    public constructor (binary: string)
+    public constructor (binary: string, clocks: Clock[])
     {
         this.binary = binary;
-        this._clocks = [];
+        this._clocks = clocks;
     }
 
     public get clocks (): Clock[]
     {
         return this._clocks;
+    }
+
+    public set clocks (value: Clock[])
+    {
+        this._clocks = value;
     }
 
     public set binary (value: string)

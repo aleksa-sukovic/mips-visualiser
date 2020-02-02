@@ -7,6 +7,7 @@ export class ALU
     protected _result: string;
     protected _op1: string;
     protected _op2: string;
+    protected _zero: string;
     protected _registerLength: number;
     protected _converter: BinaryConverter;
 
@@ -16,6 +17,7 @@ export class ALU
         this._op2 = '0';
         this._funct = '000000';
         this._op = '010';
+        this._zero = '0';
         this._registerLength = 3;
         this._converter = new BinaryConverter();
     }
@@ -29,6 +31,8 @@ export class ALU
         } else if (this.op.startsWith('1')) {
             this.operationFromFunct();
         }
+
+        this._zero = this._converter.number(this._result) === 0 ? '1' : '0';
     }
 
     private operationFromFunct (): void
@@ -135,6 +139,11 @@ export class ALU
     public set funct (value: string)
     {
         this._funct = value;
+    }
+
+    public get zero ()
+    {
+        return this._zero;
     }
 
     public set registerLength (value: number)

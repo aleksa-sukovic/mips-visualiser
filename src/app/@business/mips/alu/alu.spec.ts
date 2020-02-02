@@ -114,4 +114,25 @@ describe('ALU', () => {
 
         expect(alu.result).toBe('0000');
     });
+
+    it('sets zero signal to 0 if result is 0', () => {
+        alu.op1 = '0000';
+        alu.op2 = '0000';
+        alu.op = '00';
+
+        alu.execute();
+
+        expect(alu.zero).toBe('1');
+    });
+
+
+    it('sets zero signal to 0 if result is != 0', () => {
+        alu.op1 = '0001';
+        alu.op2 = '0000';
+        alu.op = '00';
+
+        alu.execute();
+
+        expect(alu.zero).toBe('0');
+    });
 });

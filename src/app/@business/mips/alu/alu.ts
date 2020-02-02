@@ -18,14 +18,14 @@ export class ALU
         this._converter = new BinaryConverter();
     }
 
-    public execute (): string
+    public execute (): void
     {
         if (this.operation === '00') {
             this.add();
         } else if (this.operation.endsWith('1')) {
             this.subtract();
         } else if (this.operation.startsWith('1')) {
-            return this.operationFromFunct();
+            this.operationFromFunct();
         }
     }
 
@@ -33,7 +33,7 @@ export class ALU
     {
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 + op2);
+        this._result = this._converter.binary(op1 + op2, this.op1.length);
     }
 
     private subtract (): void
@@ -43,21 +43,12 @@ export class ALU
         this._result = this._converter.binary(op1 - op2, this.op1.length);
     }
 
-    private operationFromFunct (): string
+    private operationFromFunct (): void
     {
-        switch (this.operation) {
-            case '000': // AND
-                return '';
-            case '001': // OR
-                return '';
-            case '010': // ADD
-                return '';
-            case '110': // SUBTRACT
-                return '';
-            case '111': // SET ON LESS THAN
-                return '';
-            default:
-                return '';
+        if (this.funct.endsWith('0000')) {
+            this.add();
+        } else if (this.funct.endsWith('0010')) {
+            this.subtract();
         }
     }
 

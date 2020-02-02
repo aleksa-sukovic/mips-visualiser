@@ -11,14 +11,14 @@ export class ALU
     protected _registerLength: number;
     protected _converter: BinaryConverter;
 
-    public constructor ()
+    public constructor (registerLength: number = 3)
     {
         this._op1 = '0';
         this._op2 = '0';
         this._funct = '000000';
         this._op = '010';
         this._zero = '0';
-        this._registerLength = 3;
+        this._registerLength = registerLength;
         this._converter = new BinaryConverter();
     }
 

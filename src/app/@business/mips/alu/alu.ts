@@ -1,4 +1,4 @@
-import {BinaryConverter} from "../library/binary-converter/binary-converter";
+import { BinaryConverter } from '../library/binary-converter/binary-converter';
 
 export class ALU
 {
@@ -23,7 +23,7 @@ export class ALU
         if (this.operation === '00') {
             this.add();
         } else if (this.operation.endsWith('1')) {
-            // SUB
+            this.subtract();
         } else if (this.operation.startsWith('1')) {
             return this.operationFromFunct();
         }
@@ -34,6 +34,13 @@ export class ALU
         const op1 = this._converter.number(this.op1);
         const op2 = this._converter.number(this.op2);
         this._result = this._converter.binary(op1 + op2);
+    }
+
+    private subtract (): void
+    {
+        const op1 = this._converter.number(this.op1);
+        const op2 = this._converter.number(this.op2);
+        this._result = this._converter.binary(op1 - op2, this.op1.length);
     }
 
     private operationFromFunct (): string

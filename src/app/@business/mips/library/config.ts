@@ -1,9 +1,16 @@
 import { Register } from '../register/models/register';
+import { ClockI } from '../clock/I/clock-I';
 
 export default {
     word_length: 32,
     instructions: [
-        { alias: 'add', opcode: '000000' },
+        {
+            alias: 'add',
+            opcode: '000000',
+            clocks: [
+                new ClockI(),
+            ]
+        },
         { alias: 'addi', opcode: '001000' },
         { alias: 'j', opcode: '000010' },
         { alias: 'beq', opcode: '000100' },

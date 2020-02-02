@@ -18,4 +18,10 @@ describe('ALU', () => {
 
         expect(alu.operation).toBe('000000');
     });
+
+    it('sets funct field', () => {
+        alu.funct = '001010';
+
+        expect(alu.funct).toBe('001010');
+    });
 });

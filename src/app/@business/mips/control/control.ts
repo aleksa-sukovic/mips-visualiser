@@ -5,8 +5,21 @@ export class Control
     protected _lorD: string;
     protected _memRead: string;
     protected _memWrite: string;
-    protected _irRegister: string;
+    protected _irWrite: string;
     protected _memToReg: string;
+    protected _pcSource: string;
+
+    public constructor ()
+    {
+        this._pcWrite = '0';
+        this._pcWriteCond = '0';
+        this._lorD = '0';
+        this._memRead = '0';
+        this._memWrite = '0';
+        this._irWrite = '0';
+        this._memToReg = '0';
+        this._pcSource = '00';
+    }
 
     public set pcWrite (value: string)
     {
@@ -58,14 +71,14 @@ export class Control
         return this._memWrite;
     }
 
-    public set irRegister (value: string)
+    public set irWrite (value: string)
     {
-        this._irRegister = value;
+        this._irWrite = value;
     }
 
-    public get irRegister ()
+    public get irWrite ()
     {
-        return this._irRegister;
+        return this._irWrite;
     }
 
     public set memToReg (value: string)
@@ -76,5 +89,15 @@ export class Control
     public get memToReg ()
     {
         return this._memToReg;
+    }
+
+    public set pcSource (value: string)
+    {
+        this._pcSource = value;
+    }
+
+    public get pcSource ()
+    {
+        return this._pcSource;
     }
 }

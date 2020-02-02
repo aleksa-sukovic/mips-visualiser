@@ -31,15 +31,21 @@ fdescribe('Control Unit', () => {
         expect(control.memWrite).toBe('0');
     });
 
-    it('sets irRegister', () => {
-        control.irRegister = '1';
+    it('sets irWrite', () => {
+        control.irWrite = '1';
 
-        expect(control.irRegister).toBe('1');
+        expect(control.irWrite).toBe('1');
     });
 
     it('sets memToReg', () => {
         control.memToReg = '1';
 
         expect(control.memToReg).toBe('1');
+    });
+
+    it('sets pcSource', () => {
+        control.pcSource = '0';
+
+        expect(control.pcSource).toBe('0');
     });
 });

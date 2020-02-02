@@ -60,4 +60,16 @@ fdescribe('Control Unit', () => {
 
         expect(control.aluOp).toBe('1');
     });
+
+    it('sets aluSelA', () => {
+        control.aluSelA = '1';
+
+        expect(control.aluSelA).toBe('1');
+    });
+
+    it('sets aluSelB', () => {
+        control.aluSelB = '1';
+
+        expect(control.aluSelB).toBe('1');
+    });
 });

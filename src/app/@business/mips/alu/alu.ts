@@ -37,6 +37,8 @@ export class ALU
             this.subtract();
         } else if (this.funct.endsWith('0100')) {
             this.and();
+        } else if (this.funct.endsWith('0101')) {
+            this.or();
         }
     }
 
@@ -61,6 +63,18 @@ export class ALU
 
         for (let i = length - 1; i >= 0; i--) {
             const bit = this.op1[i] === '1' && this.op2[i] === '1' ? '1' : '0';
+
+            this._result = bit + this._result;
+        }
+    }
+
+    private or (): void
+    {
+        const length = this.op1.length;
+        this._result = '';
+
+        for (let i = length - 1; i >= 0; i--) {
+            const bit = this.op1[i] === '1' || this.op2[i] === '1' ? '1' : '0';
 
             this._result = bit + this._result;
         }

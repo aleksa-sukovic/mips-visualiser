@@ -18,12 +18,16 @@ export class ClockIV  implements Clock
 
     protected doOperation (cpu: CPU): void
     {
+        // Set the ALU operands to be registers 'rs' and 'rt'
         cpu.alu.op1 = cpu.register(cpu.instruction.rs).value;
         cpu.alu.op2 = cpu.register(cpu.instruction.rt).value;
+
+        // Set the ALU funct input to be 'funct' field from instruction.
         cpu.alu.funct = cpu.instruction.funct;
+
+        // Set the ALU operation so it uses 'funct'.
         cpu.alu.op = cpu.control.aluOp;
 
         cpu.alu.execute();
-        cpu.register(cpu.instruction.rd).value = cpu.alu.result;
     }
 }

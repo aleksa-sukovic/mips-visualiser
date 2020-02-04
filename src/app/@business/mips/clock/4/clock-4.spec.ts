@@ -1,5 +1,5 @@
 import { CPU } from '../../cpu/cpu';
-import { ClockIV } from './clock-IV';
+import { Clock4 } from './clock-4';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
@@ -12,7 +12,7 @@ describe('Clock IV', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spyOnProperty(instruction, 'clocks').and.returnValue([new ClockIV()]);
+        spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
 
         cpu.register('$2').value = encoder.binary(5, config.word_length);
         cpu.register('$3').value = encoder.binary(10, config.word_length);
@@ -26,7 +26,7 @@ describe('Clock IV', () => {
 
     it('does operation between arguments in R-type instruction', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockIV()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
 
         cpu.register('$2').value = encoder.binary(5, config.word_length);
         cpu.register('$3').value = encoder.binary(10, config.word_length);

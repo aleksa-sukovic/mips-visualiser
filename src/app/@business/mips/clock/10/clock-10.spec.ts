@@ -1,10 +1,10 @@
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockX } from './clock-X';
-import { ClockIII } from '../III/clock-III';
-import { ClockVII } from '../VII/clock-VII';
+import { Clock10 } from './clock-10';
 import config from '../../library/config';
+import { Clock3 } from '../3/clock-3';
+import { Clock7 } from '../7/clock-7';
 
 describe('Clock X', () => {
     let cpu: CPU = null;
@@ -14,7 +14,7 @@ describe('Clock X', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockX()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock10()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -27,7 +27,7 @@ describe('Clock X', () => {
 
     it('writes data read from memory to specified register', () => {
         const instr = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new ClockIII(), new ClockVII(), new ClockX()]);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(), new Clock7(), new Clock10()]);
         const memoryAddress = encoder.binary(1000 + 128, config.word_length);
         const memoryData = encoder.binary(111, config.word_length);
 

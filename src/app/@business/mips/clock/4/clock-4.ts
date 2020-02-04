@@ -1,7 +1,7 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 
-export class ClockIV  implements Clock
+export class Clock4  implements Clock
 {
     public execute (cpu: CPU): void
     {

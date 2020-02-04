@@ -2,7 +2,7 @@ import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 
-export class ClockX  implements Clock
+export class Clock9  implements Clock
 {
     protected _encoder: BinaryEncoder;
 
@@ -19,14 +19,14 @@ export class ClockX  implements Clock
 
     protected setControl (cpu: CPU): void
     {
-        cpu.control.regDst = '0';
+        cpu.control.regDst = '1';
         cpu.control.regWrite = '1';
-        cpu.control.memToReg = '1';
+        cpu.control.memToReg = '0';
     }
 
     protected writeToRegister (cpu: CPU): void
     {
-        // Write data read from memory to 'rt' register.
-        cpu.register(cpu.instruction.rt).value = cpu.register('$memData').value;
+        // Writes ALU result to destination register.
+        cpu.register(cpu.instruction.rd).value = cpu.alu.result;
     }
 }

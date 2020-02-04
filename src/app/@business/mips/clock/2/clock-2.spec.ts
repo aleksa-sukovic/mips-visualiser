@@ -1,11 +1,11 @@
 import { CPU } from '../../cpu/cpu';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockII } from './clock-II';
-import { ClockI } from '../I/clock-I';
+import { Clock2 } from './clock-2';
+import { Clock1 } from '../1/clock-1';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
 
-describe('Clock II', () => {
+describe('Clock 2', () => {
     let cpu: CPU = null;
     const encoder = new BinaryEncoder();
 
@@ -13,7 +13,7 @@ describe('Clock II', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spyOnProperty(instruction, 'clocks').and.returnValue([new ClockII()]);
+        spyOnProperty(instruction, 'clocks').and.returnValue([new Clock2()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -26,7 +26,7 @@ describe('Clock II', () => {
 
     it('calculates branch target address', () => {
         const instr = InstructionFactory.fromSymbolic('beq $1, $2, 128');
-        spyOnProperty(instr, 'clocks').and.returnValue([new ClockI(), new ClockII()]);
+        spyOnProperty(instr, 'clocks').and.returnValue([new Clock1(), new Clock2()]);
 
         cpu.register('$pc').value = encoder.binary(1000, config.word_length);
         cpu.simulate(instr);

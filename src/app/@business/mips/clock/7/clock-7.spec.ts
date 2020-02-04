@@ -1,11 +1,11 @@
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockVIII } from './clock-VIII';
-import { ClockIII } from '../III/clock-III';
+import { Clock7 } from './clock-7';
 import config from '../../library/config';
+import { Clock3 } from '../3/clock-3';
 
-describe('Clock VIII', () => {
+describe('Clock 7', () => {
     let cpu: CPU = null;
     const encoder = new BinaryEncoder();
 
@@ -13,29 +13,29 @@ describe('Clock VIII', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockVIII()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock7()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.control.memWrite).toBe('1');
+        expect(cpu.control.memRead).toBe('1');
         expect(cpu.control.lorD).toBe('1');
     });
 
-    it('writes data to calculated address', () => {
-        const instr = InstructionFactory.fromSymbolic('sw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new ClockIII(), new ClockVIII()]);
-        const writeAddress = encoder.binary(1000 + 128, config.word_length);
-        const writeValue = encoder.binary(111, config.word_length);
+    it('reads data from calculated offset', () => {
+        const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(), new Clock7()]);
+        const memoryAddress = encoder.binary(128 + 1000, config.word_length);
+        const memoryData = encoder.binary(111, config.word_length);
 
-        cpu.register('$1').value = writeValue;
         cpu.register('$2').value = encoder.binary(1000, config.word_length);
+        cpu.memory.set(memoryAddress, memoryData);
 
-        cpu.simulate(instr);
+        cpu.simulate(instruction);
         cpu.execute();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.memory.get(writeAddress)).toBe(writeValue);
+        expect(cpu.register('$memData').value).toBe(memoryData);
     });
 });

@@ -1,10 +1,10 @@
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockVI } from './clock-VI';
+import { Clock6 } from './clock-6';
 import config from '../../library/config';
 
-describe('Clock VI', () => {
+describe('Clock 6', () => {
     let cpu: CPU = null;
     const encoder = new BinaryEncoder();
 
@@ -12,7 +12,7 @@ describe('Clock VI', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('j 1024');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockVI()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock6()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -24,7 +24,7 @@ describe('Clock VI', () => {
 
     it('sets the PC value to specified address', () => {
         const instruction = InstructionFactory.fromSymbolic('j 1024');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockVI()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock6()]);
         let finalPcValue = '';
 
         cpu.register('$pc').value = encoder.binary(1000, config.word_length);

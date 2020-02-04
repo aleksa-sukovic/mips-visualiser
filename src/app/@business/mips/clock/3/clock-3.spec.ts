@@ -1,10 +1,10 @@
 import { CPU } from '../../cpu/cpu';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockIII } from './clock-III';
+import { Clock3 } from './clock-3';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
 
-describe('Clock III', () => {
+describe('Clock 3', () => {
     let cpu: CPU = null;
     const encoder: BinaryEncoder = new BinaryEncoder();
 
@@ -12,7 +12,7 @@ describe('Clock III', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockIII()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -25,7 +25,7 @@ describe('Clock III', () => {
 
     it('calculates memory address', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockIII()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3()]);
 
         cpu.register('$2').value = encoder.binary(1000, config.word_length);
         cpu.simulate(instruction);

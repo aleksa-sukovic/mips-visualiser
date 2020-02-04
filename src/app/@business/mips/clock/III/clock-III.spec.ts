@@ -23,7 +23,7 @@ describe('Clock III', () => {
         expect(cpu.control.aluOp).toBe('00');
     });
 
-    fit('calculates memory address', () => {
+    it('calculates memory address', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
         const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockIII()]);
 

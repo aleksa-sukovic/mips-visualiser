@@ -24,7 +24,7 @@ describe('Clock II', () => {
         expect(cpu.control.targetWrite).toBe('1');
     });
 
-    fit('calculates branch target address', () => {
+    it('calculates branch target address', () => {
         const instr = InstructionFactory.fromSymbolic('beq $1, $2, 128');
         spyOnProperty(instr, 'clocks').and.returnValue([new ClockI(), new ClockII()]);
 

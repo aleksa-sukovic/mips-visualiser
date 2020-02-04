@@ -25,6 +25,7 @@ export class ClockVII  implements Clock
 
     protected readData (cpu: CPU): void
     {
+        // Read data from address calculated in 'Clock3' to 'memData' register.
         cpu.register('$memData').value = cpu.memory.get(cpu.alu.result);
     }
 }

@@ -23,10 +23,17 @@ export class ClockII implements Clock
 
     protected calculateBranchAddress (cpu: CPU): void
     {
+        // First ALU operand is current 'PC' value.
         cpu.alu.op1 = cpu.register('$pc').value;
+
+        // Second ALU operand is sign-extended 16-bit offset from instruction.
         cpu.alu.op2 = this._encoder.signPad(cpu.instruction.offset, config.word_length);
+
+        // Tell the ALU to do addition.
         cpu.alu.op = '00';
         cpu.alu.execute();
+
+        // Write the ALU result to 'target' register.
         cpu.register('$target').value = cpu.alu.result;
     }
 }

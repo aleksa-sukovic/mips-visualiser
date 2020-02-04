@@ -68,8 +68,8 @@ export class CPU
         return this._instruction;
     }
 
-    public register (name: string): Register
+    public register (value: string): Register
     {
-        return this._registers.find(it => it.hasAlias(name));
+        return this._registers.find(it => it.hasAlias(value) || it.binary === value);
     }
 }

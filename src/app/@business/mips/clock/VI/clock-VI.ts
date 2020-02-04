@@ -1,7 +1,6 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
 
 export class ClockVI  implements Clock
 {

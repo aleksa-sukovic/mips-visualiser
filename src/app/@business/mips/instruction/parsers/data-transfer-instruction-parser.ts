@@ -16,7 +16,7 @@ export class DataTransferInstructionParser extends InstructionParser
 
     public parse (value: string): string
     {
-        const args = this.arguments(value);
+        const args = this.instructionArgs(value);
 
         const rs = this.register(args[0]);
         const rt = this.register(args[1]);
@@ -36,7 +36,7 @@ export class DataTransferInstructionParser extends InstructionParser
         return register;
     }
 
-    protected arguments (value: string): string[]
+    protected instructionArgs (value: string): string[]
     {
         const args = value.split(this.instruction(value).alias)[1].trim();
         const arg1 = args.split(',')[0].trim();

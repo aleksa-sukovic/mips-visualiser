@@ -16,7 +16,7 @@ export class ImmediateInstructionParser extends InstructionParser
 
     public parse (value: string): string
     {
-        const args = this.arguments(value);
+        const args = this.instructionArgs(value);
 
         const rs = this.register(args[0]).binary;
         const rt = this.register(args[1]).binary;
@@ -25,7 +25,7 @@ export class ImmediateInstructionParser extends InstructionParser
         return this.instruction(value).opcode + rs + rt + this._encoder.binary(immediate, 16);
     }
 
-    protected arguments (value: string): string[]
+    protected instructionArgs (value: string): string[]
     {
         value = value.split(this.instruction(value).alias)[1];
 

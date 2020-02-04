@@ -2,7 +2,7 @@ import { BinaryConverter } from './binary-converter';
 import { OverflowException } from '../exceptions/overflow-exception';
 
 describe('Binary Converter ', () => {
-    let converter;
+    let converter: BinaryConverter;
 
     beforeAll(() => {
         converter = new BinaryConverter();
@@ -42,5 +42,13 @@ describe('Binary Converter ', () => {
         expect(converter.number('000')).toBe(0);
         expect(converter.number('0101')).toBe(5);
         expect(converter.number('11101110')).toBe(-18);
+    });
+
+    it('pads with 0s', () => {
+        expect(converter.signPad('01111', 10)).toBe('0000001111');
+    });
+
+    it('pads with 1s', () => {
+        expect(converter.signPad('10000', 10)).toBe('1111110000');
     });
 });

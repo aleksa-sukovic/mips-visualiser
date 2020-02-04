@@ -38,6 +38,6 @@ describe('Clock I', () => {
         cpu.simulate(instruction);
         cpu.nextClock();
 
-        expect(cpu.instruction)
+        expect(cpu.register('$ir').value).toBe(instruction.binary);
     });
 });

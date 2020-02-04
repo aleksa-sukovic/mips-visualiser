@@ -1,5 +1,5 @@
 import { Register } from '../register/models/register';
-import { ClockI } from '../clock/I/clock-I';
+import { Clock1 } from '../clock/1/clock-1';
 
 export default {
     word_length: 32,
@@ -9,7 +9,7 @@ export default {
             opcode: '000000',
             funct: '100000',
             clocks: [
-                new ClockI(),
+                new Clock1(),
             ],
         },
         {

@@ -3,7 +3,7 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
 
-export class ClockII implements Clock
+export class Clock2 implements Clock
 {
     protected _encoder: BinaryEncoder = new BinaryEncoder();
 

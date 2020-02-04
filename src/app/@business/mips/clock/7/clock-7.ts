@@ -2,7 +2,7 @@ import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 
-export class ClockVIII  implements Clock
+export class Clock7  implements Clock
 {
     protected _encoder: BinaryEncoder;
 
@@ -14,21 +14,18 @@ export class ClockVIII  implements Clock
     public execute (cpu: CPU): void
     {
         this.setControl(cpu);
-        this.write(cpu);
+        this.readData(cpu);
     }
 
     protected setControl (cpu: CPU): void
     {
-        cpu.control.memWrite = '1';
+        cpu.control.memRead = '1';
         cpu.control.lorD = '1';
     }
 
-    protected write (cpu: CPU): void
+    protected readData (cpu: CPU): void
     {
-        // Take the value of 'rt' register.
-        const sourceRegister = cpu.register(cpu.instruction.rt);
-
-        // Write to calculated address.
-        cpu.memory.set(cpu.alu.result, sourceRegister.value);
+        // Read data from address calculated in 'Clock3' to 'memData' register.
+        cpu.register('$memData').value = cpu.memory.get(cpu.alu.result);
     }
 }

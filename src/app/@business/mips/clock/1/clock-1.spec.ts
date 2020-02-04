@@ -3,7 +3,7 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
 
-describe('Clock I', () => {
+describe('Clock 1', () => {
     let cpu: CPU = null;
     const encoder: BinaryEncoder = new BinaryEncoder();
 

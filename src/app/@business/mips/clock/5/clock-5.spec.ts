@@ -1,11 +1,11 @@
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { ClockV } from './clock-V';
+import { Clock5 } from './clock-5';
 import config from '../../library/config';
 import { Instruction } from '../../instruction/instruction';
 
-describe('Clock V', () => {
+describe('Clock 5', () => {
     let cpu: CPU = null;
     let instruction: Instruction = null;
     let spy: jasmine.Spy;
@@ -14,7 +14,7 @@ describe('Clock V', () => {
     beforeAll(() => {
         cpu = new CPU();
         instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spy = spyOnProperty(instruction, 'clocks').and.returnValue([new ClockV()]);
+        spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock5()]);
     });
 
     it('sets the CPU control signals', () => {

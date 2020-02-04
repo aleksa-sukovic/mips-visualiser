@@ -1,5 +1,14 @@
 import { Register } from '../register/models/register';
 import { Clock1 } from '../clock/1/clock-1';
+import { Clock2 } from '../clock/2/clock-2';
+import { Clock3 } from '../clock/3/clock-3';
+import { Clock4 } from '../clock/4/clock-4';
+import { Clock5 } from '../clock/5/clock-5';
+import { Clock6 } from '../clock/6/clock-6';
+import { Clock7 } from '../clock/7/clock-7';
+import { Clock8 } from '../clock/8/clock-8';
+import { Clock9 } from '../clock/9/clock-9';
+import { Clock10 } from '../clock/10/clock-10';
 
 export default {
     word_length: 32,
@@ -10,49 +19,85 @@ export default {
             funct: '100000',
             clocks: [
                 new Clock1(),
+                new Clock2(),
+                new Clock4(),
+                new Clock9(),
             ],
         },
         {
             alias: 'addi',
             opcode: '001000',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock4(),
+                new Clock9(),
+            ],
         },
         {
             alias: 'sub',
             opcode: '000000',
             funct: '100010',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock4(),
+                new Clock9(),
+            ],
         },
         {
             alias: 'j',
             opcode: '000010',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock6(),
+            ],
         },
         {
             alias: 'beq',
             opcode: '000100',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock5(),
+            ],
         },
         {
             alias: 'bne',
             opcode: '000101',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock5(),
+            ],
         },
         {
             alias: 'lw',
             opcode: '100011',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock3(),
+                new Clock7(),
+                new Clock10(),
+            ],
         },
         {
             alias: 'sw',
             opcode: '101011',
             funct: '',
-            clocks: [],
+            clocks: [
+                new Clock1(),
+                new Clock2(),
+                new Clock3(),
+                new Clock8(),
+            ],
         },
     ],
     registers: [

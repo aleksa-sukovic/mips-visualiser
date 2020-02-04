@@ -1,6 +1,6 @@
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { CPU } from '../../cpu/cpu';
-import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
+import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
 
 describe('Clock I', () => {

@@ -39,6 +39,7 @@ export class CPU
     {
         if (!this._clocks[this._currentClock]) { return; }
 
+        this._control.reset();
         this._clocks[this._currentClock++].execute(this);
     }
 

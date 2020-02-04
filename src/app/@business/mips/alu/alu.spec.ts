@@ -107,7 +107,7 @@ describe('ALU', () => {
         alu.op1 = '0010';
         alu.op2 = '0000';
         alu.op = '1x';
-        alu.funct = 'xx1010';
+        alu.funct = '101010';
 
         alu.execute();
 

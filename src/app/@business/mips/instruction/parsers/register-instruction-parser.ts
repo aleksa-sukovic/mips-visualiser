@@ -21,7 +21,7 @@ export class RegisterInstructionParser extends InstructionParser
         const rt = registers[2];
         const rd = registers[0];
         const shamt = '00000';
-        const funct = '000000';
+        const funct = this.instruction(value).funct;
 
         return opCode + rs + rt + rd + shamt + funct;
     }

@@ -35,7 +35,7 @@ describe('Register instruction parser', () => {
 
     it('parses R-type instruction', () => {
         const instruction = 'add $1, $2, $3';
-        const binary = '000000,00010,00011,00001,00000,000000';
+        const binary = '000000,00010,00011,00001,00000,100000';
 
         expect(parser.parse(instruction).length).toBe(32);
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
@@ -43,7 +43,21 @@ describe('Register instruction parser', () => {
 
     it('parses R-type instruction with register aliases', () => {
         const instruction = 'add $v0, $1, $v1';
-        const binary = '000000,00001,00011,00010,00000,000000';
+        const binary = '000000,00001,00011,00010,00000,100000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('sets funct field for add instructions', () => {
+        const instruction = 'add $1, $2, $3';
+        const binary = '000000,00010,00011,00001,00000,100000';
+
+        expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
+    });
+
+    it('sets funct field for sub instructions', () => {
+        const instruction = 'sub $1, $2, $3';
+        const binary = '000000,00010,00011,00001,00000,100010';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });

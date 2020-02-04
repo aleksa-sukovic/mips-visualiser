@@ -7,16 +7,53 @@ export default {
         {
             alias: 'add',
             opcode: '000000',
+            funct: '100000',
             clocks: [
                 new ClockI(),
-            ]
+            ],
         },
-        { alias: 'addi', opcode: '001000' },
-        { alias: 'j', opcode: '000010' },
-        { alias: 'beq', opcode: '000100' },
-        { alias: 'bne', opcode: '000101' },
-        { alias: 'lw', opcode: '100011' },
-        { alias: 'sw', opcode: '101011' },
+        {
+            alias: 'addi',
+            opcode: '001000',
+            funct: '',
+            clocks: [],
+        },
+        {
+            alias: 'sub',
+            opcode: '000000',
+            funct: '100010',
+            clocks: [],
+        },
+        {
+            alias: 'j',
+            opcode: '000010',
+            funct: '',
+            clocks: [],
+        },
+        {
+            alias: 'beq',
+            opcode: '000100',
+            funct: '',
+            clocks: [],
+        },
+        {
+            alias: 'bne',
+            opcode: '000101',
+            funct: '',
+            clocks: [],
+        },
+        {
+            alias: 'lw',
+            opcode: '100011',
+            funct: '',
+            clocks: [],
+        },
+        {
+            alias: 'sw',
+            opcode: '101011',
+            funct: '',
+            clocks: [],
+        },
     ],
     registers: [
         new Register(['$ir'], '', '0000'),

@@ -37,15 +37,15 @@ export class ALU
 
     private operationFromFunct (): void
     {
-        if (this.funct.endsWith('0000')) {
+        if (this.funct === '100000') {
             this.add();
-        } else if (this.funct.endsWith('0010')) {
+        } else if (this.funct === '100010') {
             this.subtract();
-        } else if (this.funct.endsWith('0100')) {
+        } else if (this.funct === '100100') {
             this.and();
-        } else if (this.funct.endsWith('0101')) {
+        } else if (this.funct === '100101') {
             this.or();
-        } else if (this.funct.endsWith('1010')) {
+        } else if (this.funct === '101010') {
             this.slt();
         }
     }

@@ -1,8 +1,11 @@
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { CPU } from '../../cpu/cpu';
+import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import config from '../../library/config';
 
 describe('Clock I', () => {
     let cpu: CPU = null;
+    const encoder: BinaryConverter = new BinaryConverter();
 
     beforeAll(() => cpu = new CPU());
 
@@ -25,7 +28,7 @@ describe('Clock I', () => {
     it('increments PC by 4', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
 
-        cpu.register('$pc').value = '0000';
+        cpu.register('$pc').value = encoder.binary(0, config.word_length);
         cpu.simulate(instruction);
         cpu.nextClock();
 

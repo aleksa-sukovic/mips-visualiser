@@ -7,18 +7,23 @@ export class RegisterInstructionParser extends InstructionParser
 {
     public parse (value: string): string
     {
-        const registers = this.registers(this.removeInstructionAlias(value));
-        let result = this.instruction(value).opcode;
+        const registers = this.registers(this.removeInstructionAlias(value))
+            .map(it => {
+                if (!this.register(it)) {
+                    throw new RegisterNotFoundException(it);
+                }
 
-        for (const registerString of registers) {
-            if (!this.register(registerString)) {
-                throw new RegisterNotFoundException(registerString);
-            }
+                return this.register(it).binary;
+            });
 
-            result = result + this.register(registerString).binary;
-        }
+        const opCode = this.instruction(value).opcode;
+        const rs = registers[1];
+        const rt = registers[2];
+        const rd = registers[0];
+        const shamt = '00000';
+        const funct = '000000';
 
-        return result + '00000' + '000000'; // add shamt + funct
+        return opCode + rs + rt + rd + shamt + funct;
     }
 
     protected registers (value: string): string[]

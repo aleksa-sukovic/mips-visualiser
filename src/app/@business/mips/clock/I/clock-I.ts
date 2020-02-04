@@ -15,7 +15,7 @@ export class ClockI implements Clock
     public execute (cpu: CPU): void
     {
         this.setControl(cpu);
-        // this.readInstruction();
+        this.readInstruction(cpu);
         this.incrementPC(cpu);
     }
 
@@ -29,6 +29,11 @@ export class ClockI implements Clock
         cpu.control.aluOp    = '00';
         cpu.control.pcWrite  = '1';
         cpu.control.pcSource = '00';
+    }
+
+    protected readInstruction (cpu: CPU): void
+    {
+        cpu.register('$ir').value = cpu.instruction.binary;
     }
 
     protected incrementPC (cpu: CPU): void

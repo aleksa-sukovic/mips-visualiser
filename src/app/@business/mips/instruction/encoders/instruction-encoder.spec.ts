@@ -12,7 +12,7 @@ describe('Instruction encoder', () => {
         const instruction3 = 'j 1024';
         const instruction4 = 'lw $v0, 256($v1)';
 
-        const binary1 = '000000,00010,00011,00001,00000,000000';
+        const binary1 = '000000,00010,00011,00001,00000,100000';
         const binary2 = '000100,00011,00000,0000000100000000';
         const binary3 = '000010,00000000000000010000000000';
         const binary4 = '100011,00011,00010,0000000100000000';

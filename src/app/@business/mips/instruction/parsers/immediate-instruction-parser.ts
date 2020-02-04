@@ -2,16 +2,16 @@ import { InstructionParser } from './instruction-parser';
 import { Register } from '../../register/models/register';
 import config from '../../library/config';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
-import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
 
 export class ImmediateInstructionParser extends InstructionParser
 {
-    private converter: BinaryConverter;
+    private _encoder: BinaryEncoder;
 
     public constructor ()
     {
         super();
-        this.converter = new BinaryConverter();
+        this._encoder = new BinaryEncoder();
     }
 
     public parse (value: string): string
@@ -22,7 +22,7 @@ export class ImmediateInstructionParser extends InstructionParser
         const rt = this.register(args[1]).binary;
         const immediate = this.number(args[2]);
 
-        return this.instruction(value).opcode + rs + rt + this.converter.binary(immediate, 16);
+        return this.instruction(value).opcode + rs + rt + this._encoder.binary(immediate, 16);
     }
 
     protected arguments (value: string): string[]

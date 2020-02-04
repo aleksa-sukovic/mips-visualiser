@@ -1,11 +1,11 @@
-import { BinaryConverter } from './binary-converter';
+import { BinaryEncoder } from './binary-encoder';
 import { OverflowException } from '../exceptions/overflow-exception';
 
 describe('Binary Converter ', () => {
-    let converter: BinaryConverter;
+    let converter: BinaryEncoder;
 
     beforeAll(() => {
-        converter = new BinaryConverter();
+        converter = new BinaryEncoder();
     });
 
     it('converts base 10 number to binary', () => {

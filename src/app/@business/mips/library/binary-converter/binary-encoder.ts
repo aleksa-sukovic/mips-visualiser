@@ -1,7 +1,7 @@
 import { OverflowException } from '../exceptions/overflow-exception';
 import { Str } from '../utilities/str';
 
-export class BinaryConverter
+export class BinaryEncoder
 {
     public number (binary: string): number
     {

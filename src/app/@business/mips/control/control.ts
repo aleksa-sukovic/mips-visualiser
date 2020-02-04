@@ -17,6 +17,11 @@ export class Control
 
     public constructor ()
     {
+        this.reset();
+    }
+
+    public reset (): void
+    {
         this._pcWrite = '0';
         this._pcWriteCond = '0';
         this._lorD = '0';

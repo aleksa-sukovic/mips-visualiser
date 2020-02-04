@@ -3,37 +3,45 @@ import { Clock4 } from './clock-4';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
+import { Instruction } from '../../instruction/instruction';
 
 describe('Clock IV', () => {
     let cpu: CPU = null;
+    let instruction: Instruction;
+    let spy: jasmine.Spy;
     const encoder = new BinaryEncoder();
 
-    beforeAll(() => cpu = new CPU());
+    beforeAll(() => {
+        cpu = new CPU();
+        instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+        spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
+    });
 
     it('sets the CPU control signals', () => {
-        const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
-
         cpu.register('$2').value = encoder.binary(5, config.word_length);
         cpu.register('$3').value = encoder.binary(10, config.word_length);
+
         cpu.simulate(instruction);
         cpu.nextClock();
 
+        expect(spy).toHaveBeenCalled();
         expect(cpu.control.aluSelA).toBe('1');
         expect(cpu.control.aluSelB).toBe('00');
         expect(cpu.control.aluOp).toBe('10');
     });
 
     it('does operation between arguments in R-type instruction', () => {
-        const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
+        const operand1 = 20;
+        const operand2 = 10;
+        const result = 20 + 10;
 
-        cpu.register('$2').value = encoder.binary(5, config.word_length);
-        cpu.register('$3').value = encoder.binary(10, config.word_length);
+        cpu.register('$2').value = encoder.binary(operand1, config.word_length);
+        cpu.register('$3').value = encoder.binary(operand2, config.word_length);
+
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.alu.result).toBe(encoder.binary(15, config.word_length));
+        expect(cpu.alu.result).toBe(encoder.binary(result, config.word_length));
     });
 });

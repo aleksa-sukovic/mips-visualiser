@@ -2,6 +2,7 @@ import { InstructionFactory } from '../../instruction/factories/instruction-fact
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
+import { Clock1 } from './clock-1';
 
 describe('Clock 1', () => {
     let cpu: CPU = null;
@@ -11,10 +12,12 @@ describe('Clock 1', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
 
         cpu.simulate(instruction);
-        cpu.nextClock();
+        cpu.execute();
 
+        expect(spy).toHaveBeenCalled();
         expect(cpu.control.memRead).toBe('1');
         expect(cpu.control.aluSelA).toBe('0');
         expect(cpu.control.lorD).toBe('0');
@@ -27,20 +30,24 @@ describe('Clock 1', () => {
 
     it('increments PC by 4', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
 
         cpu.register('$pc').value = encoder.binary(0, config.word_length);
         cpu.simulate(instruction);
-        cpu.nextClock();
+        cpu.execute();
 
+        expect(spy).toHaveBeenCalled();
         expect(cpu.register('$pc').value).toBe('00000000000000000000000000000100');
     });
 
     it('reads instruction', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
 
         cpu.simulate(instruction);
-        cpu.nextClock();
+        cpu.execute();
 
+        expect(spy).toHaveBeenCalled();
         expect(cpu.register('$ir').value).toBe(instruction.binary);
     });
 });

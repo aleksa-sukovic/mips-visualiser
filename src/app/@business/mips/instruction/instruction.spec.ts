@@ -10,19 +10,19 @@ describe('Instruction', () => {
     it('parses RS field', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
 
-        expect(instruction.rs).toBe('00001');
+        expect(instruction.rs).toBe('00010');
     });
 
     it('parses RT field', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
 
-        expect(instruction.rt).toBe('00010');
+        expect(instruction.rt).toBe('00011');
     });
 
     it('parses RD field', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
 
-        expect(instruction.rd).toBe('00011');
+        expect(instruction.rd).toBe('00001');
     });
 
     it('parses shamt field', () => {

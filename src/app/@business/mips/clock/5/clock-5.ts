@@ -30,9 +30,17 @@ export class Clock5  implements Clock
         cpu.alu.op  = cpu.control.aluOp;
         cpu.alu.execute();
 
+        // If instruction is 'be'.
         // If 'rs' == 'rt' jump to address calculated in 'Clock2'.
         // Jump is done by altering the value of 'PC' register.
-        if (cpu.alu.zero === '1') {
+        if (cpu.instruction.op === '000100' && cpu.alu.zero === '1') {
+            cpu.register('$pc').value = cpu.register('$target').value;
+        }
+
+        // If instruction is 'bne'
+        // If 'rs' != 'rt' jump to address calculated in 'Clock2'.
+        // Jump is done by altering the value of 'PC' register.
+        if (cpu.instruction.op === '000101' && cpu.alu.zero === '0') {
             cpu.register('$pc').value = cpu.register('$target').value;
         }
     }

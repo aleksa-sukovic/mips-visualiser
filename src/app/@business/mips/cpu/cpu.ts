@@ -14,6 +14,7 @@ export class CPU
     protected _clocks: Clock[];
     protected _registers: Register[];
     protected _currentClock: number;
+    protected _instruction: Instruction;
 
     public constructor ()
     {
@@ -23,10 +24,12 @@ export class CPU
         this._clocks = [];
         this._registers = config.registers;
         this._currentClock = 0;
+        this._instruction = null;
     }
 
     public simulate (instruction: Instruction): void
     {
+        this._instruction = instruction;
         this._clocks = instruction.clocks;
         this._currentClock = 0;
         this._memory.set(this.register('$pc').value, instruction.binary);
@@ -57,6 +60,11 @@ export class CPU
     public get memory ()
     {
         return this._memory;
+    }
+
+    public get instruction ()
+    {
+        return this._instruction;
     }
 
     public register (name: string): Register

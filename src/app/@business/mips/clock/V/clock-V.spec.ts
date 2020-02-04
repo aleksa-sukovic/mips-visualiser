@@ -31,8 +31,8 @@ describe('Clock V', () => {
     it('updates PC value if branch should happen', () => {
         cpu.register('$pc').value = encoder.binary(1000, config.word_length);
         cpu.register('$target').value = encoder.binary(1000 + 256, config.word_length);
-        cpu.register('$1').value = encoder.binary(10, config.word_length);
         cpu.register('$2').value = encoder.binary(10, config.word_length);
+        cpu.register('$3').value = encoder.binary(10, config.word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -43,8 +43,8 @@ describe('Clock V', () => {
 
     it('does not update PC value if operands are not equal', () => {
         cpu.register('$pc').value = encoder.binary(1000, config.word_length);
-        cpu.register('$1').value = encoder.binary(10, config.word_length);
-        cpu.register('$2').value = encoder.binary(5, config.word_length);
+        cpu.register('$2').value = encoder.binary(10, config.word_length);
+        cpu.register('$3').value = encoder.binary(5, config.word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();

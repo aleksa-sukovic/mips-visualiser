@@ -13,7 +13,7 @@ describe('Clock 5', () => {
 
     beforeAll(() => {
         cpu = new CPU();
-        instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
+        instruction = InstructionFactory.fromSymbolic('beq $1, $2, 128');
         spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock5()]);
     });
 
@@ -38,8 +38,8 @@ describe('Clock 5', () => {
 
         cpu.register('$pc').value = encoder.binary(pcValue, config.word_length);
         cpu.register('$target').value = encoder.binary(branchAddress, config.word_length);
-        cpu.register('$2').value = encoder.binary(operand1, config.word_length);
-        cpu.register('$3').value = encoder.binary(operand2, config.word_length);
+        cpu.register('$1').value = encoder.binary(operand1, config.word_length);
+        cpu.register('$2').value = encoder.binary(operand2, config.word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -54,8 +54,8 @@ describe('Clock 5', () => {
         const operand2 = 5;
         const pcValue = 2000;
 
-        cpu.register('$2').value = encoder.binary(operand1, config.word_length);
-        cpu.register('$3').value = encoder.binary(operand2, config.word_length);
+        cpu.register('$1').value = encoder.binary(operand1, config.word_length);
+        cpu.register('$2').value = encoder.binary(operand2, config.word_length);
         cpu.register('$pc').value = encoder.binary(pcValue, config.word_length);
 
         cpu.simulate(instruction);

@@ -34,6 +34,6 @@ describe('Clock IV', () => {
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.register('$1').value).toBe(encoder.binary(15, config.word_length));
+        expect(cpu.alu.result).toBe(encoder.binary(15, config.word_length));
     });
 });

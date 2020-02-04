@@ -85,6 +85,12 @@ export class BinaryConverter
         return (carry === 1 ? '1' : '') + binary;
     }
 
+    public signPad (binary: string, length: number): string
+    {
+        return binary.startsWith('0') ?
+            this.pad(binary, length, '0') : this.pad(binary, length, '1');
+    }
+
     public pad (binary: string, length: number, pad: string = '0'): string
     {
         while (binary.length < length) { binary = pad + binary; }

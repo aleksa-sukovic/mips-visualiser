@@ -27,8 +27,13 @@ export class ClockIII implements Clock
 
     public calculateMemoryAddress (cpu: CPU): void
     {
+        // First ALU operand is base register 'rs' specified by instruction.
         cpu.alu.op1 = cpu.register(cpu.instruction.rs).value;
+
+        // Second ALU operand is sign-extended 16-bit offset read from instruction.
         cpu.alu.op2 = this._encoder.signPad(cpu.instruction.offset, config.word_length);
+
+        // Tell the ALU to do addition.
         cpu.alu.op = cpu.control.aluOp;
         cpu.alu.execute();
     }

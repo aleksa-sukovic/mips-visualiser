@@ -20,11 +20,18 @@ export class ClockV  implements Clock
 
     protected doBranch (cpu: CPU): void
     {
+        // First operand is 'rs' register.
         cpu.alu.op1 = cpu.register(cpu.instruction.rs).value;
+
+        // Second operand is 'rt' register.
         cpu.alu.op2 = cpu.register(cpu.instruction.rt).value;
+
+        // Tell the ALU to do subtraction.
         cpu.alu.op  = cpu.control.aluOp;
         cpu.alu.execute();
 
+        // If 'rs' == 'rt' jump to address calculated in 'Clock2'.
+        // Jump is done by altering the value of 'PC' register.
         if (cpu.alu.zero === '1') {
             cpu.register('$pc').value = cpu.register('$target').value;
         }

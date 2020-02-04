@@ -38,10 +38,18 @@ export class ClockI implements Clock
 
     protected incrementPC (cpu: CPU): void
     {
+        // First ALU operand is current 'PC (program counter)' value.
         cpu.alu.op1 = cpu.register('$pc').value;
+
+        // Second ALU operand is number '4'
+        // We are incrementing 'PC' to point to next instruction.
         cpu.alu.op2 = this._encoder.binary(4, config.word_length);
+
+        // Tell the ALU to do addition.
         cpu.alu.op  = '00';
         cpu.alu.execute();
+
+        // Write to 'PC' register (PC <- PC + 4).
         cpu.register('$pc').value = cpu.alu.result;
     }
 }

@@ -43,6 +43,13 @@ export class CPU
         this._clocks[this._currentClock++].execute(this);
     }
 
+    public execute (): void
+    {
+        while (this._clocks[this._currentClock]) {
+            this.nextClock();
+        }
+    }
+
     public done (): boolean
     {
         return this._currentClock === this._clocks.length;

@@ -59,6 +59,7 @@ export default {
         new Register(['$ir'], '', '0000'),
         new Register(['$pc'], '', '00000'),
         new Register(['$target'], '', '00000'),
+        new Register(['$memData'], '', '00000'),
         new Register(['$0', '$zero'], '00000'),
         new Register(['$1', '$at'], '00001'),
         new Register(['$2', '$v0'], '00010'),

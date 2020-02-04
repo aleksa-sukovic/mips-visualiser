@@ -1,5 +1,5 @@
 import { InstructionParser } from './instruction-parser';
-import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
+import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 
 export class JumpInstructionParser extends InstructionParser
 {

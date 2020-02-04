@@ -1,5 +1,5 @@
 import { InstructionParser } from './instruction-parser';
-import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
+import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { Register } from '../../register/models/register';
 import config from '../../library/config';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';

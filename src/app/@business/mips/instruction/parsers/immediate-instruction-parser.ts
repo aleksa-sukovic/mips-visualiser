@@ -2,7 +2,7 @@ import { InstructionParser } from './instruction-parser';
 import { Register } from '../../register/models/register';
 import config from '../../library/config';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
-import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
+import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 
 export class ImmediateInstructionParser extends InstructionParser
 {

@@ -51,7 +51,7 @@ describe('ALU', () => {
         alu.op1 = '0000';
         alu.op2 = '0001';
         alu.op = '1x';
-        alu.funct = '000000';
+        alu.funct = '100000';
 
         alu.execute();
 
@@ -62,7 +62,7 @@ describe('ALU', () => {
         alu.op1 = '0100';
         alu.op2 = '0010';
         alu.op = '1x';
-        alu.funct = 'xx0010';
+        alu.funct = '100010';
 
         alu.execute();
 
@@ -73,7 +73,7 @@ describe('ALU', () => {
         alu.op1 = '1111';
         alu.op2 = '1010';
         alu.op = '1x';
-        alu.funct = 'xx0100';
+        alu.funct = '100100';
 
         alu.execute();
 
@@ -84,7 +84,7 @@ describe('ALU', () => {
         alu.op1 = '0101';
         alu.op2 = '1010';
         alu.op = '1x';
-        alu.funct = 'xx0101';
+        alu.funct = '100101';
 
         alu.execute();
 
@@ -95,7 +95,7 @@ describe('ALU', () => {
         alu.op1 = '0001';
         alu.op2 = '0010';
         alu.op = '1x';
-        alu.funct = 'xx1010';
+        alu.funct = '101010';
 
         alu.execute();
 

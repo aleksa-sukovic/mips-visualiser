@@ -1,11 +1,11 @@
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { CPU } from '../../cpu/cpu';
-import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
 import config from '../../library/config';
 
 describe('Clock I', () => {
     let cpu: CPU = null;
-    const encoder: BinaryConverter = new BinaryConverter();
+    const encoder: BinaryEncoder = new BinaryEncoder();
 
     beforeAll(() => cpu = new CPU());
 

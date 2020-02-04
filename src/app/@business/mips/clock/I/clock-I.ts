@@ -1,15 +1,15 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
-import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
 import config from '../../library/config';
 
 export class ClockI implements Clock
 {
-    private _converter: BinaryConverter;
+    private _encoder: BinaryEncoder;
 
     public constructor ()
     {
-        this._converter = new BinaryConverter();
+        this._encoder = new BinaryEncoder();
     }
 
     public execute (cpu: CPU): void
@@ -39,7 +39,7 @@ export class ClockI implements Clock
     protected incrementPC (cpu: CPU): void
     {
         cpu.alu.op1 = cpu.register('$pc').value;
-        cpu.alu.op2 = this._converter.binary(4, config.word_length);
+        cpu.alu.op2 = this._encoder.binary(4, config.word_length);
         cpu.alu.op  = '00';
         cpu.alu.execute();
         cpu.register('$pc').value = cpu.alu.result;

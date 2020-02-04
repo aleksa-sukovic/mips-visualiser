@@ -1,21 +1,21 @@
 import { InstructionParser } from './instruction-parser';
-import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
 
 export class JumpInstructionParser extends InstructionParser
 {
-    private converter: BinaryConverter;
+    private _encoder: BinaryEncoder;
 
     public constructor ()
     {
         super();
-        this.converter = new BinaryConverter();
+        this._encoder = new BinaryEncoder();
     }
 
     public parse (value: string): string
     {
         const immediate = this.number(this.immediate(value));
 
-        return this.instruction(value).opcode + this.converter.binary(immediate, 26);
+        return this.instruction(value).opcode + this._encoder.binary(immediate, 26);
     }
 
     protected immediate (value: string): string

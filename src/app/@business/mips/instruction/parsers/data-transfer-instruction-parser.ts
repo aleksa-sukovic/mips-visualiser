@@ -1,17 +1,17 @@
 import { InstructionParser } from './instruction-parser';
-import { BinaryConverter } from '../../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../../library/binary-converter/binary-encoder';
 import { Register } from '../../register/models/register';
 import config from '../../library/config';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 
 export class DataTransferInstructionParser extends InstructionParser
 {
-    private converter: BinaryConverter;
+    private _encoder: BinaryEncoder;
 
     public constructor ()
     {
         super();
-        this.converter = new BinaryConverter();
+        this._encoder = new BinaryEncoder();
     }
 
     public parse (value: string): string
@@ -20,7 +20,7 @@ export class DataTransferInstructionParser extends InstructionParser
 
         const rs = this.register(args[0]);
         const rt = this.register(args[1]);
-        const addr = this.converter.binary(Number(args[2]), 16);
+        const addr = this._encoder.binary(Number(args[2]), 16);
 
         return this.instruction(value).opcode + rs.binary + rt.binary + addr;
     }

@@ -1,4 +1,4 @@
-import { BinaryConverter } from '../library/binary-converter/binary-converter';
+import { BinaryEncoder } from '../library/binary-converter/binary-encoder';
 
 export class ALU
 {
@@ -9,7 +9,7 @@ export class ALU
     protected _op2: string;
     protected _zero: string;
     protected _wordLength: number;
-    protected _converter: BinaryConverter;
+    protected _encoder: BinaryEncoder;
 
     public constructor (wordLength: number = 3)
     {
@@ -19,7 +19,7 @@ export class ALU
         this._op = '010';
         this._zero = '0';
         this._wordLength = wordLength;
-        this._converter = new BinaryConverter();
+        this._encoder = new BinaryEncoder();
     }
 
     public execute (): void
@@ -32,7 +32,7 @@ export class ALU
             this.operationFromFunct();
         }
 
-        this._zero = this._converter.number(this._result) === 0 ? '1' : '0';
+        this._zero = this._encoder.number(this._result) === 0 ? '1' : '0';
     }
 
     private operationFromFunct (): void
@@ -52,16 +52,16 @@ export class ALU
 
     private add (): void
     {
-        const op1 = this._converter.number(this.op1);
-        const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 + op2, this._wordLength);
+        const op1 = this._encoder.number(this.op1);
+        const op2 = this._encoder.number(this.op2);
+        this._result = this._encoder.binary(op1 + op2, this._wordLength);
     }
 
     private subtract (): void
     {
-        const op1 = this._converter.number(this.op1);
-        const op2 = this._converter.number(this.op2);
-        this._result = this._converter.binary(op1 - op2, this._wordLength);
+        const op1 = this._encoder.number(this.op1);
+        const op2 = this._encoder.number(this.op2);
+        this._result = this._encoder.binary(op1 - op2, this._wordLength);
     }
 
     private and (): void
@@ -90,11 +90,11 @@ export class ALU
 
     private slt (): void
     {
-        const op1 = this._converter.number(this.op1);
-        const op2 = this._converter.number(this.op2);
+        const op1 = this._encoder.number(this.op1);
+        const op2 = this._encoder.number(this.op2);
         const result = op1 < op2 ? '1' : '0';
 
-        this._result = this._converter.pad(result, this._wordLength);
+        this._result = this._encoder.pad(result, this._wordLength);
     }
 
     public get op1 (): string
@@ -106,7 +106,7 @@ export class ALU
    {
        const pad = value.startsWith('1') ? '1' : '0';
 
-       this._op1 = this._converter.pad(value, this._wordLength, pad);
+       this._op1 = this._encoder.pad(value, this._wordLength, pad);
    }
 
     public get op2 (): string
@@ -118,7 +118,7 @@ export class ALU
     {
         const pad = value.startsWith('1') ? '1' : '0';
 
-        this._op2 = this._converter.pad(value, this._wordLength, pad);
+        this._op2 = this._encoder.pad(value, this._wordLength, pad);
     }
 
     public get op (): string

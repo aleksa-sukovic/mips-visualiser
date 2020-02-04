@@ -19,6 +19,7 @@ export default {
         { alias: 'sw', opcode: '101011' },
     ],
     registers: [
+        new Register(['$ir'], '', '0000'),
         new Register(['$pc'], '', '00000'),
         new Register(['$target'], '', '00000'),
         new Register(['$0', '$zero'], '00000'),

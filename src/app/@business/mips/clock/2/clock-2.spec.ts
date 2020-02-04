@@ -4,6 +4,7 @@ import { Clock2 } from './clock-2';
 import { Clock1 } from '../1/clock-1';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import config from '../../library/config';
+import { of } from 'rxjs';
 
 describe('Clock 2', () => {
     let cpu: CPU = null;
@@ -13,11 +14,12 @@ describe('Clock 2', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spyOnProperty(instruction, 'clocks').and.returnValue([new Clock2()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock2()]);
 
         cpu.simulate(instruction);
-        cpu.nextClock();
+        cpu.execute();
 
+        expect(spy).toHaveBeenCalled();
         expect(cpu.control.aluSelA).toBe('0');
         expect(cpu.control.aluSelB).toBe('11');
         expect(cpu.control.aluOp).toBe('00');
@@ -26,13 +28,20 @@ describe('Clock 2', () => {
 
     it('calculates branch target address', () => {
         const instr = InstructionFactory.fromSymbolic('beq $1, $2, 128');
-        spyOnProperty(instr, 'clocks').and.returnValue([new Clock1(), new Clock2()]);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock1(), new Clock2()]);
 
-        cpu.register('$pc').value = encoder.binary(1000, config.word_length);
+        const offset = 128;
+        const pcValue = 1000;
+
+        // PC is incremented by '4' in 'Clock1'.
+        const branchAddress = pcValue + 4 + offset;
+
+        cpu.register('$pc').value = encoder.binary(pcValue, config.word_length);
         cpu.simulate(instr);
         cpu.nextClock();
         cpu.nextClock();
 
-        expect(cpu.register('$target').value).toBe(encoder.binary(1132, config.word_length));
+        expect(spy).toHaveBeenCalled();
+        expect(cpu.register('$target').value).toBe(encoder.binary(branchAddress, config.word_length));
     });
 });

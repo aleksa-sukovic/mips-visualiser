@@ -1,0 +1,40 @@
+<div class="max-w-sm">
+    <p class="text-2xl text-gray-600">Manipulate individual registers</p>
+    <span class="text-gray-500 inline-block mt-2">In real processor, not all registers are meant to be manipulated by programmer.</span>
+    <span class="text-gray-500 inline-block mb-3 mt-1">However in simulator, you can do whatever you want.</span>
+
+    <table class="table-fixed overflow-y-scroll overflow-x-hidden inline-block border border-gray-200 rounded w-auto" style="height: 30vh; overflow-y: scroll;">
+        <thead>
+            <tr>
+                <th class="px-4 py-2 font-normal text-lg text-gray-700 text-left">Labels</th>
+                <th class="px-4 py-2 font-normal text-lg text-gray-700 text-center" style="min-width: 300px">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let register of registers" class="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:cursor-pointer">
+                <td class="border px-4 py-2 font-bold w-1/2">{{ register.alias }}</td>
+                <td class="border px-4 py-2 text-center">
+                    <!-- Display -->
+                    <div *ngIf="!register.edit" class="flex flex-row justify-between">
+                        <span></span>
+                        {{ register.value }}
+                        <fa-icon [icon]="faEdit" (click)="handleEditClick(register)"></fa-icon>
+                    </div>
+
+                    <!-- Edit -->
+                    <div *ngIf="register.edit" class="flex flex-row justify-between">
+                        <input type="text"
+                               id="register_{{ register.alias }}"
+                               name="register_{{ register.alias }}"
+                               placeholder="New register value"
+                               (keyup)="handleInputChange($event, register)"
+                               class="border rounded p-1 w-full border-gray-500 focus:border-gray-700 outline-none">
+
+                        <fa-icon [icon]="faClose" class="inline-block ml-2 mt-2" (click)="handleRegisterEditClose(register)"></fa-icon>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

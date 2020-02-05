@@ -1,21 +1,21 @@
-<div class="w-full h-16 bg-blue-100 flex flex-row justify-center">
+<div class="w-full h-16 bg-blue-800 flex flex-row justify-center">
     <!-- Forward -->
     <p class="tooltip p-4" (click)="handleForwardClick()">
-        <fa-icon [icon]="faForward" size="2x" class="text-gray-800 p-4"></fa-icon>
+        <fa-icon [icon]="faForward" size="2x" class="text-gray-200 p-4 hover:text-gray-500"></fa-icon>
 
         <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do next cycle</span>
     </p>
 
     <!-- Simulate -->
     <p class="tooltip p-4" (click)="handleSimulateClick()">
-        <fa-icon [icon]="faPlay" size="2x" class="text-gray-800 p-4"></fa-icon>
+        <fa-icon [icon]="faPlay" size="2x" class="text-gray-200 p-4 hover:text-gray-500"></fa-icon>
 
         <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Simulate instruction</span>
     </p>
 
     <!-- Backward -->
     <p class="tooltip p-4" (click)="handleBackwardClick()">
-        <fa-icon [icon]="faBackward" size="2x" class="text-gray-800 p-4"></fa-icon>
+        <fa-icon [icon]="faBackward" size="2x" class="text-gray-200 p-4 hover:text-gray-500"></fa-icon>
 
         <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do previous cycle</span>
     </p>

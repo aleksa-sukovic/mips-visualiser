@@ -30,4 +30,9 @@ export class Register
     {
         this._value = value;
     }
+
+    public get aliases ()
+    {
+        return this._aliases;
+    }
 }

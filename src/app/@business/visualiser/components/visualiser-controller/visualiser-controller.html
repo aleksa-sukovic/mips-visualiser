@@ -1,9 +1,11 @@
-<app-header></app-header>
+<!--<app-header></app-header>-->
 
 <app-player (simulate)="handleSimulateClick()"
             (backward)="handleBackwardClick()"
             (forward)="handleForwardClick()"></app-player>
 
-<div class="flex flex-row justify-center align-middle p-3">
-    <app-instruction-container></app-instruction-container>
+<div class="flex flex-row justify-start align-middle p-6">
+    <app-instruction-container class="pr-6"></app-instruction-container>
+
+    <app-registers></app-registers>
 </div>

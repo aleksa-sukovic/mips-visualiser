@@ -1,12 +1,4 @@
 <div class="w-full h-16 bg-blue-100 flex flex-row justify-center">
-    <div class="absolute top-auto bottom-auto left-0 h-16 flex justify-center flex-col p-3 text-blue-900">
-        <!-- Clock -->
-        <span class="italic">Clock: <strong class="font-bold not-italic">{{ clock }}</strong></span>
-
-        <!-- Instruction -->
-        <span class="italic">Instruction: <strong class="font-bold not-italic">{{ instruction }}</strong></span>
-    </div>
-
     <!-- Forward -->
     <p class="tooltip p-4" (click)="handleForwardClick()">
         <fa-icon [icon]="faForward" size="2x" class="text-gray-800 p-4"></fa-icon>

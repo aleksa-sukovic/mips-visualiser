@@ -1,0 +1,30 @@
+<div class="max-w-md">
+    <!-- Input label -->
+    <label for="instruction" class="block text-gray-700 text-lg mb-1">
+        Enter instruction:
+    </label>
+
+    <!-- Input -->
+    <input type="text"
+           id="instruction"
+           name="instruction"
+           placeholder="Body"
+           (keyup)="handleInputChange($event)"
+           class="border rounded p-2 w-full border-gray-500 focus:border-gray-700 outline-none">
+
+    <!-- Manual -->
+    <div class="mt-3 text-gray-500 italic">
+        <span>You can simulate few different instructions:</span>
+
+        <ul class="list-disc ml-10 mt-1 text-gray-600">
+            <li *ngFor="let instruction of availableInstructions">
+                <span class="text-gray-700 font-bold">{{ instruction.alias }}</span>
+                <span class="inline-block ml-2 ">({{ instruction.example }})</span>
+            </li>
+        </ul>
+
+        <span class="mt-2 inline-block">Make sure you spell check your instruction, I do not offer auto-completion.</span>
+        <br>
+        <span class="mt-2 inline-block">If you are using instructions that access the memory of use registers, don't forget to set their values.</span>
+    </div>
+</div>

@@ -12,17 +12,13 @@ export class PlayerComponent
     public faBackward = faBackward;
     public faPlay = faPlay;
 
-    public instruction: string;
-    public clock: string;
-
     @Output() simulate = new EventEmitter();
     @Output() forward = new EventEmitter();
     @Output() backward = new EventEmitter();
 
     public constructor ()
     {
-        this.instruction = 'add $1, $2, $3';
-        this.clock = '5';
+        //
     }
 
     public handleSimulateClick ()

@@ -1,14 +1,14 @@
-<div class="max-w-md">
+<div class="max-w-sm">
     <!-- Input label -->
-    <label for="instruction" class="block text-gray-700 text-lg mb-1">
-        Enter instruction:
+    <label for="instruction" class="block text-2xl text-gray-600 mb-2">
+        Instruction editing
     </label>
 
     <!-- Input -->
     <input type="text"
            id="instruction"
            name="instruction"
-           placeholder="Body"
+           placeholder="Enter instruction to simulate"
            (keyup)="handleInputChange($event)"
            class="border rounded p-2 w-full border-gray-500 focus:border-gray-700 outline-none">
 

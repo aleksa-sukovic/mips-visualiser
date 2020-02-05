@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { VisualiserRouting } from './visualiser.routing';
+import { SharedModule } from '../../@shared/shared.modules';
 
 @NgModule({
     declarations: [
@@ -7,6 +8,8 @@ import { VisualiserRouting } from './visualiser.routing';
     ],
     imports: [
         VisualiserRouting,
+
+        SharedModule,
     ],
     exports: [
         //

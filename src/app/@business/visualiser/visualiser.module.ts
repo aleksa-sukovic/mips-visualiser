@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistersComponent } from './components/registers/registers.component';
 import { CPUService } from './services/cpu.services';
 import { RegisterItemComponent } from './components/register-item/register-item.component';
+import { MemoryComponent } from './components/memory/memory.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { RegisterItemComponent } from './components/register-item/register-item.
         InstructionContainerComponent,
         RegistersComponent,
         RegisterItemComponent,
+        MemoryComponent,
     ],
     imports: [
         VisualiserRouting,
@@ -29,6 +31,7 @@ import { RegisterItemComponent } from './components/register-item/register-item.
         PlayerComponent,
         InstructionContainerComponent,
         RegistersComponent,
+        MemoryComponent,
     ],
     providers: [
         CPUService,

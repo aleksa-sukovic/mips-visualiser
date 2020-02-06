@@ -1,19 +1,24 @@
 export class Memory
 {
-    protected store: any;
+    protected _store: any;
 
     public constructor ()
     {
-        this.store = {};
+        this._store = {};
     }
 
     public set (key: string, value: any): void
     {
-        this.store[key] = value;
+        this._store[key] = value;
     }
 
     public get (key: string): any
     {
-        return this.store[key];
+        return this._store[key];
+    }
+
+    public store (): any
+    {
+        return this._store;
     }
 }

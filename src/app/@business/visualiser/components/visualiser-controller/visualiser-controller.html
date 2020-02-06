@@ -4,8 +4,10 @@
             (backward)="handleBackwardClick()"
             (forward)="handleForwardClick()"></app-player>
 
-<div class="flex flex-row justify-start align-middle p-6">
-    <app-instruction-container class="pr-6"></app-instruction-container>
+<div class="flex flex-row justify-start align-middle p-3">
+    <app-instruction-container class="w-1/4 p-3"></app-instruction-container>
 
-    <app-registers></app-registers>
+    <app-registers class="w-1/3 flex-grow p-3"></app-registers>
+
+    <app-memory class="w-1/3 flex-grow p-3"></app-memory>
 </div>

@@ -16,27 +16,13 @@ export class RegistersComponent
     public constructor (private cpuService: CPUService)
     {
         this.encoder = new BinaryEncoder();
-        this.initializeRegisters();
-    }
-
-    protected initializeRegisters ()
-    {
-        this.registers = this.cpuService.registers().map(it => {
-            return {
-                id: it.binary,
-                alias: it.aliases.join(' / '),
-                value: this.encoder.number(it.value),
-                edit: false,
-                editValue: '',
-            };
-        });
+        this.registers = this.cpuService.registers();
     }
 
     public handleRegisterEdit (register)
     {
         if (register.editValue) {
             this.cpuService.updateRegister(register.id, register.editValue);
-            this.initializeRegisters();
         }
 
         register.edit = false;

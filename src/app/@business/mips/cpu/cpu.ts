@@ -79,4 +79,9 @@ export class CPU
     {
         return this._registers.find(it => it.hasAlias(value) || it.binary === value);
     }
+
+    public registers (): Register[]
+    {
+        return this._registers;
+    }
 }

@@ -1,0 +1,29 @@
+<!-- Display -->
+<div *ngIf="!register.edit" (click)="handleEditClick(register)" class="flex flex-row justify-between">
+    <!-- Empty element to keep value centered -->
+    <span></span>
+
+    <!-- Register value -->
+    {{ register.value }}
+
+    <!-- Edit icon -->
+    <fa-icon [icon]="faEdit"></fa-icon>
+</div>
+
+<!-- Edit -->
+<form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
+    <div class="flex flex-row justify-between">
+        <!-- Edit input -->
+        <input type="text"
+               id="register_{{ register.alias }}"
+               name="register_{{ register.alias }}"
+               placeholder="New register value"
+               [(ngModel)]="register.editValue"
+               [ngClass]="{ 'border-red-500': !registerForm.valid && !registerForm.pristine }"
+               class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+               required>
+
+        <!-- Close icon -->
+        <fa-icon [icon]="faClose" class="inline-block ml-2 mt-2" (click)="handleCloseClick($event, register)"></fa-icon>
+    </div>
+</form>

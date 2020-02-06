@@ -1,7 +1,7 @@
-<div class="max-w-sm">
+<div class="h-full p-6 border-r border-gray-300 hover:bg-gray-200">
     <form #instructionForm="ngForm" (ngSubmit)="handleFormSubmit()">
         <!-- Input label -->
-        <label for="instruction" class="block text-2xl text-gray-600 mb-2">
+        <label for="instruction" class="block text-2xl text-blue-800 mb-2">
             Instruction editing
         </label>
 
@@ -22,8 +22,8 @@
 
         <ul class="list-disc ml-10 mt-1 text-gray-600">
             <li *ngFor="let instruction of availableInstructions">
-                <span class="text-gray-700 font-bold">{{ instruction.alias }}</span>
-                <span class="inline-block ml-2 ">({{ instruction.example }})</span>
+                <span class="text-blue-900 font-bold">{{ instruction.alias }}</span>
+                <span class="inline-block ml-2">({{ instruction.example }})</span>
             </li>
         </ul>
 

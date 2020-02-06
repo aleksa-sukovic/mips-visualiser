@@ -21,10 +21,7 @@ export class RegistersComponent
 
     public handleRegisterEdit (register)
     {
-        if (register.editValue) {
-            this.cpuService.updateRegister(register.id, register.editValue);
-        }
-
+        this.cpuService.updateRegister(register.id, register.editValue);
         register.edit = false;
     }
 }

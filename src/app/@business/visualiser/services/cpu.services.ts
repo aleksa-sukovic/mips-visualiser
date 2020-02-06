@@ -32,13 +32,20 @@ export class CPUService
         this.initializeRegisters(this.cpu);
     }
 
-    public updateMemory (address: string, value: string): void
+    public updateMemory (memoryItem: any): void
     {
+        this.cpu.memory.destroy(memoryItem.id);
         this.cpu.memory.set(
-            this.encoder.binary(parseInt(address, 10), config.word_length),
-            this.encoder.binary(parseInt(value, 10), config.word_length)
+            this.encoder.binary(parseInt(memoryItem.editAddress, 10), config.word_length),
+            this.encoder.binary(parseInt(memoryItem.editValue, 10), config.word_length)
         );
         this.initializeMemory(this.cpu);
+    }
+
+    public deleteFromMemory (key: string): void
+    {
+        this.cpu.memory.destroy(key);
+        this.initializeMemory(this.cpu)
     }
 
     public registers ()
@@ -68,19 +75,17 @@ export class CPUService
 
     private initializeMemory (cpu: CPU): void
     {
-        const memory = cpu.memory.store();
         this._memory.splice(0, this._memory.length);
 
-        for (const key in memory) {
-            if (memory.hasOwnProperty(key)) {
-                this._memory.push({
-                    address: key,
-                    value: memory[key],
-                    edit: false,
-                    editAddress: '',
-                    editValue: '',
-                });
-            }
+        for (const address of cpu.memory.addresses()) {
+            this._memory.push({
+                id: address,
+                address: this.encoder.number(address) || 1,
+                value: this.encoder.number(cpu.memory.get(address)),
+                edit: false,
+                editAddress: this.encoder.number(address) || 1,
+                editValue: this.encoder.number(cpu.memory.get(address)),
+            });
         }
     }
 }

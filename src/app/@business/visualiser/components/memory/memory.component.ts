@@ -17,14 +17,28 @@ export class MemoryComponent
         this.memory = cpuService.memory();
     }
 
+    public handleMemoryEdit (memoryItem): void
+    {
+        this.cpuService.updateMemory(memoryItem);
+    }
+
+    public handleMemoryItemDelete (memoryItem): void
+    {
+        this.cpuService.deleteFromMemory(memoryItem.id);
+    }
+
     public handleAddButtonClick (): void
     {
-        this.memory.push({
-            address: '0',
-            value: '0',
-            edit: true,
-            editValue: '0',
-            editAddress: '0',
-        });
+        if (!this.memory.find(it => it.id === 'new')) {
+            this.memory.push({
+                id: 'new',
+                address: 1,
+                value: 0,
+                edit: true,
+                editValue: 0,
+                editAddress: 1,
+            });
+            setTimeout(() => document.getElementById('item_new_address').focus());
+        }
     }
 }

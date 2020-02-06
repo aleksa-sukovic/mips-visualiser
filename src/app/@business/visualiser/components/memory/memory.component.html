@@ -3,7 +3,7 @@
     <span class="text-gray-500 inline-block mt-2">In addition to registers, processor has RAM (random access memory) to work with.</span>
     <span class="text-gray-500 inline-block mb-3 mt-1">RAM is several times slower than register memory, but it has much higher capacity.</span>
 
-    <table class="table-fixed overflow-y-scroll overflow-x-hidden inline-block border border-gray-200 rounded w-full" style="height: 30vh; overflow-y: scroll;">
+    <table class="table-fixed overflow-y-scroll overflow-x-hidden inline-block border border-gray-300 rounded w-full" style="height: 30vh; overflow-y: scroll;">
         <thead class="flex flex-col">
         <tr class="flex flex-row justify-around">
             <th class="px-4 py-2 font-normal text-lg text-gray-700 text-left">Address</th>
@@ -11,13 +11,8 @@
         </tr>
         </thead>
         <tbody class="flex flex-col">
-        <tr *ngFor="let item of memory" class="flex flex-row bg-gray-100 text-gray-700 hover:bg-gray-200 hover:cursor-pointer">
-            <td class="border px-4 py-2 font-bold w-1/2">{{ item.address }}</td>
-            <td class="border px-4 py-2 text-center flex-grow">
-                {{ item.value }}
-<!--                <app-register-item [register]="register" (submit)="handleRegisterEdit($event)"></app-register-item>-->
-            </td>
-        </tr>
+        <!-- Table Row -->
+        <app-memory-item [item]="item" (submit)="handleMemoryEdit($event)" (onDelete)="handleMemoryItemDelete($event)" *ngFor="let item of memory"></app-memory-item>
 
         <!-- Add button -->
         <tr class="flex p-3">

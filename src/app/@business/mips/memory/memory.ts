@@ -17,6 +17,22 @@ export class Memory
         return this._store[key];
     }
 
+    public destroy (key: string): void
+    {
+        delete this._store[key];
+    }
+
+    public addresses (): any[]
+    {
+        const result = [];
+        for (const key in this._store) {
+            if (this._store.hasOwnProperty(key)) {
+                result.push(key);
+            }
+        }
+        return result;
+    }
+
     public store (): any
     {
         return this._store;

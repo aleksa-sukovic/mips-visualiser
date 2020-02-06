@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-instruction-container',
@@ -23,8 +23,12 @@ export class InstructionContainerComponent
         //
     }
 
-    public handleInputChange (event)
+    public handleFormSubmit ()
     {
-        this.instructionText = event.target.value;
+        if (!this.instructionText) {
+            return;
+        }
+
+        console.log(this.instructionText);
     }
 }

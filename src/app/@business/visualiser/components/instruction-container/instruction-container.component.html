@@ -1,16 +1,20 @@
 <div class="max-w-sm">
-    <!-- Input label -->
-    <label for="instruction" class="block text-2xl text-gray-600 mb-2">
-        Instruction editing
-    </label>
+    <form #instructionForm="ngForm" (ngSubmit)="handleFormSubmit()">
+        <!-- Input label -->
+        <label for="instruction" class="block text-2xl text-gray-600 mb-2">
+            Instruction editing
+        </label>
 
-    <!-- Input -->
-    <input type="text"
-           id="instruction"
-           name="instruction"
-           placeholder="Enter instruction to simulate"
-           (keyup)="handleInputChange($event)"
-           class="border rounded p-2 w-full border-gray-500 focus:border-gray-700 outline-none">
+        <!-- Input -->
+        <input type="text"
+               id="instruction"
+               name="instruction"
+               placeholder="Enter instruction to simulate"
+               [(ngModel)]="instructionText"
+               [ngClass]="{ 'border-red-500': !instructionForm.valid && !instructionForm.pristine }"
+               class="border rounded p-2 w-full border-gray-500 outline-none"
+               required>
+    </form>
 
     <!-- Manual -->
     <div class="mt-3 text-gray-500 italic">

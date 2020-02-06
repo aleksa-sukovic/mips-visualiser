@@ -1,29 +1,46 @@
-<!-- Display -->
-<div *ngIf="!register.edit" (click)="handleEditClick(register)" class="flex flex-row justify-between">
-    <!-- Empty element to keep value centered -->
-    <span></span>
+<tr *ngIf="!register.edit" (click)="handleEditClick(register)" class="flex flex-row bg-gray-100 border-b border-gray-300 text-gray-600 hover:bg-gray-400 hover:cursor-pointer cursor-pointer">
+    <td class="px-4 font-bold py-2 w-1/2">
+        {{ register.alias }}
+    </td>
 
-    <!-- Register value -->
-    {{ register.value }}
+    <td class="px-4 py-2 w-1/2 flex flex-row justify-between">
+        <!-- Empty element to keep value centered -->
+        <span></span>
 
-    <!-- Edit icon -->
-    <fa-icon [icon]="faEdit"></fa-icon>
-</div>
+        <!-- Register value -->
+        {{ register.value }}
 
-<!-- Edit -->
-<form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
-    <div class="flex flex-row justify-between">
-        <!-- Edit input -->
-        <input type="number"
-               id="register_{{ register.alias }}"
-               name="register_{{ register.alias }}"
-               placeholder="Value"
-               [(ngModel)]="register.editValue"
-               [ngClass]="{ 'border-red-500': !registerForm.valid && !registerForm.pristine }"
-               class="border rounded p-1 w-full border-gray-500 outline-none box-content"
-               required>
+        <!-- Edit icon -->
+        <fa-icon [icon]="faEdit"></fa-icon>
+    </td>
+</tr>
 
-        <!-- Close icon -->
-        <fa-icon [icon]="faClose" class="inline-block ml-2 mt-2" (click)="handleCloseClick($event, register)"></fa-icon>
-    </div>
-</form>
+<tr *ngIf="register.edit" class="flex flex-row">
+    <td class="border px-4 py-2 font-bold w-1/2">
+        {{ register.alias }}
+    </td>
+
+    <td class="border px-4 py-2 font-bold w-1/2">
+        <form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
+            <div class="flex flex-row">
+                <!-- Edit input -->
+                <input type="number"
+                       id="register_{{ register.alias }}"
+                       name="register_{{ register.alias }}"
+                       placeholder="Value"
+                       [(ngModel)]="register.editValue"
+                       [ngClass]="{ 'border-red-500': !registerForm.valid && !registerForm.pristine }"
+                       class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+                       min="-2000000"
+                       max="2000000"
+                       required>
+
+                <!-- Confirm icon -->
+                <fa-icon [icon]="faCheck" class="inline-block ml-2 mt-2 text-gray-600 hover:text-gray-900 cursor-pointer" (click)="handleFormSubmit(register)"></fa-icon>
+
+                <!-- Close icon -->
+                <fa-icon [icon]="faClose" class="inline-block ml-2 mt-2 text-gray-600 hover:text-gray-900 cursor-pointer" (click)="handleCloseClick($event, register)"></fa-icon>
+            </div>
+        </form>
+    </td>
+</tr>

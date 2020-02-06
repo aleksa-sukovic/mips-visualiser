@@ -1,8 +1,8 @@
-<tr *ngIf="!item.edit" (click)="handleEditClick(item)" class="flex flex-row bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer">
-    <td class="border px-4 py-2 w-1/2 text-center">
+<tr *ngIf="!item.edit" (click)="handleEditClick(item)" class="flex flex-row bg-gray-100 border-b border-gray-300 text-gray-600 hover:bg-gray-400 hover:cursor-pointer cursor-pointer">
+    <td class="px-4 font-bold py-2 w-1/2">
         {{ item.address }}
     </td>
-    <td class="border px-4 py-2 text-center flex-grow">
+    <td class="px-4 py-2 w-1/2 text-center flex-grow">
         {{ item.value }}
     </td>
 </tr>
@@ -18,6 +18,7 @@
                    [(ngModel)]="item.editAddress"
                    class="border rounded p-1 w-full border-gray-500 outline-none box-content"
                    min="1"
+                   max="2000000"
                    required>
         </td>
 
@@ -30,7 +31,6 @@
                        placeholder="Value"
                        [(ngModel)]="item.editValue"
                        class="border rounded p-1 w-full border-gray-500 outline-none box-content"
-                       min="1"
                        max="2000000"
                        required>
 

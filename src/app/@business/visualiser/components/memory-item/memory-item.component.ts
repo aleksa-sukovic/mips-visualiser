@@ -10,7 +10,7 @@ export class MemoryItemComponent
 {
     @Input() item;
     @Output() submit = new EventEmitter();
-    @Output() onDelete = new EventEmitter();
+    @Output() delete = new EventEmitter();
     public faCheck = faCheck;
     public faTrash = faTrash;
 
@@ -35,6 +35,6 @@ export class MemoryItemComponent
 
     public handleItemDelete (item): void
     {
-        this.onDelete.emit(item);
+        this.delete.emit(item);
     }
 }

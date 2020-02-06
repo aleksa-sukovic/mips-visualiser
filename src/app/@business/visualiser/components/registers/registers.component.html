@@ -1,22 +1,17 @@
-<div>
-    <p class="text-2xl text-gray-600">Manipulate individual registers</p>
-    <span class="text-gray-500 inline-block mt-2">In real processor, not all registers are meant to be manipulated by programmer.</span>
-    <span class="text-gray-500 inline-block mb-3 mt-1">However in simulator, you can do whatever you want.</span>
+<div class="h-full p-6 border-r border-gray-300 hover:bg-gray-200">
+    <p class="text-2xl text-blue-800">Manipulate individual registers</p>
+    <span class="text-gray-500 inline-block mt-2 italic">In real processor, not all registers are meant to be manipulated by programmer.</span>
+    <span class="text-gray-500 inline-block mb-3 mt-1 italic">However in simulator, you can do whatever you want.</span>
 
-    <table class="table-fixed overflow-y-scroll overflow-x-hidden inline-block border border-gray-300 rounded w-full" style="height: 30vh; overflow-y: scroll;">
+    <table class="table-fixed overflow-auto inline-block border rounded w-full" style="height: 40vh">
         <thead class="flex flex-col">
-            <tr class="flex flex-row justify-around">
-                <th class="px-4 py-2 font-normal text-lg text-gray-700 text-left">Labels</th>
-                <th class="px-4 py-2 font-normal text-lg text-gray-700 text-center">Value</th>
-            </tr>
+        <tr class="flex flex-row justify-around">
+            <th class="w-1/2 px-4 py-2 font-normal text-lg border-b font-bold border-gray-400 bg-gray-100 text-blue-900 text-left">Aliases</th>
+            <th class="w-1/2 px-4 py-2 font-normal text-lg border-b font-bold border-gray-400 bg-gray-100 text-blue-900 text-center">Value</th>
+        </tr>
         </thead>
         <tbody class="flex flex-col">
-            <tr *ngFor="let register of registers" class="flex flex-row bg-gray-100 text-gray-700 hover:bg-gray-200 hover:cursor-pointer">
-                <td class="border px-4 py-2 font-bold w-1/2">{{ register.alias }}</td>
-                <td class="border px-4 py-2 text-center flex-grow">
-                    <app-register-item [register]="register" (submit)="handleRegisterEdit($event)"></app-register-item>
-                </td>
-            </tr>
+        <app-register-item *ngFor="let register of registers" [register]="register" (submit)="handleRegisterEdit($event)"></app-register-item>
         </tbody>
     </table>
 </div>

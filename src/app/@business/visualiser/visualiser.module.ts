@@ -7,12 +7,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistersComponent } from './components/registers/registers.component';
 import { CPUService } from './services/cpu.services';
+import { RegisterItemComponent } from './components/register-item/register-item.component';
 
 @NgModule({
     declarations: [
         PlayerComponent,
         InstructionContainerComponent,
         RegistersComponent,
+        RegisterItemComponent,
     ],
     imports: [
         VisualiserRouting,

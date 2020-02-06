@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CPUService } from '../../services/cpu.services';
 import { BinaryEncoder } from '../../../mips/library/binary-encoder/binary-encoder';
-import { faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-registers',
@@ -11,8 +10,6 @@ import { faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 export class RegistersComponent
 {
     public registers: any[];
-    public faEdit = faEdit;
-    public faClose = faWindowClose;
 
     protected encoder: BinaryEncoder;
 
@@ -28,7 +25,6 @@ export class RegistersComponent
             return {
                 id: it.binary,
                 alias: it.aliases.join(' / '),
-                number: this.encoder.unsignedNumber(it.binary) || it.binary,
                 value: this.encoder.number(it.value),
                 edit: false,
                 editValue: '',
@@ -36,17 +32,7 @@ export class RegistersComponent
         });
     }
 
-    public handleEditClick (register)
-    {
-        register.edit = true;
-    }
-
-    public handleInputChange ($event, register)
-    {
-        register.editValue = $event.target.value;
-    }
-
-    public handleRegisterEditClose (register)
+    public handleRegisterEdit (register)
     {
         if (register.editValue) {
             this.cpuService.updateRegister(register.id, register.editValue);

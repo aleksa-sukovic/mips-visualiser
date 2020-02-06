@@ -1,0 +1,47 @@
+<tr *ngIf="!item.edit" (click)="handleEditClick(item)" class="flex flex-row bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer">
+    <td class="border px-4 py-2 w-1/2 text-center">
+        {{ item.address }}
+    </td>
+    <td class="border px-4 py-2 text-center flex-grow">
+        {{ item.value }}
+    </td>
+</tr>
+
+<form *ngIf="item.edit" #itemForm="ngForm" (ngSubmit)="handleFormSubmit(item)" >
+    <!-- Address value column -->
+    <tr class="flex flex-row bg-gray-100 text-gray-500 hover:bg-gray-200 hover:cursor-pointer">
+        <td class="border px-4 py-2 font-bold w-1/2">
+            <input type="number"
+                   id="item_{{ item.id }}_address"
+                   name="item_{{ item.id }}"
+                   placeholder="Value"
+                   [(ngModel)]="item.editAddress"
+                   class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+                   min="1"
+                   required>
+        </td>
+
+        <!-- Edit value column -->
+        <td class="border px-4 py-2 text-center flex-grow">
+            <div class="flex flex-row justify-between">
+                <input type="number"
+                       id="item_{{ item.id }}_value"
+                       name="item_{{ item.id }}_value"
+                       placeholder="Value"
+                       [(ngModel)]="item.editValue"
+                       class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+                       min="1"
+                       max="2000000"
+                       required>
+
+                <!-- Close icon -->
+                <fa-icon [icon]="faCheck" class="inline-block ml-2 mt-2 hover:text-gray-600 cursor-pointer" (click)="handleFormSubmit(item)"></fa-icon>
+                <fa-icon [icon]="faTrash" class="inline-block ml-2 mt-2 hover:text-gray-600 cursor-pointer" (click)="handleItemDelete(item)"></fa-icon>
+            </div>
+        </td>
+    </tr>
+
+    <!-- Submit button -->
+    <button type="submit" class="hidden"></button>
+</form>
+

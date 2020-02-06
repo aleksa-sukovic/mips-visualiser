@@ -9,6 +9,7 @@ import { RegistersComponent } from './components/registers/registers.component';
 import { CPUService } from './services/cpu.services';
 import { RegisterItemComponent } from './components/register-item/register-item.component';
 import { MemoryComponent } from './components/memory/memory.component';
+import { MemoryItemComponent } from './components/memory-item/memory-item.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { MemoryComponent } from './components/memory/memory.component';
         RegistersComponent,
         RegisterItemComponent,
         MemoryComponent,
+        MemoryItemComponent,
     ],
     imports: [
         VisualiserRouting,

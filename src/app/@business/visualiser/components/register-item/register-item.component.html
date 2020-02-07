@@ -1,4 +1,4 @@
-<tr *ngIf="!register.edit" (click)="handleEditClick(register)" class="flex flex-row bg-gray-100 border-b border-gray-300 text-gray-600 hover:bg-gray-400 hover:cursor-pointer cursor-pointer">
+<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row bg-gray-100 border-b shadow text-gray-600 hover:bg-blue-400 hover:text-blue-100">
     <td class="px-4 font-bold py-2 w-1/2">
         {{ register.alias }}
     </td>
@@ -11,16 +11,13 @@
         {{ register.value }}
 
         <!-- Edit icon -->
-        <fa-icon [icon]="faEdit"></fa-icon>
+        <fa-icon [icon]="faEdit" *ngIf="register.editable"></fa-icon>
+        <span *ngIf="!register.editable" style="width: 16px"></span>
     </td>
 </tr>
 
 <tr *ngIf="register.edit" class="flex flex-row">
-    <td class="border px-4 py-2 font-bold w-1/2">
-        {{ register.alias }}
-    </td>
-
-    <td class="border px-4 py-2 font-bold w-1/2">
+    <td colspan="2" class="border px-4 py-2 font-bold w-full">
         <form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
             <div class="flex flex-row">
                 <!-- Edit input -->

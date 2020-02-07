@@ -45,7 +45,7 @@ export class CPUService
     public deleteFromMemory (key: string): void
     {
         this.cpu.memory.destroy(key);
-        this.initializeMemory(this.cpu)
+        this.initializeMemory(this.cpu);
     }
 
     public registers ()
@@ -69,6 +69,7 @@ export class CPUService
                 value: this.encoder.number(register.value),
                 edit: false,
                 editValue: '',
+                editable: register.editable,
             });
         }
     }

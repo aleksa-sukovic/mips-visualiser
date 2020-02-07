@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CPUService } from '../../services/cpu.services';
 import { BinaryEncoder } from '../../../mips/library/binary-encoder/binary-encoder';
+import { RegistersService } from '../../services/registers.service';
 
 @Component({
     selector: 'app-registers',
@@ -13,15 +13,16 @@ export class RegistersComponent
 
     protected encoder: BinaryEncoder;
 
-    public constructor (private cpuService: CPUService)
+    public constructor (private registersService: RegistersService)
     {
         this.encoder = new BinaryEncoder();
-        this.registers = this.cpuService.registers();
+        this.registers = this.registersService.registers();
     }
 
     public handleRegisterEdit (register)
     {
-        this.cpuService.updateRegister(register.id, register.editValue);
+        this.registersService.updateRegister(register.id, register.editValue);
+
         register.edit = false;
     }
 }

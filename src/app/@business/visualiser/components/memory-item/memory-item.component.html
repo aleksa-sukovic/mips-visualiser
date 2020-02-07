@@ -9,35 +9,42 @@
 
 <form *ngIf="item.edit" #itemForm="ngForm" (ngSubmit)="handleFormSubmit(item)" >
     <!-- Address value column -->
-    <tr class="flex flex-row bg-gray-100 text-gray-500 hover:bg-gray-200 hover:cursor-pointer">
-        <td class="border px-4 py-2 font-bold w-1/2">
+    <tr class="flex justify-center p-2 text-gray-500">
+        <td class="font-bold w-1/2">
             <input type="number"
                    id="item_{{ item.id }}_address"
                    name="item_{{ item.id }}"
                    placeholder="Value"
                    [(ngModel)]="item.editAddress"
-                   class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+                   class="border w-full rounded mr-1 p-1 border-gray-500 outline-none"
                    min="1"
                    max="2000000"
                    required>
         </td>
 
         <!-- Edit value column -->
-        <td class="border px-4 py-2 text-center flex-grow">
-            <div class="flex flex-row justify-between">
-                <input type="number"
-                       id="item_{{ item.id }}_value"
-                       name="item_{{ item.id }}_value"
-                       placeholder="Value"
-                       [(ngModel)]="item.editValue"
-                       class="border rounded p-1 w-full border-gray-500 outline-none box-content"
-                       max="2000000"
-                       required>
+        <td class="font-bold w-1/2">
+            <input type="number"
+                   id="item_{{ item.id }}_value"
+                   name="item_{{ item.id }}_value"
+                   placeholder="Value"
+                   [(ngModel)]="item.editValue"
+                   class="border w-full rounded ml-1 p-1 border-gray-500 outline-none"
+                   max="2000000"
+                   required>
+        </td>
+    </tr>
+    <tr class="flex p-2">
+        <td class="w-full flex flex-row justify-end" colspan="2">
+            <span class="inline-block mr-2 text-green-600 hover:text-green-800 cursor-pointer" (click)="handleFormSubmit(item)">
+                Confirm
+                <fa-icon [icon]="faCheck"></fa-icon>
+            </span>
 
-                <!-- Close icon -->
-                <fa-icon [icon]="faCheck" class="inline-block ml-2 mt-2 hover:text-gray-600 cursor-pointer" (click)="handleFormSubmit(item)"></fa-icon>
-                <fa-icon [icon]="faTrash" class="inline-block ml-2 mt-2 hover:text-gray-600 cursor-pointer" (click)="handleItemDelete(item)"></fa-icon>
-            </div>
+            <span class="inline-block text-red-600 hover:text-red-800 cursor-pointer" (click)="handleItemDelete(item)">
+                Delete
+                <fa-icon [icon]="faTrash"></fa-icon>
+            </span>
         </td>
     </tr>
 

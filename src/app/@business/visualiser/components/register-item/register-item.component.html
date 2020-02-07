@@ -1,4 +1,4 @@
-<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row bg-gray-100 border-b shadow text-gray-600 hover:bg-blue-400 hover:text-blue-100">
+<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row bg-gray-100 border-b text-gray-600 hover:bg-blue-400 hover:text-blue-100">
     <td class="px-4 font-bold py-2 w-1/2">
         {{ register.alias }}
     </td>
@@ -17,7 +17,7 @@
 </tr>
 
 <tr *ngIf="register.edit" class="flex flex-row">
-    <td colspan="2" class="border px-4 py-2 font-bold w-full">
+    <td colspan="2" class="border border-b-0 p-2 pb-0 font-bold w-full">
         <form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
             <div class="flex flex-row">
                 <!-- Edit input -->
@@ -31,13 +31,21 @@
                        min="-2000000"
                        max="2000000"
                        required>
-
-                <!-- Confirm icon -->
-                <fa-icon [icon]="faCheck" class="inline-block ml-2 mt-2 text-gray-600 hover:text-gray-900 cursor-pointer" (click)="handleFormSubmit(register)"></fa-icon>
-
-                <!-- Close icon -->
-                <fa-icon [icon]="faClose" class="inline-block ml-2 mt-2 text-gray-600 hover:text-gray-900 cursor-pointer" (click)="handleCloseClick($event, register)"></fa-icon>
             </div>
         </form>
+    </td>
+</tr>
+
+<tr *ngIf="register.edit" class="flex p-2">
+    <td class="w-full flex flex-row justify-end" colspan="2">
+        <span class="inline-block mr-2 text-green-600 hover:text-green-800 cursor-pointer" (click)="handleFormSubmit(register)">
+            Confirm
+            <fa-icon [icon]="faCheck"></fa-icon>
+        </span>
+
+        <span class="inline-block text-gray-700 hover:text-gray-900 cursor-pointer" (click)="handleCloseClick($event, register)">
+            Cancel
+            <fa-icon [icon]="faClose"></fa-icon>
+        </span>
     </td>
 </tr>

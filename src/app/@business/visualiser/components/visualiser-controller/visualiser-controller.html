@@ -8,8 +8,12 @@
     <app-memory class="w-1/3 flex-grow p-3"></app-memory>
 </div>
 
-<div class="p-3">
+<div class="p-3 pb-0">
     <app-player (simulate)="handleSimulateClick()"
                 (backward)="handleBackwardClick()"
                 (forward)="handleForwardClick()"></app-player>
+</div>
+
+<div class="p-3 pt-0">
+    <app-mips></app-mips>
 </div>

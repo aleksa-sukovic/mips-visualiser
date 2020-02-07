@@ -10,6 +10,7 @@ import { CPUService } from './services/cpu.services';
 import { RegisterItemComponent } from './components/register-item/register-item.component';
 import { MemoryComponent } from './components/memory/memory.component';
 import { MemoryItemComponent } from './components/memory-item/memory-item.component';
+import { MipsComponent } from './components/mips/mips.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { MemoryItemComponent } from './components/memory-item/memory-item.compon
         RegisterItemComponent,
         MemoryComponent,
         MemoryItemComponent,
+        MipsComponent,
     ],
     imports: [
         VisualiserRouting,
@@ -34,6 +36,7 @@ import { MemoryItemComponent } from './components/memory-item/memory-item.compon
         InstructionContainerComponent,
         RegistersComponent,
         MemoryComponent,
+        MipsComponent,
     ],
     providers: [
         CPUService,

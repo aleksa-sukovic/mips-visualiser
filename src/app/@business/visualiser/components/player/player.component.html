@@ -1,4 +1,12 @@
-<div class="w-full h-16 rounded-lg shadow-md bg-gray-200 flex flex-row justify-center">
+<div class="text-2xl p-4 rounded-b-none rounded-lg bg-blue-500 text-gray-100 font-bold">
+    Interact with processor
+</div>
+<div class="p-4 rounded-lg shadow-md bg-gray-200">
+    <p class="text-gray-600 text-xl">Examine the CPU in different cycles of instruction execution</p>
+    <p class="text-gray-500 block">This is an interactive CPU representation. Hover over any element to examine it.</p>
+    <p class="text-gray-500 block">Use the buttons below to navigate to next/previous clock or just execute entire instruction.</p>
+</div>
+<div class="w-full h-16 rounded-lg rounded-b-none shadow-md bg-blue-100 flex flex-row justify-center">
     <!-- Forward -->
     <p class="tooltip p-4" (click)="handleForwardClick()">
         <fa-icon [icon]="faForward" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>

@@ -11,6 +11,8 @@ import { RegisterItemComponent } from './components/register-item/register-item.
 import { MemoryComponent } from './components/memory/memory.component';
 import { MemoryItemComponent } from './components/memory-item/memory-item.component';
 import { MipsComponent } from './components/mips/mips.component';
+import { RegistersService } from './services/registers.service';
+import { MemoryService } from './services/memory.service';
 
 @NgModule({
     declarations: [
@@ -40,6 +42,8 @@ import { MipsComponent } from './components/mips/mips.component';
     ],
     providers: [
         CPUService,
+        RegistersService,
+        MemoryService,
     ]
 })
 export class VisualiserModule

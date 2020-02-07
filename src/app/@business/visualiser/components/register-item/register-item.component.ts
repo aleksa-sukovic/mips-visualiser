@@ -27,11 +27,11 @@ export class RegisterItemComponent
 
     public handleEditClick (register)
     {
-        register.edit = true;
-        register.editValue = register.value;
-        setTimeout(() => {
-            document.getElementById(`register_${register.alias}`).focus();
-        });
+        if (register.editable) {
+            register.edit = true;
+            register.editValue = register.value;
+            setTimeout(() => document.getElementById(`register_${register.alias}`).focus());
+        }
     }
 
     public handleCloseClick ($event, register)

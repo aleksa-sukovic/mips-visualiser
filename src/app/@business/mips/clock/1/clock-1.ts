@@ -1,13 +1,12 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
 
 export class Clock1 implements Clock
 {
     private _encoder: BinaryEncoder;
 
-    public constructor ()
+    public constructor (private wordLength: number)
     {
         this._encoder = new BinaryEncoder();
     }
@@ -48,7 +47,7 @@ export class Clock1 implements Clock
 
         // Second ALU operand is number '4'
         // We are incrementing 'PC' to point to next instruction.
-        cpu.alu.op2 = this._encoder.binary(4, config.word_length);
+        cpu.alu.op2 = this._encoder.binary(4, this.wordLength);
 
         // Tell the ALU to do addition.
         cpu.alu.op  = '00';

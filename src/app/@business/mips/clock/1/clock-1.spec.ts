@@ -12,7 +12,7 @@ describe('Clock 1', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();
@@ -30,7 +30,7 @@ describe('Clock 1', () => {
 
     it('increments PC by 4', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
 
         cpu.register('$pc').value = encoder.binary(0, config.word_length);
         cpu.simulate(instruction);
@@ -42,7 +42,7 @@ describe('Clock 1', () => {
 
     it('reads instruction', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();

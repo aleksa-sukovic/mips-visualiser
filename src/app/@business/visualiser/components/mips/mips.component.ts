@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SVG } from '@svgdotjs/svg.js';
 import { SvgService } from '../../services/svg.service';
 
 @Component({
@@ -18,12 +17,9 @@ export class MipsComponent implements OnInit
 
     public ngOnInit (): void
     {
-        const elements = document.querySelectorAll('text,path,circle,g,rect');
+        this.svgService.elements = document.querySelectorAll('text,path,circle,g,rect');
 
-        this.addEventListeners(elements);
-        this.svgService.elements = elements;
-
-        this.svgService.visualiseClock(null);
+        // this.svgService.visualiseClock(null);
     }
 
     public addEventListeners (nodes: any): void

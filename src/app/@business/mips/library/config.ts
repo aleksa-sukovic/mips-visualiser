@@ -144,37 +144,47 @@ export default {
             id: 'clock_1',
             focus: [
                 // Control
-                'Control_background', 'Control_text', 'Control_claim', 'Control_op_text', 'Control_background',
+                'Control_background', 'Control_text', 'Control_claim', 'Control_background',
                 // MemRead
                 181, 162,
                 // AluSelA
                 170, 174,
                 // lorD
-                161, 180,
+                161, 180, 'lorD_background', 'lorD_text', 'lorD_0_text', 'lorD_0_dot', 130, 98,
                 // irWrite
                 164, 183,
                 // Alu SelB
-                169, 183,
+                169, 187, 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_1_dot', 'ALUSelB_1_text', 120, 35, 50, 21, 117,
+                // Alu SelA
+                'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 22, 116,
                 // AluOP
                 168, 186,
                 // pcWrite
-                159, 175,
+                159, 175, 177, 'OR_gate_background', 127, 129, 139, 97,
                 // pcSource
-                166, 185,
+                166, 185, 13,
                 // memory
                 'memory_background', 'mem_data_label_text', 'mem_data_label_dot', 'read_address_label_text', 'read_address_label_dot',
-                'memory_label', 'write_address_label_text', 'write_address_label_dot', 'write_data_label_text', 'write_data_label_dot',
-                // 
+                'memory_label',
+                134, 135, 156, 126,
+                // pc
+                'PC_background', 'PC_text', 128, 91, 140, 12, 18, 33, 104,
+                // Instruction register
+                'instruction_background', 'instruction_label',
+                // ALU
+                'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143,
+                23, 11, 25, 141, 28, 112, 'ALU_Control_background', 'ALU_Control_text', 37,
+                // MemToReg
+                'MemToReg_background', 'PCSource_0_dot', 'PCSource_0_text', 26, 96,
             ],
             tooltips: [
                 {
-                    ids: ['Control_text'],
-                    content: '<div>Hello Tooltip</div>',
+                    ids: [128, 91, 33, 18, 'ALUSelA_background', 22, 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
+                    title: 'PC Value',
+                    content: '<div>Value of PC is brought as first operand of ALU.</div>',
+                    value: (cpu: CPU) => cpu.register('$pc'),
                 }
             ],
-            values: (cpu: CPU): any => {
-                return {};
-            }
         }
     ],
 };

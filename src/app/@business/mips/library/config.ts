@@ -12,20 +12,72 @@ import { Clock10 } from '../clock/10/clock-10';
 import { CPU } from '../cpu/cpu';
 import { Clock } from '../clock/clock';
 import { NullClock } from '../clock/Null/NullClock';
+import { BinaryEncoder } from './binary-encoder/binary-encoder';
+
+const encoder = new BinaryEncoder();
 
 export function findClockConfig (clock: Clock) {
     return config.clocks.find(it => it.id === clock.id()) || findClockConfig(new NullClock());
 }
 
-export function findTooltipForElement (clock: Clock, element) {
-    const clockConfig = findClockConfig(clock);
+export function findTooltipForElement (element, clock: Clock = null) {
+    if (!clock) {
+        return config.global_tooltips.find(it => it.ids.find(id => id == element.id));
+    }
 
-    // tslint:disable-next-line:triple-equals
-    return clockConfig.tooltips.find(it => it.ids.find(id => id == element.id));
+    return findClockConfig(clock).tooltips.find(it => it.ids.find(id => id == element.id));
+}
+
+export function isElementFocused (element, clock: Clock) {
+   return findClockConfig(clock).focus.find(it => it == element.id) !== undefined;
+}
+
+export function isElementTextNode (element) {
+    return config.visual.nodes.text.find(it => it == element.id);
+}
+
+export function isElementArrow (element) {
+    return config.visual.nodes.arrows.find(it => it == element.id);
 }
 
 const config = {
     word_length: 32,
+    visual: {
+        animationDuration: 3000,
+        emphasizeColor: '#f30',
+        emphasizeTextColor: '#fff',
+        deEmphasizeColor: '#00CEFF',
+        deEmphasizeTextColor: '#000',
+        opacitySteps: [
+            { opacity: 1 },
+            { opacity: 0.9 },
+            { opacity: 0.8 },
+            { opacity: 0.7 },
+            { opacity: 0.6 },
+            { opacity: 0.5 },
+            { opacity: 0.4 },
+            { opacity: 0.3 },
+            { opacity: 0.2 },
+        ],
+        inactiveOpacity: 0.2,
+        nodes: {
+            text: [
+                'Control_claim', 'Control_text', 'Control_op_text', 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169,
+                170, 171, 172, 'PC_text', 'lorD_0_text', 'lorD_text', 'lorD_1_text', 'read_address_label_text', 'mem_data_label_text',
+                'write_address_label_text', 'write_data_label_text_1', 'instruction_label', 'instruction_25_0_label_text', 'instruction_31_26_label_text',
+                79, 80, 81, 78, 'RegDst_0_text', 'RegDst_text', 'RegDst_1_text', 'MemToReg_text', 'MemToReg_0_text', 'MemToReg_1_text',
+                'read_register_1_label_text', 'read_register_2_label_text', 'write_register_label_text_2', 'write_data_label_text_2', 'registers_label',
+                'read_data_1_label_text', 'read_data_2_label_text', 'Sign_Extend_text', 77, 75, 51, 'SHL_2_x2_text', 'ALU_Control_text', 50,
+                'ALUSelB_0_text', 'ALUSelB_1_text', 'ALUSelB_2_text', 'ALUSelB_3_text', 'ALUSelA_0_text', 'ALUSelA_1_text', 'ALUSelA_text', 76,
+                'ALU_text', 'ALU_zero_label_text', 'ALU_result_label_text', 48, 'SHL_2_x2_text_1', 'Target_text', 46, 'PCSource_1_text',
+                'PCSource_1_text', 'PCSource_2_text', 'PCSource_text',
+            ],
+            arrows: [
+                96, 97, 99, 98, 100, 101, 126, 108, 107, 110, 111, 106, 109, 124, 125, 123, 119, 118, 120, 122, 121, 15, 105, 104, 105, 117, 116,
+                103, 115, 112, 113, 114, 102,
+            ],
+        },
+    },
     instructions: [
         {
             alias: 'add',
@@ -152,6 +204,14 @@ const config = {
         new Register(['$30', '$fp'], '11110'),
         new Register(['$31', '$ra'], '11111')
     ],
+    global_tooltips: [
+        {
+            ids: ['simulate_button', 'simulate_button_1'],
+            title: 'Simulate',
+            description: 'Execute entire instruction.',
+            value: (cpu: CPU) => null,
+        }
+    ],
     clocks: [
         {
             id: 'null_clock',
@@ -197,10 +257,10 @@ const config = {
             ],
             tooltips: [
                 {
-                    ids: [128, 91, 33, 18, 'ALUSelA_background', 22, 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
+                    ids: [128, 91, 33, 13, 22, 116, 18, 104, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
                     title: 'PC Value',
-                    content: '<div>Value of PC is brought as first operand of ALU.</div>',
-                    value: (cpu: CPU) => cpu.register('$pc'),
+                    description: '<div>Value of PC is brought as first operand of ALU.</div>',
+                    value: (cpu: CPU) => encoder.number(cpu.register('$pc').value).toString(10),
                 }
             ],
         }

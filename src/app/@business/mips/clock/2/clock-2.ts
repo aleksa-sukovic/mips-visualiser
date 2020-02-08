@@ -1,13 +1,12 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
 
 export class Clock2 implements Clock
 {
     protected _encoder: BinaryEncoder;
 
-    public constructor ()
+    public constructor (private wordLength: number)
     {
         this._encoder = new BinaryEncoder();
     }
@@ -37,7 +36,7 @@ export class Clock2 implements Clock
         cpu.alu.op1 = cpu.register('$pc').value;
 
         // Second ALU operand is sign-extended 16-bit offset from instruction.
-        cpu.alu.op2 = this._encoder.signPad(cpu.instruction.offset, config.word_length);
+        cpu.alu.op2 = this._encoder.signPad(cpu.instruction.offset, this.wordLength);
 
         // Tell the ALU to do addition.
         cpu.alu.op = '00';

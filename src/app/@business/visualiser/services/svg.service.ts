@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Clock } from '../../mips/clock/clock';
 import Anime from 'animejs/lib/anime.es.js';
-import { findClockConfig } from '../../mips/library/config';
+import config, {
+    findClockConfig,
+    findTooltipForElement, isElementArrow,
+    isElementFocused,
+    isElementTextNode
+} from '../../mips/library/config';
 import { NullClock } from '../../mips/clock/Null/NullClock';
 
 @Injectable({
@@ -9,21 +14,9 @@ import { NullClock } from '../../mips/clock/Null/NullClock';
 })
 export class SvgService
 {
-    protected _elements: NodeListOf<Element> = null;
-    protected _animationDuration = 3000;
-    protected _inactiveOpacity = 0.2;
-    protected _opacityKeyframes = [
-        { opacity: 1 },
-        { opacity: 0.9 },
-        { opacity: 0.8 },
-        { opacity: 0.7 },
-        { opacity: 0.6 },
-        { opacity: 0.5 },
-        { opacity: 0.4 },
-        { opacity: 0.3 },
-        { opacity: 0.2 },
-    ];
+    protected _elements = [];
     protected _activeClock: Clock = new NullClock();
+    protected _emphasizedIds: any[] = [];
 
     public visualiseClock (clock: Clock)
     {
@@ -31,22 +24,71 @@ export class SvgService
         const clockConfig = findClockConfig(clock);
 
         // Reduce opacity of all elements.
-        Anime({ targets: this._elements, opacity: this._inactiveOpacity });
+        Anime({ targets: this._elements, opacity: config.visual.inactiveOpacity });
 
         // Fade in focused elements.
-        Anime({ targets: this.findElements(clockConfig.focus), keyframes: this._opacityKeyframes.reverse(), duration: this._animationDuration });
+        Anime({ targets: this.findElements(clockConfig.focus), keyframes: config.visual.opacitySteps.reverse(), duration: config.visual.animationDuration });
+    }
+
+    public mouseMove ($event): void
+    {
+        const tooltip = findTooltipForElement($event.target, this._activeClock);
+        this.deEmphasize(this.findElements(this._emphasizedIds));
+
+        if (tooltip) {
+            this.emphasize(this.findElements(tooltip.ids));
+            this._emphasizedIds = tooltip.ids;
+        }
+    }
+
+    public emphasize (elements): void
+    {
+        elements.forEach(element => {
+            if (isElementTextNode(element)) {
+                Anime({ targets: element, fill: config.visual.emphasizeTextColor });
+            } else if (isElementArrow(element)) {
+                Anime({ targets: element, fill: config.visual.emphasizeColor });
+            } else if (element.tagName === 'path') {
+                Anime({ targets: element, stroke: config.visual.emphasizeColor });
+            } else {
+                Anime({ targets: element, fill: config.visual.emphasizeColor });
+            }
+        });
+    }
+
+    public deEmphasize (elements): void
+    {
+        elements.forEach(element => {
+            if (isElementTextNode(element)) {
+                Anime({ targets: element, fill: config.visual.deEmphasizeTextColor });
+            } else if (isElementArrow(element)) {
+                Anime({ targets: element, fill: config.visual.deEmphasizeColor });
+            } else if (element.tagName === 'path') {
+                Anime({ targets: element, stroke: config.visual.deEmphasizeColor });
+            } else {
+                Anime({ targets: element, fill: config.visual.deEmphasizeColor });
+            }
+        });
     }
 
     public set elements (values: NodeListOf<Element>)
     {
-        this._elements = values;
-        Anime({ targets: values, opacity: this._inactiveOpacity });
+        this._elements.splice(0, this._elements.length);
+
+        values.forEach(it => this._elements.push(it));
+
+        this.deEmphasize(this._elements);
     }
 
-    protected findElements (ids: any[]): NodeListOf<Element>
+    protected findElements (ids: any[]): any[]
     {
-        return document.querySelectorAll(ids.map(it => {
+        if (ids.length === 0) return [];
+        const result = [];
+
+        document.querySelectorAll(ids.map(it => {
             return parseInt(it, 10) ? `[id="${it}"]` : `#${it}`;
-        }).join(','));
+        }).join(',')).forEach(it => result.push(it));
+
+        return result;
     }
 }

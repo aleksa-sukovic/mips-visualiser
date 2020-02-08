@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { faPlay, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-player',
@@ -9,7 +9,6 @@ import { faPlay, faBackward, faForward } from '@fortawesome/free-solid-svg-icons
 export class PlayerComponent
 {
     public faForward = faForward;
-    public faBackward = faBackward;
     public faPlay = faPlay;
 
     @Output() simulate = new EventEmitter();

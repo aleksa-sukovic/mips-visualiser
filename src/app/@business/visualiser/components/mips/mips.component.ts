@@ -33,6 +33,7 @@ export class MipsComponent implements OnInit
 
     public handleMouseMove ($event)
     {
+        this.svgService.mouseMove($event);
         this.tooltipService.mouseMove($event);
     }
 }

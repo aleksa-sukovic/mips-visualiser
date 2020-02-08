@@ -13,6 +13,20 @@ export class CPUService
         this._cpu = new CPU();
     }
 
+    public next (): boolean
+    {
+        this.cpu.execute();
+
+        return this.cpu.done();
+    }
+
+    public all (): void
+    {
+        while (!this.next()) {
+            //
+        }
+    }
+
     public get cpu (): CPU
     {
         return this._cpu;

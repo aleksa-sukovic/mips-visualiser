@@ -21,6 +21,7 @@
                 "allow-pascal-case"
             ]
         },
-        "no-trailing-whitespace": false
+        "no-trailing-whitespace": false,
+        "prefer-for-of": false
     }
 }

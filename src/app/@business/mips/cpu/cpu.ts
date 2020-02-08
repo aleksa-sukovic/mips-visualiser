@@ -37,10 +37,17 @@ export class CPU
 
     public nextClock (): void
     {
+        this._currentClock = this._currentClock === 0 ? 0 : this._currentClock + 1;
+
         if (!this._clocks[this._currentClock]) { return; }
 
         this._control.reset();
-        this._clocks[this._currentClock++].execute(this);
+        this._clocks[this._currentClock].execute(this);
+    }
+
+    public currentClock (): Clock
+    {
+        return this.done() ? null : this._clocks[this._currentClock];
     }
 
     public execute (): void

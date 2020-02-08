@@ -13,6 +13,7 @@ import { MemoryItemComponent } from './components/memory-item/memory-item.compon
 import { MipsComponent } from './components/mips/mips.component';
 import { RegistersService } from './services/registers.service';
 import { MemoryService } from './services/memory.service';
+import { SvgService } from './services/svg.service';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import { MemoryService } from './services/memory.service';
         CPUService,
         RegistersService,
         MemoryService,
+        SvgService,
     ]
 })
 export class VisualiserModule

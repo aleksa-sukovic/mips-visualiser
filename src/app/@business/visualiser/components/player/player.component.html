@@ -6,14 +6,7 @@
     <p class="text-gray-500 block">This is an interactive CPU representation. Hover over any element to examine it.</p>
     <p class="text-gray-500 block">Use the buttons below to navigate to next/previous clock or just execute entire instruction.</p>
 </div>
-<div class="w-full h-16 rounded-lg rounded-b-none shadow-md bg-blue-100 flex flex-row justify-center">
-    <!-- Forward -->
-    <p class="tooltip p-4" (click)="handleForwardClick()">
-        <fa-icon [icon]="faForward" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
-
-        <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do next cycle</span>
-    </p>
-
+<div class="w-full h-16 rounded-lg rounded-b-none shadow-md bg-blue-100 flex flex-row justify-start">
     <!-- Simulate -->
     <p class="tooltip p-4" (click)="handleSimulateClick()">
         <fa-icon [icon]="faPlay" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
@@ -21,10 +14,10 @@
         <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Simulate instruction</span>
     </p>
 
-    <!-- Backward -->
-    <p class="tooltip p-4" (click)="handleBackwardClick()">
-        <fa-icon [icon]="faBackward" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
+    <!-- Forward -->
+    <p class="tooltip p-4" (click)="handleForwardClick()">
+        <fa-icon [icon]="faForward" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
 
-        <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do previous cycle</span>
+        <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do next cycle</span>
     </p>
 </div>

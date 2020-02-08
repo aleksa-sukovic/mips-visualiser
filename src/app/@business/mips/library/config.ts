@@ -9,6 +9,7 @@ import { Clock7 } from '../clock/7/clock-7';
 import { Clock8 } from '../clock/8/clock-8';
 import { Clock9 } from '../clock/9/clock-9';
 import { Clock10 } from '../clock/10/clock-10';
+import { CPU } from '../cpu/cpu';
 
 export default {
     word_length: 32,
@@ -138,4 +139,16 @@ export default {
         new Register(['$30', '$fp'], '11110'),
         new Register(['$31', '$ra'], '11111')
     ],
+    clock_1: {
+        focus: ['Control_background', 'Control_claim', 'Control_text', 'Control_op_text', 'ALU_result_label_dot'],
+        tooltips: [
+            {
+                ids: ['Control_text'],
+                content: '<div>Hello Tooltip</div>',
+            }
+        ],
+        values: (cpu: CPU): any => {
+            return {};
+        }
+    }
 };

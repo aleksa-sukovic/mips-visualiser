@@ -11,6 +11,11 @@ export class Clock9  implements Clock
         this._encoder = new BinaryEncoder();
     }
 
+    public id (): string
+    {
+        return 'clock_9';
+    }
+
     public execute (cpu: CPU): void
     {
         this.setControl(cpu);

@@ -12,6 +12,11 @@ export class Clock3 implements Clock
         this._encoder = new BinaryEncoder();
     }
 
+    public id (): string
+    {
+        return 'clock_3';
+    }
+
     public execute (cpu: CPU): void
     {
         this.setControl(cpu);

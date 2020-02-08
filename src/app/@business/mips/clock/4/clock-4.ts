@@ -3,6 +3,16 @@ import { CPU } from '../../cpu/cpu';
 
 export class Clock4  implements Clock
 {
+    public constructor ()
+    {
+        //
+    }
+
+    public id (): string
+    {
+        return 'clock_4';
+    }
+
     public execute (cpu: CPU): void
     {
         this.setControl(cpu);

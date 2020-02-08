@@ -5,7 +5,17 @@ import config from '../../library/config';
 
 export class Clock2 implements Clock
 {
-    protected _encoder: BinaryEncoder = new BinaryEncoder();
+    protected _encoder: BinaryEncoder;
+
+    public constructor ()
+    {
+        this._encoder = new BinaryEncoder();
+    }
+
+    public id (): string
+    {
+        return 'clock_2';
+    }
 
     public execute (cpu: CPU): void
     {

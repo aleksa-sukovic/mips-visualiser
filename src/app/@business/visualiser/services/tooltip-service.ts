@@ -12,6 +12,10 @@ export class TooltipService
     public paddingBottom =  15;
     public visible = false;
 
+    public tooltipTitle = '';
+    public tooltipDescription = '';
+    public tooltipValue = '';
+
     public constructor (private cpuService: CPUService)
     {
         //
@@ -19,17 +23,27 @@ export class TooltipService
 
     public mouseMove ($event): void
     {
-        const tooltip = findTooltipForElement(this.cpuService.clock, $event.target);
+        const tooltip = findTooltipForElement($event.target) ||
+            findTooltipForElement($event.target, this.cpuService.clock);
 
         if (tooltip) {
-            this.show($event.clientX, $event.pageY + document.body.scrollTop);
+            this.show(
+                $event.clientX,
+                $event.pageY + document.body.scrollTop,
+                tooltip.title,
+                tooltip.description,
+                tooltip.value(this.cpuService.cpu)
+            );
         } else {
             this.hide();
         }
     }
 
-    public show (mouseX: number, mouseY: number): void
+    public show (mouseX: number, mouseY: number, title: string = '', description: string = '', value: string = ''): void
     {
+        this.tooltipTitle = title;
+        this.tooltipDescription = description;
+        this.tooltipValue = value;
         this.tooltip().style.left = mouseX + 'px';
         this.tooltip().style.top = (mouseY - this.paddingBottom) + 'px';
 

@@ -8,16 +8,12 @@
 </div>
 <div class="w-full h-16 rounded-lg rounded-b-none shadow-md bg-blue-100 flex flex-row justify-start">
     <!-- Simulate -->
-    <p class="tooltip p-4" (click)="handleSimulateClick()">
-        <fa-icon [icon]="faPlay" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
-
-        <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Simulate instruction</span>
+    <p class="tooltip p-4" id="simulate_button" (click)="handleSimulateClick()">
+        <fa-icon [icon]="faPlay" size="2x" id="simulate_button_1" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
     </p>
 
     <!-- Forward -->
-    <p class="tooltip p-4" (click)="handleForwardClick()">
+    <p class="tooltip p-4" id="forward_button" (click)="handleForwardClick()">
         <fa-icon [icon]="faForward" size="2x" class="text-blue-800 p-4 hover:text-blue-600"></fa-icon>
-
-        <span class="tooltip-text bg-gray-800 text-white rounded left-auto right-auto">Do next cycle</span>
     </p>
 </div>

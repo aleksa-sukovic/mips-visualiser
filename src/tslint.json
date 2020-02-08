@@ -23,6 +23,8 @@
         },
         "no-trailing-whitespace": false,
         "prefer-for-of": false,
-        "max-line-length": false
+        "max-line-length": false,
+        "curly": false,
+        "triple-equals": false
     }
 }

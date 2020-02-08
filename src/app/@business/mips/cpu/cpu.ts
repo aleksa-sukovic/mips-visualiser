@@ -5,6 +5,7 @@ import { Register } from '../register/models/register';
 import { Clock } from '../clock/clock';
 import { Instruction } from '../instruction/instruction';
 import config from '../library/config';
+import { NullClock } from '../clock/Null/NullClock';
 
 export class CPU
 {
@@ -47,7 +48,7 @@ export class CPU
 
     public currentClock (): Clock
     {
-        return this.done() ? null : this._clocks[this._currentClock];
+        return this.done() ? new NullClock() : this._clocks[this._currentClock];
     }
 
     public execute (): void

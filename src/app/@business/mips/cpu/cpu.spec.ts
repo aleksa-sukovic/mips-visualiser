@@ -21,6 +21,7 @@ describe('CPU', () => {
     it('resets control unit after each clock', () => {
         class TestClock implements Clock
         {
+            public id (): string { return ''; }
             public execute (aCpu: CPU): void
             {
                 const defaultCPU = new CPU();

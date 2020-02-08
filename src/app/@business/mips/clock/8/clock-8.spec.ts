@@ -25,7 +25,7 @@ describe('Clock 8', () => {
 
     it('writes data to calculated address', () => {
         const instr = InstructionFactory.fromSymbolic('sw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(), new Clock8()]);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(config.word_length), new Clock8()]);
         const writeAddress = encoder.binary(1000 + 128, config.word_length);
         const writeValue = encoder.binary(111, config.word_length);
 

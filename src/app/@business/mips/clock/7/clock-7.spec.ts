@@ -25,7 +25,7 @@ describe('Clock 7', () => {
 
     it('reads data from calculated offset', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(), new Clock7()]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(config.word_length), new Clock7()]);
         const memoryAddress = encoder.binary(128 + 1000, config.word_length);
         const memoryData = encoder.binary(111, config.word_length);
 

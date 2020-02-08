@@ -27,7 +27,7 @@ describe('Clock X', () => {
 
     it('writes data read from memory to specified register', () => {
         const instr = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(), new Clock7(), new Clock10()]);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(config.word_length), new Clock7(), new Clock10()]);
         const memoryAddress = encoder.binary(1000 + 128, config.word_length);
         const memoryData = encoder.binary(111, config.word_length);
 

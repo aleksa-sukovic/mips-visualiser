@@ -1,6 +1,6 @@
 import Anime from 'animejs/lib/anime.es.js';
 import { CPUService } from './cpu.services';
-import config from '../../mips/library/config';
+import { findTooltipForElement } from '../../mips/library/config';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,19 +19,12 @@ export class TooltipService
 
     public mouseMove ($event): void
     {
-        const clockConfig = config.visualisations.find(it => it.id === this.cpuService.clock.id());
+        const tooltip = findTooltipForElement(this.cpuService.clock, $event.target);
 
-        if (clockConfig) {
-            // const element = $event.target;
-            const tooltip = clockConfig.tooltips.find(it => it.ids.find(id => id == $event.target.id));
-
-            if (tooltip) {
-                const mouseX = $event.clientX;
-                const mouseY = $event.pageY + document.body.scrollTop;
-                this.show(mouseX, mouseY);
-            } else {
-                this.hide();
-            }
+        if (tooltip) {
+            this.show($event.clientX, $event.pageY + document.body.scrollTop);
+        } else {
+            this.hide();
         }
     }
 
@@ -43,7 +36,6 @@ export class TooltipService
         if (!this.visible) {
             this.fadeIn();
         }
-
         this.visible = true;
     }
 

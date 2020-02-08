@@ -10,8 +10,21 @@ import { Clock8 } from '../clock/8/clock-8';
 import { Clock9 } from '../clock/9/clock-9';
 import { Clock10 } from '../clock/10/clock-10';
 import { CPU } from '../cpu/cpu';
+import { Clock } from '../clock/clock';
+import { NullClock } from '../clock/Null/NullClock';
 
-export default {
+export function findClockConfig (clock: Clock) {
+    return config.clocks.find(it => it.id === clock.id()) || findClockConfig(new NullClock());
+}
+
+export function findTooltipForElement (clock: Clock, element) {
+    const clockConfig = findClockConfig(clock);
+
+    // tslint:disable-next-line:triple-equals
+    return clockConfig.tooltips.find(it => it.ids.find(id => id == element.id));
+}
+
+const config = {
     word_length: 32,
     instructions: [
         {
@@ -139,7 +152,12 @@ export default {
         new Register(['$30', '$fp'], '11110'),
         new Register(['$31', '$ra'], '11111')
     ],
-    visualisations: [
+    clocks: [
+        {
+            id: 'null_clock',
+            focus: [],
+            tooltips: [],
+        },
         {
             id: 'clock_1',
             focus: [
@@ -188,3 +206,5 @@ export default {
         }
     ],
 };
+
+export default config;

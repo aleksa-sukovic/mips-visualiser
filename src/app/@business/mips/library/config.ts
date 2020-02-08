@@ -139,16 +139,42 @@ export default {
         new Register(['$30', '$fp'], '11110'),
         new Register(['$31', '$ra'], '11111')
     ],
-    clock_1: {
-        focus: ['Control_background', 'Control_claim', 'Control_text', 'Control_op_text', 'ALU_result_label_dot'],
-        tooltips: [
-            {
-                ids: ['Control_text'],
-                content: '<div>Hello Tooltip</div>',
+    visualisations: [
+        {
+            id: 'clock_1',
+            focus: [
+                // Control
+                'Control_background', 'Control_text', 'Control_claim', 'Control_op_text', 'Control_background',
+                // MemRead
+                181, 162,
+                // AluSelA
+                170, 174,
+                // lorD
+                161, 180,
+                // irWrite
+                164, 183,
+                // Alu SelB
+                169, 183,
+                // AluOP
+                168, 186,
+                // pcWrite
+                159, 175,
+                // pcSource
+                166, 185,
+                // memory
+                'memory_background', 'mem_data_label_text', 'mem_data_label_dot', 'read_address_label_text', 'read_address_label_dot',
+                'memory_label', 'write_address_label_text', 'write_address_label_dot', 'write_data_label_text', 'write_data_label_dot',
+                // 
+            ],
+            tooltips: [
+                {
+                    ids: ['Control_text'],
+                    content: '<div>Hello Tooltip</div>',
+                }
+            ],
+            values: (cpu: CPU): any => {
+                return {};
             }
-        ],
-        values: (cpu: CPU): any => {
-            return {};
         }
-    }
+    ],
 };

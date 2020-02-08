@@ -10,16 +10,20 @@ export class SvgService
 {
     public animationSpeed = 400;
 
-    protected _elements: any[];
+    protected _elements: NodeListOf<Element>;
 
     public constructor ()
     {
-        this._elements = [];
+        //
     }
 
     public visualiseClock (clock: Clock)
     {
-        //
+        const cfg = config.visualisations.find(it => it.id === clock.id());
+
+        console.log(cfg.focus);
+        Anime({ targets: this._elements, opacity: 0.2 });
+        Anime({ targets: this.findElements(cfg.focus), opacity: 1 });
     }
 
     protected handleElementHover (element)
@@ -27,9 +31,18 @@ export class SvgService
         console.log(element);
     }
 
-    public set elements (value)
+    public set elements (values: NodeListOf<Element>)
     {
-        this._elements = value;
+        this._elements = values;
         this._elements.forEach(it => it.addEventListener('mousemove', event => this.handleElementHover(event.currentTarget)));
+    }
+
+    protected findElements (ids: any[])
+    {
+        const selector = ids.map(it => {
+            return parseInt(it, 10) ? `[id="${it}"]` : `#${it}`;
+        }).join(',');
+
+        return document.querySelectorAll(selector);
     }
 }

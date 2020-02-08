@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SvgService } from '../../services/svg.service';
+import { CPUService } from '../../services/cpu.services';
+import { InstructionFactory } from '../../../mips/instruction/factories/instruction-factory';
 
 @Component({
     selector: 'app-mips',
@@ -10,7 +12,7 @@ export class MipsComponent implements OnInit
 {
     public svg: any;
 
-    public constructor (private svgService: SvgService)
+    public constructor (private svgService: SvgService, private cpuService: CPUService)
     {
         //
     }
@@ -19,33 +21,10 @@ export class MipsComponent implements OnInit
     {
         this.svgService.elements = document.querySelectorAll('text,path,circle,g,rect');
 
-        // this.svgService.visualiseClock(null);
-    }
-
-    public addEventListeners (nodes: any): void
-    {
-        for (let i = 0; i < nodes.length; i++) {
-            nodes.item(i).addEventListener('mousemove', this.handleElementMouseMove.bind(this));
-        }
-    }
-
-    public handleElementMouseMove ($event): void
-    {
-        const element = $event.currentTarget;
-
-        switch (element.tagName) {
-            case 'path':
-                SVG(element).attr({ stroke: '#f30' });
-                break;
-            case 'text':
-                SVG(element).attr({ fill: '#f30' });
-                break;
-            case 'rect':
-                SVG(element).attr({ fill: '#f30' });
-                break;
-            case 'circle':
-                SVG(element).attr({ fill: '#f30' });
-                break;
+        this.cpuService.cpu.simulate(InstructionFactory.fromSymbolic('add $1, $2, $3'));
+        const clock = this.cpuService.cpu.currentClock();
+        if (clock) {
+            this.svgService.visualiseClock(clock);
         }
     }
 }

@@ -14,6 +14,8 @@ import { MipsComponent } from './components/mips/mips.component';
 import { RegistersService } from './services/registers.service';
 import { MemoryService } from './services/memory.service';
 import { SvgService } from './services/svg.service';
+import { TooltipService } from './services/tooltip-service';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +26,7 @@ import { SvgService } from './services/svg.service';
         MemoryComponent,
         MemoryItemComponent,
         MipsComponent,
+        TooltipComponent,
     ],
     imports: [
         VisualiserRouting,
@@ -40,12 +43,14 @@ import { SvgService } from './services/svg.service';
         RegistersComponent,
         MemoryComponent,
         MipsComponent,
+        TooltipComponent,
     ],
     providers: [
         CPUService,
         RegistersService,
         MemoryService,
         SvgService,
+        TooltipService,
     ]
 })
 export class VisualiserModule

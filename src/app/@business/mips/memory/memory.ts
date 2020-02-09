@@ -4,6 +4,7 @@ export class Memory
 
     public constructor ()
     {
+        this._store = { a: '1', b: '2', c: '3' };
         this._store = {};
     }
 

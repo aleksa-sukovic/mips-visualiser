@@ -206,9 +206,57 @@ const config = {
     ],
     global_tooltips: [
         {
-            ids: ['simulate_button', 'simulate_button_1'],
-            title: 'Simulate',
-            description: 'Execute entire instruction.',
+            ids: ['instruction_add'],
+            title: '<div class="text-gray-900">ADD <br><span class="text-gray-500 text-sm font-normal italic">add $1, $2, $3</span></div>',
+            description: '<div>Adds registers $2 and $3 and stores the result in $1.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_addi'],
+            title: '<div class="text-gray-900">ADDI <br><span class="text-gray-500 text-sm font-normal italic">addi $1, $2, 256</span></div>',
+            description: '<div>Adds register $2 and sign-extended immediate value and stores the result in $1.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_sub'],
+            title: '<div class="text-gray-900">SUB <br><span class="text-gray-500 text-sm font-normal italic">sub $1, $2, $3</span></div>',
+            description: '<div>Subtracts register $3 from register $2 and stores the result in $1.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_beq'],
+            title: '<div class="text-gray-900">BEQ <br><span class="text-gray-500 text-sm font-normal italic">beq $1, $2, 1500</span></div>',
+            description: '<div>Branches if registers $1 and $2 are equal.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_bne'],
+            title: '<div class="text-gray-900">BNE <br><span class="text-gray-500 text-sm font-normal italic">bne $1, $2, 1500</span></div>',
+            description: '<div>Branches if registers $1 and $2 are not equal.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_lw'],
+            title: '<div class="text-gray-900">LW <br><span class="text-gray-500 text-sm font-normal italic">lw $1, 256($2)</span></div>',
+            description: '<div>Loads word into $1 register from specified address.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_sw'],
+            title: '<div class="text-gray-900">LW <br><span class="text-gray-500 text-sm font-normal italic">sw $1, 256($2)</span></div>',
+            description: '<div>Stores the contents of $1 register at specified address.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['player_execute'],
+            title: 'Execute',
+            description: '<div>Executes loaded instruction, step by step.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['player_forward'],
+            title: 'Next clock',
+            description: '<div>Executes the next instruction clock.</div>',
             value: (cpu: CPU) => null,
         }
     ],

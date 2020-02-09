@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CPU } from '../../mips/cpu/cpu';
 import { Clock } from '../../mips/clock/clock';
+import { InstructionFactory } from '../../mips/instruction/factories/instruction-factory';
 
 @Injectable({
     providedIn: 'root',
@@ -14,23 +15,26 @@ export class CPUService
         this._cpu = new CPU();
     }
 
-    public next (): boolean
+    public load (instruction: string): void
     {
-        this.cpu.execute();
-
-        return this.cpu.done();
+        this.cpu.simulate(InstructionFactory.fromSymbolic(instruction));
     }
 
-    public all (): void
+    public next (): boolean
     {
-        while (!this.next()) {
-            //
-        }
+        this.cpu.nextClock();
+
+        return this.cpu.done();
     }
 
     public get clock (): Clock
     {
         return this.cpu.currentClock();
+    }
+
+    public get clockIndex (): number
+    {
+        return this.cpu.currentClockIndex();
     }
 
     public get cpu (): CPU

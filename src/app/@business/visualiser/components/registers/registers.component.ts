@@ -25,4 +25,9 @@ export class RegistersComponent
 
         register.edit = false;
     }
+
+    public handleResetClick (): void
+    {
+
+    }
 }

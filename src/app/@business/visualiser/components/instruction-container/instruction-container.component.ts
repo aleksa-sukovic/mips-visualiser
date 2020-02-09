@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { TooltipService } from '../../services/tooltip-service';
 
 @Component({
     selector: 'app-instruction-container',
@@ -17,10 +18,16 @@ export class InstructionContainerComponent
         { alias: 'sw', example: 'sw $2, 0($1)' },
     ];
     public instructionText: string;
+    @Output() loaded = new EventEmitter<string>();
 
-    public constructor ()
+    public constructor (private tooltipService: TooltipService)
     {
         //
+    }
+
+    public handleMouseMove ($event)
+    {
+        this.tooltipService.mouseMove($event);
     }
 
     public handleFormSubmit ()
@@ -28,7 +35,6 @@ export class InstructionContainerComponent
         if (!this.instructionText) {
             return;
         }
-
-        console.log(this.instructionText);
+        this.loaded.emit(this.instructionText);
     }
 }

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { CPUService } from '../../services/cpu.services';
+import { SvgService } from '../../services/svg.service';
+import { RegistersService } from '../../services/registers.service';
+import { MemoryService } from '../../services/memory.service';
 
 @Component({
     selector: 'app-visualiser-controller',
@@ -7,9 +11,18 @@ import { Component } from '@angular/core';
 })
 export class VisualiserControllerComponent
 {
-    public constructor ()
-    {
+    public constructor (
+        private cpuService: CPUService,
+        private registersService: RegistersService,
+        private memoryService: MemoryService,
+        private svgService: SvgService,
+    ) {
         //
+    }
+
+    public handleInstructionLoad (instruction): void
+    {
+        this.cpuService.load(instruction);
     }
 
     public handleSimulateClick ()
@@ -17,13 +30,11 @@ export class VisualiserControllerComponent
         console.log('Simulate.');
     }
 
-    public handleBackwardClick ()
-    {
-        console.log('Backward.');
-    }
-
     public handleForwardClick ()
     {
-        console.log('Forward.');
+        this.cpuService.next();
+        this.registersService.refreshRegisters();
+        this.memoryService.refreshMemory();
+        this.svgService.visualiseClock(this.cpuService.clock);
     }
 }

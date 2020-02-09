@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
+import { TooltipService } from '../../services/tooltip-service';
+import { CPUService } from '../../services/cpu.services';
 
 @Component({
     selector: 'app-player',
@@ -13,21 +15,20 @@ export class PlayerComponent
 
     @Output() simulate = new EventEmitter();
     @Output() forward = new EventEmitter();
-    @Output() backward = new EventEmitter();
 
-    public constructor ()
+    public constructor (private tooltipService: TooltipService, public cpuService: CPUService)
     {
         //
     }
 
-    public handleSimulateClick ()
+    public handleMouseMove ($event): void
     {
-        this.simulate.emit();
+        this.tooltipService.mouseMove($event);
     }
 
-    public handleBackwardClick ()
+    public handleExecuteClick ()
     {
-        this.backward.emit();
+        this.simulate.emit();
     }
 
     public handleForwardClick ()

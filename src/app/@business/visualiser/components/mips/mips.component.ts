@@ -13,22 +13,17 @@ export class MipsComponent implements OnInit
 {
     public svg: any;
 
-    public constructor (private svgService: SvgService, private cpuService: CPUService, private tooltipService: TooltipService)
-    {
+    public constructor (
+        private svgService: SvgService,
+        private cpuService: CPUService,
+        private tooltipService: TooltipService
+    ) {
         //
     }
 
     public ngOnInit (): void
     {
-        // Initialize SVG animations service.
         this.svgService.elements = document.querySelectorAll('text,path,circle,g,rect');
-
-        // Prepare processor to simulate instruction.
-        this.cpuService.cpu.simulate(InstructionFactory.fromSymbolic('add $1, $2, $3'));
-
-        // Visualise first clock, testing.
-        const clock = this.cpuService.cpu.currentClock();
-        this.svgService.visualiseClock(clock);
     }
 
     public handleMouseMove ($event)

@@ -1,7 +1,8 @@
 import { InstructionParser } from './instruction-parser';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 import { Register } from '../../register/models/register';
-import config from '../../library/config';
+import Specification from '../../library/specification';
+import { RegisterFactory } from '../../register/factories/register-factory';
 
 export class RegisterInstructionParser extends InstructionParser
 {
@@ -38,7 +39,9 @@ export class RegisterInstructionParser extends InstructionParser
 
     protected register (value: string): Register
     {
-        return config.registers.find(it => it.hasAlias(value));
+        const registers = Specification.registers.map(it => RegisterFactory.fromSpecification(it));
+
+        return registers.find(it => it.hasAlias(value));
     }
 
     public regex (): RegExp

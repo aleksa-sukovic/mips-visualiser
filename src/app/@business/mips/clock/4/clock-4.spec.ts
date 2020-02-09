@@ -2,8 +2,9 @@ import { CPU } from '../../cpu/cpu';
 import { Clock4 } from './clock-4';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
+import config from '../../library/config/config';
 import { Instruction } from '../../instruction/instruction';
+import Specification from '../../library/specification';
 
 describe('Clock IV', () => {
     let cpu: CPU = null;
@@ -18,8 +19,8 @@ describe('Clock IV', () => {
     });
 
     it('sets the CPU control signals', () => {
-        cpu.register('$2').value = encoder.binary(5, config.word_length);
-        cpu.register('$3').value = encoder.binary(10, config.word_length);
+        cpu.register('$2').value = encoder.binary(5, Specification.word_length);
+        cpu.register('$3').value = encoder.binary(10, Specification.word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -35,13 +36,13 @@ describe('Clock IV', () => {
         const operand2 = 10;
         const result = 20 + 10;
 
-        cpu.register('$2').value = encoder.binary(operand1, config.word_length);
-        cpu.register('$3').value = encoder.binary(operand2, config.word_length);
+        cpu.register('$2').value = encoder.binary(operand1, Specification.word_length);
+        cpu.register('$3').value = encoder.binary(operand2, Specification.word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.alu.result).toBe(encoder.binary(result, config.word_length));
+        expect(cpu.alu.result).toBe(encoder.binary(result, Specification.word_length));
     });
 });

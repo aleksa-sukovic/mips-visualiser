@@ -2,7 +2,8 @@ import { CPU } from './cpu';
 import { InstructionFactory } from '../instruction/factories/instruction-factory';
 import { Clock } from '../clock/clock';
 import { Clock1 } from '../clock/1/clock-1';
-import config from '../library/config';
+import config from '../library/config/config';
+import Specification from '../library/specification';
 
 describe('CPU', () => {
     let cpu: CPU = null;
@@ -46,7 +47,7 @@ describe('CPU', () => {
 
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
         spyOnProperty(instruction, 'clocks')
-            .and.returnValue([new Clock1(config.word_length), new TestClock()]);
+            .and.returnValue([new Clock1(Specification.word_length), new TestClock()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();

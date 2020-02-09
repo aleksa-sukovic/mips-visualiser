@@ -2,9 +2,10 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock10 } from './clock-10';
-import config from '../../library/config';
+import config from '../../library/config/config';
 import { Clock3 } from '../3/clock-3';
 import { Clock7 } from '../7/clock-7';
+import Specification from '../../library/specification';
 
 describe('Clock X', () => {
     let cpu: CPU = null;
@@ -27,12 +28,12 @@ describe('Clock X', () => {
 
     it('writes data read from memory to specified register', () => {
         const instr = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(config.word_length), new Clock7(), new Clock10()]);
-        const memoryAddress = encoder.binary(1000 + 128, config.word_length);
-        const memoryData = encoder.binary(111, config.word_length);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(Specification.word_length), new Clock7(), new Clock10()]);
+        const memoryAddress = encoder.binary(1000 + 128, Specification.word_length);
+        const memoryData = encoder.binary(111, Specification.word_length);
 
         cpu.memory.set(memoryAddress, memoryData);
-        cpu.register('$2').value = encoder.binary(1000, config.word_length);
+        cpu.register('$2').value = encoder.binary(1000, Specification.word_length);
 
         cpu.simulate(instr);
         cpu.execute();

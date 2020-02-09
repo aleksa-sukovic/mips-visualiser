@@ -2,7 +2,8 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock6 } from './clock-6';
-import config from '../../library/config';
+import config from '../../library/config/config';
+import Specification from '../../library/specification';
 
 describe('Clock 6', () => {
     let cpu: CPU = null;
@@ -27,7 +28,7 @@ describe('Clock 6', () => {
         const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock6()]);
         let finalPcValue = '';
 
-        cpu.register('$pc').value = encoder.binary(1000, config.word_length);
+        cpu.register('$pc').value = encoder.binary(1000, Specification.word_length);
         cpu.simulate(instruction);
         cpu.nextClock();
 

@@ -1,50 +1,9 @@
-import { Register } from '../register/models/register';
-import { Clock1 } from '../clock/1/clock-1';
-import { Clock2 } from '../clock/2/clock-2';
-import { Clock3 } from '../clock/3/clock-3';
-import { Clock4 } from '../clock/4/clock-4';
-import { Clock5 } from '../clock/5/clock-5';
-import { Clock6 } from '../clock/6/clock-6';
-import { Clock7 } from '../clock/7/clock-7';
-import { Clock8 } from '../clock/8/clock-8';
-import { Clock9 } from '../clock/9/clock-9';
-import { Clock10 } from '../clock/10/clock-10';
 import { CPU } from '../cpu/cpu';
-import { Clock } from '../clock/clock';
-import { NullClock } from '../clock/Null/NullClock';
 import { BinaryEncoder } from './binary-encoder/binary-encoder';
 
 const encoder = new BinaryEncoder();
 
-export function findClockConfig (clock: Clock) {
-    return config.clocks.find(it => it.id === clock.id()) || findClockConfig(new NullClock());
-}
-
-export function findTooltipForElement (element, clock: Clock = null) {
-    if (!clock) {
-        return config.global_tooltips.find(it => it.ids.find(id => id == element.id));
-    }
-
-    return findClockConfig(clock).tooltips.find(it => it.ids.find(id => id == element.id));
-}
-
-export function isElementFocused (element, clock: Clock) {
-   return findClockConfig(clock).focus.find(it => it == element.id) !== undefined;
-}
-
-export function isElementTextNode (element) {
-    return config.visual.nodes.text.find(it => it == element.id);
-}
-
-export function isElementArrow (element) {
-    return config.visual.nodes.arrows.find(it => it == element.id);
-}
-
-export function findInstructionByOpcode (opcode: string) {
-    return config.instructions.find(it => it.opcode === opcode);
-}
-
-const config = {
+const Specification = {
     word_length: 32,
     visual: {
         animationDuration: 3000,
@@ -89,10 +48,11 @@ const config = {
             funct: '100000',
             type: 'R',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock4(),
-                new Clock9(),
+                'clock_1',
+                'clock_2',
+                'clock_3',
+                'clock_4',
+                'clock_9',
             ],
         },
         {
@@ -101,10 +61,10 @@ const config = {
             funct: '',
             type: 'R',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock4(),
-                new Clock9(),
+                'clock_1',
+                'clock_2',
+                'clock_4',
+                'clock_9',
             ],
         },
         {
@@ -113,10 +73,10 @@ const config = {
             funct: '100010',
             type: 'R',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock4(),
-                new Clock9(),
+                'clock_1',
+                'clock_2',
+                'clock_4',
+                'clock_9',
             ],
         },
         {
@@ -125,9 +85,9 @@ const config = {
             funct: '',
             type: 'J',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock6(),
+                'clock_1',
+                'clock_2',
+                'clock_6',
             ],
         },
         {
@@ -136,9 +96,9 @@ const config = {
             funct: '',
             type: 'I',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock5(),
+                'clock_1',
+                'clock_2',
+                'clock_5',
             ],
         },
         {
@@ -147,9 +107,9 @@ const config = {
             funct: '',
             type: 'I',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock5(),
+                'clock_1',
+                'clock_2',
+                'clock_5',
             ],
         },
         {
@@ -158,11 +118,11 @@ const config = {
             funct: '',
             type: 'I',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock3(32),
-                new Clock7(),
-                new Clock10(),
+                'clock_1',
+                'clock_2',
+                'clock_3',
+                'clock_7',
+                'clock_10',
             ],
         },
         {
@@ -171,50 +131,273 @@ const config = {
             funct: '',
             type: 'I',
             clocks: [
-                new Clock1(32),
-                new Clock2(32),
-                new Clock3(32),
-                new Clock8(),
+                'clock_1',
+                'clock_2',
+                'clock_3',
+                'clock_8',
             ],
         },
     ],
     registers: [
-        new Register(['$ir'], 'ir', '00000000000000000000000000000000', false),
-        new Register(['$pc'], 'pc', '00000000000000000000000000000000', false),
-        new Register(['$target'], 'target', '00000000000000000000000000000000', false),
-        new Register(['$memData'], 'memData', '00000000000000000000000000000000', false),
-        new Register(['$0', '$zero'], '00000', '00000000000000000000000000000000', false),
-        new Register(['$1', '$at'], '00001'),
-        new Register(['$2', '$v0'], '00010'),
-        new Register(['$3', '$v1'], '00011'),
-        new Register(['$4', '$a0'], '00100'),
-        new Register(['$5', '$a1'], '00101'),
-        new Register(['$6', '$a2'], '00110'),
-        new Register(['$7', '$a3'], '00111'),
-        new Register(['$8', '$t0'], '01000'),
-        new Register(['$9', '$t1'], '01001'),
-        new Register(['$10', '$t2'], '01010'),
-        new Register(['$11', '$t3'], '01011'),
-        new Register(['$12', '$t4'], '01100'),
-        new Register(['$13', '$t5'], '01101'),
-        new Register(['$14', '$t6'], '01110'),
-        new Register(['$15', '$t7'], '01111'),
-        new Register(['$16', '$s0'], '10000'),
-        new Register(['$17', '$s1'], '10001'),
-        new Register(['$18', '$s2'], '10010'),
-        new Register(['$19', '$s3'], '10011'),
-        new Register(['$20', '$s4'], '10100'),
-        new Register(['$21', '$s5'], '10101'),
-        new Register(['$22', '$s6'], '10110'),
-        new Register(['$23', '$s7'], '10111'),
-        new Register(['$24', '$t8'], '11000'),
-        new Register(['$25', '$t9'], '11001'),
-        new Register(['$26', '$k0'], '11010'),
-        new Register(['$27', '$k1'], '11011'),
-        new Register(['$28', '$gp'], '11100'),
-        new Register(['$29', '$sp'], '11101'),
-        new Register(['$30', '$fp'], '11110'),
-        new Register(['$31', '$ra'], '11111')
+        {
+            id: 'ir',
+            aliases: ['$ir'],
+            value:  0,
+            editable: false,
+            visible: true,
+        },
+        {
+            id: 'pc',
+            aliases: ['$pc'],
+            value:  0,
+            editable: false,
+            visible: true,
+        },
+        {
+            id: 'target',
+            aliases: ['$target'],
+            value:  0,
+            editable: false,
+            visible: true,
+        },
+        {
+            id: 'memData',
+            aliases: ['$memData'],
+            value:  0,
+            editable: false,
+            visible: false,
+        },
+        {
+            id: '00000',
+            aliases: ['$0', '$zero'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00001',
+            aliases: ['$1', '$at'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00010',
+            aliases: ['$2', '$v0'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00011',
+            aliases: ['$3', '$v1'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00100',
+            aliases: ['$4', '$a0'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00101',
+            aliases: ['$5', '$a1'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00110',
+            aliases: ['$6', '$a2'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '00111',
+            aliases: ['$7', '$a3'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01000',
+            aliases: ['$8', '$t0'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01001',
+            aliases: ['$9', '$t1'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01010',
+            aliases: ['$10', '$t2'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01011',
+            aliases: ['$11', '$t3'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01100',
+            aliases: ['$12', '$t4'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01101',
+            aliases: ['$13', '$t5'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01110',
+            aliases: ['$14', '$t6'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '01111',
+            aliases: ['$15', '$t7'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10000',
+            aliases: ['$16', '$s0'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10001',
+            aliases: ['$17', '$s1'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10010',
+            aliases: ['$18', '$s2'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10010',
+            aliases: ['$18', '$s2'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10011',
+            aliases: ['$19', '$s3'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10100',
+            aliases: ['$20', '$s4'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10101',
+            aliases: ['$21', '$s5'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10110',
+            aliases: ['$22', '$s6'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '10111',
+            aliases: ['$23', '$s7'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11000',
+            aliases: ['$24', '$t8'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11001',
+            aliases: ['$25', '$t9'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11010',
+            aliases: ['$26', '$k0'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11011',
+            aliases: ['$27', '$k1'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11100',
+            aliases: ['$28', '$gp'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11101',
+            aliases: ['$29', '$sp'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11110',
+            aliases: ['$30', '$fp'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
+        {
+            id: '11111',
+            aliases: ['$31', '$ra'],
+            value:  0,
+            editable: true,
+            visible: true,
+        },
     ],
     global_tooltips: [
         // Instructions
@@ -278,25 +461,25 @@ const config = {
             ids: ['register_ir'],
             title: '$ir / Instruction Register',
             description: '<div>Register holding the instruction currently being executed.</div>',
-            value: (cpu: CPU) => cpu.register('$0').value,
+            value: (cpu: CPU) => cpu.register('ir').value,
         },
         {
             ids: ['register_pc'],
             title: '$pc / Program Counter',
             description: '<div>Register holding the address of next instruction to be executed.</div>',
-            value: (cpu: CPU) => cpu.register('$0').value,
+            value: (cpu: CPU) => cpu.register('pc').value,
         },
         {
             ids: ['register_target'],
             title: '$target / Target',
             description: '<div>Register holding target jump address calculated in clock 2 of every instruction.</div>',
-            value: (cpu: CPU) => cpu.register('$0').value,
+            value: (cpu: CPU) => cpu.register('target').value,
         },
         {
             ids: ['register_memData'],
             title: 'Memory Data',
             description: '<div>Not an actual register, rather a helper container for data read from memory used by this visualisation.</div>',
-            value: (cpu: CPU) => cpu.register('$0').value,
+            value: (cpu: CPU) => cpu.register('memData').value,
         },
         {
             ids: ['register_00000'],
@@ -546,4 +729,4 @@ const config = {
     ],
 };
 
-export default config;
+export default Specification;

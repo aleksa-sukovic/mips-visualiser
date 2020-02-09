@@ -1,6 +1,5 @@
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
-import config from '../../library/config';
-import { Clock } from '../../clock/clock';
+import Specification from '../../library/specification';
 
 export abstract class InstructionParser
 {
@@ -14,9 +13,9 @@ export abstract class InstructionParser
         return this.regex().test(instruction);
     }
 
-    protected instruction (value: string): { alias: string, opcode: string, funct: string, clocks: Clock[] }
+    protected instruction (value: string): { alias: string, opcode: string, funct: string, type: string, clocks: string[] }
     {
-        for (const instruction of config.instructions) {
+        for (const instruction of Specification.instructions) {
             if (value.startsWith(instruction.alias + ' ')) {
                 return instruction;
             }

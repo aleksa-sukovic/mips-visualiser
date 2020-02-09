@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CPU } from '../../mips/cpu/cpu';
 import { BinaryEncoder } from '../../mips/library/binary-encoder/binary-encoder';
 import { CPUService } from './cpu.services';
-import config from '../../mips/library/config';
+import Config from '../../mips/library/config/config';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +24,7 @@ export class RegistersService
 
     public updateRegister (id: string, value: string): void
     {
-        this._cpu.register(id).value = this._encoder.binary(parseInt(value, 10), config.word_length);
+        this._cpu.register(id).value = this._encoder.binary(parseInt(value, 10), Config.get().word_length);
 
         this.refreshRegisters();
     }
@@ -46,6 +46,7 @@ export class RegistersService
                 edit: false,
                 editValue: '',
                 editable: register.editable,
+                visible: register.visible,
             });
         }
     }

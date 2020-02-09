@@ -42,6 +42,10 @@ protected _emphasizedIds: any[] = [];
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
                 Anime({ targets: element, fill: Config.get().visual.emphasizeTextColor });
+            } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
+                Anime({ targets: element, fill: Config.get().visual.emphasizeLabelColor });
+            }  else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
+                Anime({ targets: element, fill: Config.get().visual.emphasizeComponentColor });
             } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
                 Anime({ targets: element, fill: Config.get().visual.emphasizeColor });
             } else if (Config.elementType(element) === Config.ELEMENT_PATH) {
@@ -57,6 +61,10 @@ protected _emphasizedIds: any[] = [];
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
                 Anime({ targets: element, fill: Config.get().visual.deEmphasizeTextColor });
+            } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
+                Anime({ targets: element, fill: Config.get().visual.deEmphasizeLabelColor });
+            } else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
+                Anime({ targets: element, fill: Config.get().visual.deEmphasizeComponentColor });
             } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
                 Anime({ targets: element, fill: Config.get().visual.deEmphasizeColor });
             } else if (Config.elementType(element) === Config.ELEMENT_PATH) {
@@ -83,7 +91,7 @@ protected _emphasizedIds: any[] = [];
         this._activeClock = new NullClock();
 
         // Fade in all elements
-        Anime({ targets: this._elements, keyframes: Specification.visual.opacitySteps.reverse(), duration: Specification.visual.animationDuration });
+        Anime({ targets: this._elements, duration: Specification.visual.animationDuration });
     }
 
     protected findElements (ids: any[]): any[]

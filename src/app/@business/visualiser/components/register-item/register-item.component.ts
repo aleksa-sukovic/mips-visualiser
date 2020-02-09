@@ -43,6 +43,6 @@ export class RegisterItemComponent
 
     public handleMouseMove ($event): void
     {
-        this.tooltipService.mouseMove($event, true);
+        this.tooltipService.mouseMove($event, false);
     }
 }

@@ -6,11 +6,15 @@ const encoder = new BinaryEncoder();
 const Specification = {
     word_length: 32,
     visual: {
-        animationDuration: 3000,
-        emphasizeColor: '#f30',
+        animationDuration: 1000,
+        emphasizeColor: '#dd6b20',
         emphasizeTextColor: '#fff',
-        deEmphasizeColor: '#00CEFF',
+        emphasizeLabelColor: '#fff',
+        emphasizeComponentColor: '#c05621',
+        deEmphasizeColor: '#2a4365',
         deEmphasizeTextColor: '#000',
+        deEmphasizeLabelColor: '#fff',
+        deEmphasizeComponentColor: '#2c5282',
         opacitySteps: [
             { opacity: 1 },
             { opacity: 0.9 },
@@ -39,6 +43,25 @@ const Specification = {
                 96, 97, 99, 98, 100, 101, 126, 108, 107, 110, 111, 106, 109, 124, 125, 123, 119, 118, 120, 122, 121, 15, 105, 104, 105, 117, 116,
                 103, 115, 112, 113, 114, 102,
             ],
+            labels: [
+                'PC_text', 'lorD_text', 'lorD_0_text', 'lorD_1_text', 'lorD_1_dot', 'lorD_0_dot', 'memory_label', 'read_address_label_text', 'read_address_label_dot',
+                'write_address_label_text', 'write_address_label_dot', 'write_data_label_text_1', 'write_data_label_dot_1', 'mem_data_label_text', 'mem_data_label_dot',
+                'instruction_label', 'instruction_25_0_label_text', 'instruction_31_26_label_text', 'instruction_25_0_label_dot', 'instruction_31_26_label_dot',
+                'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', 'RegDst_text', 'MemToReg_0_text', 'MemToReg_0_dot', 'MemToReg_text', 'MemToReg_1_text', 'MemToReg_1_text',
+                'read_register_1_label_text', 'read_register_1_label_dot', 'read_register_2_label_text', 'read_register_2_label_dot', 'registers_label', 'read_data_1_label_text',
+                'read_data_1_label_dot', 'read_data_2_label_text', 'read_data_2_label_dot', 'Sign_Extend_text', 'SHL_2_x2_text', 'ALU_Control_text',
+                'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALUSelB_1_text', 'ALUSelB_1_dot', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALUSelB_3_text', 'ALUSelB_3_dot',
+                'ALUSelA_0_text', 'ALUSelA_0_dot', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelA_text',
+                'ALU_text', 'ALU_zero_label_text', 'ALU_zero_label_dot', 'ALU_result_label_text', 'ALU_result_label_dot', 'SHL_2_x2_text_1', 'Target_text',
+                'PCSource_text', 'PCSource_0_dot', 'PCSource_0_text', 'PCSource_1_dot', 'PCSource_1_text', 'PCSource_2_dot', 'PCSource_2_text',
+                'write_register_label_text_2', 'write_register_label_dot', 'write_data_label_text_2', 'write_data_label_dot_2',
+                'Control_claim', 'Control_text', 'Control_op_text', 'Control_dot',
+            ],
+            components: [
+                'ALU_background', 'SHL_2_x2_background', 'ALU_Control_background', 'SHL_2_x2_background_1', 'Control_background', 'Sign_Extend_background',
+                'PC_background', 'lorD_background', 'memory_background', 'OR_gate_background', 'AND_gate_background', 'instruction_background', 'RegDst_background',
+                'MemToReg_Background', 'registers_background', 'ALUSelA_background', 'ALUSelB_background', 'Target_background', 'MemToReg_background',
+            ]
         },
     },
     instructions: [

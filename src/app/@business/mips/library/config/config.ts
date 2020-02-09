@@ -4,9 +4,11 @@ import Specification from '../specification';
 
 export default class Config
 {
-    public static ELEMENT_TEXT = 'element_text';
+    public static ELEMENT_TEXT  = 'element_text';
     public static ELEMENT_ARROW = 'element_arrow';
-    public static ELEMENT_PATH = 'element_path';
+    public static ELEMENT_PATH  = 'element_path';
+    public static ELEMENT_LABEL = 'element_label';
+    public static ELEMENT_COMPONENT = 'element_component';
 
     protected static _config: any = Specification;
 
@@ -31,7 +33,11 @@ export default class Config
 
     public static elementType (element)
     {
-        if (this._config.visual.nodes.text.find(it => it == element.id)) {
+        if (this._config.visual.nodes.labels.find(it => it == element.id)) {
+            return Config.ELEMENT_LABEL;
+        } else if (this._config.visual.nodes.components.find(it => it == element.id)) {
+            return Config.ELEMENT_COMPONENT;
+        } else if (this._config.visual.nodes.text.find(it => it == element.id)) {
             return Config.ELEMENT_TEXT;
         } else if (this._config.visual.nodes.arrows.find(it => it == element.id)) {
             return Config.ELEMENT_ARROW;

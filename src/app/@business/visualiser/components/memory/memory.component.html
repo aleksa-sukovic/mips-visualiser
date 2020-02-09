@@ -1,31 +1,30 @@
-<div class="h-full rounded-lg shadow-md bg-gray-200">
-    <p class="text-2xl p-4 rounded-b-none rounded-lg bg-blue-500 text-gray-100 font-bold">Memory editing</p>
+<div class="h-full p-2 border bg-gray-200 flex flex-col items-stretch">
+    <p class="text-2xl p-3 pb-0 text-gray-900">Memory editing</p>
 
-    <div class="p-4">
-        <span class="text-gray-500 text-gray-600 text-xl block">Set values for memory locations</span>
-        <span class="text-gray-500 inline-block mb-3 mt-1">Create, modify and delete values from RAM memory.</span>
+    <div class="p-4 pt-1 flex-grow flex flex-col items-stretch">
+        <p class="text-gray-600 mb-3">Create, modify and delete values from RAM memory</p>
 
-        <table class="table-fixed overflow-y-scroll inline-block border rounded w-full" style="height: 40vh;">
+        <table class="table-fixed overflow-y-scroll inline-block border rounded w-full" *ngIf="memory.length" style="max-height: 50vh">
             <thead class="flex flex-col">
             <tr class="flex flex-row justify-around">
-                <th class="w-1/2 px-4 py-2 font-normal text-lg border-b font-bold text-gray-800 bg-white text-left">Address</th>
-                <th class="w-1/2 px-4 py-2 font-normal text-lg border-b font-bold text-gray-800 bg-white text-center">Value</th>
+                <th class="w-1/2 px-4 py-2 font-normal text-center bg-orange-700 text-white">Address</th>
+                <th class="w-1/2 px-4 py-2 font-normal text-center bg-orange-700 text-white">Value</th>
             </tr>
             </thead>
-            <tbody class="flex flex-col">
-            <!-- Table Row -->
+            <tbody class="flex flex-col pt-2">
             <app-memory-item [item]="item" (submit)="handleMemoryEdit($event)" (delete)="handleMemoryItemDelete($event)"
                              *ngFor="let item of memory"></app-memory-item>
-
-            <!-- Add button -->
-            <tr class="flex p-3 bg-white">
-                <td class="flex flex-grow">
-                    <button (click)="handleAddButtonClick()" class="block px-2 py-1 bg-gray-300 flex-grow rounded text-gray-600 hover:bg-gray-400 hover:text-gray-100">
-                        <fa-icon [icon]="faPlus"></fa-icon>
-                    </button>
-                </td>
-            </tr>
             </tbody>
         </table>
+
+        <div *ngIf="!memory.length" class="p-2 text-center text-gray-500 text-sm w-full bg-gray-300">
+            No custom memory values defined.
+        </div>
+
+        <div class="flex flex-row p-0 mt-3 flex-grow items-end">
+            <button (click)="handleAddButtonClick()" class="block px-2 py-1 bg-gray-800 rounded w-full text-white hover:bg-gray-900 hover:text-gray-500" style="height: 32px">
+                <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+        </div>
     </div>
 </div>

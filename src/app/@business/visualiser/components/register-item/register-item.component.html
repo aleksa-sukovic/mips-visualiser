@@ -1,17 +1,17 @@
-<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row bg-gray-100 border-b text-gray-600 hover:bg-blue-400 hover:text-blue-100">
-    <td class="px-4 font-bold py-2 w-1/2">
+<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner">
+    <td class="px-4 text-center font-thin py-2 w-1/2">
         {{ register.alias }}
     </td>
 
-    <td class="px-4 py-2 w-1/2 flex flex-row justify-between">
+    <td class="px-4 py-2 w-1/2 flex font-light flex-row justify-between">
         <!-- Empty element to keep value centered -->
         <span></span>
 
         <!-- Register value -->
-        {{ register.value }}
+        <span class="font-bold">{{ register.value }}</span>
 
         <!-- Edit icon -->
-        <fa-icon [icon]="faEdit" *ngIf="register.editable"></fa-icon>
+        <fa-icon [icon]="faEdit" *ngIf="register.editable" class="text-orange-700 "></fa-icon>
         <span *ngIf="!register.editable" style="width: 16px"></span>
     </td>
 </tr>

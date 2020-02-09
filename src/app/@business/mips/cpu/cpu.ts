@@ -32,18 +32,18 @@ export class CPU
     {
         this._instruction = instruction;
         this._clocks = instruction.clocks;
-        this._currentClock = 0;
+        this._currentClock = -1;
         this._memory.set(this.register('$pc').value, instruction.binary);
     }
 
     public nextClock (): void
     {
-        this._currentClock = this._currentClock === 0 ? 0 : this._currentClock + 1;
+        this._currentClock += 1;
 
-        if (!this._clocks[this._currentClock]) { return; }
-
-        this._control.reset();
-        this._clocks[this._currentClock].execute(this);
+        if (this._clocks[this._currentClock]) {
+            this._control.reset();
+            this._clocks[this._currentClock].execute(this);
+        }
     }
 
     public currentClock (): Clock
@@ -51,16 +51,21 @@ export class CPU
         return this.done() ? new NullClock() : this._clocks[this._currentClock];
     }
 
+    public currentClockIndex (): number
+    {
+        return this._currentClock;
+    }
+
     public execute (): void
     {
-        while (this._clocks[this._currentClock]) {
+        while (!this.done()) {
             this.nextClock();
         }
     }
 
     public done (): boolean
     {
-        return this._currentClock === this._clocks.length;
+        return this._currentClock === this._clocks.length - 1;
     }
 
     public get alu ()

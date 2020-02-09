@@ -19,14 +19,14 @@ export class RegistersService
         this._encoder = new BinaryEncoder();
         this._registers = [];
 
-        this.initializeRegisters(this._cpu);
+        this.refreshRegisters();
     }
 
     public updateRegister (id: string, value: string): void
     {
         this._cpu.register(id).value = this._encoder.binary(parseInt(value, 10), config.word_length);
 
-        this.initializeRegisters(this._cpu);
+        this.refreshRegisters();
     }
 
     public registers ()
@@ -34,11 +34,11 @@ export class RegistersService
         return this._registers;
     }
 
-    private initializeRegisters (cpu: CPU): void
+    public refreshRegisters (): void
     {
         this._registers.splice(0, this._registers.length);
 
-        for (const register of cpu.registers()) {
+        for (const register of this.cpuService.cpu.registers()) {
             this._registers.push({
                 id: register.binary,
                 alias: register.aliases.join(' / '),

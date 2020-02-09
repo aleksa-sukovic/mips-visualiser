@@ -46,6 +46,7 @@ export class TooltipService
         this.tooltipValue = value;
         this.tooltip().style.left = mouseX + 'px';
         this.tooltip().style.top = (mouseY - this.paddingBottom) + 'px';
+        this.tooltip().style.zIndex = 100;
 
         if (!this.visible) {
             this.fadeIn();
@@ -56,6 +57,7 @@ export class TooltipService
     public hide (): void
     {
         if (this.visible) {
+            this.tooltip().style.zIndex = -1;
             this.fadeOut();
         }
         this.visible = false;

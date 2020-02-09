@@ -6,7 +6,7 @@ import { TooltipService } from '../../services/tooltip-service';
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.component.scss']
 })
-export class TooltipComponent implements OnInit
+export class TooltipComponent
 {
     public constructor (public tooltipService: TooltipService)
     {

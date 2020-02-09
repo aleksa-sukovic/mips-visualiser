@@ -19,7 +19,7 @@ export class MemoryService
         this._encoder = new BinaryEncoder();
         this._memory = [];
 
-        this.initializeMemory(this._cpu);
+        this.refreshMemory();
     }
 
     public updateMemory (memoryItem: any): void
@@ -31,14 +31,14 @@ export class MemoryService
             this._encoder.binary(parseInt(memoryItem.editValue, 10), config.word_length)
         );
 
-        this.initializeMemory(this._cpu);
+        this.refreshMemory();
     }
 
     public deleteFromMemory (key: string): void
     {
         this._cpu.memory.destroy(key);
 
-        this.initializeMemory(this._cpu);
+        this.refreshMemory();
     }
 
     public memory (): any[]
@@ -46,18 +46,18 @@ export class MemoryService
         return this._memory;
     }
 
-    private initializeMemory (cpu: CPU): void
+    public refreshMemory (): void
     {
         this._memory.splice(0, this._memory.length);
 
-        for (const address of cpu.memory.addresses()) {
+        for (const address of this.cpuService.cpu.memory.addresses()) {
             this._memory.push({
                 id: address,
                 address: this._encoder.number(address) || 1,
-                value: this._encoder.number(cpu.memory.get(address)),
+                value: this._encoder.number(this.cpuService.cpu.memory.get(address)),
                 edit: false,
                 editAddress: this._encoder.number(address) || 1,
-                editValue: this._encoder.number(cpu.memory.get(address)),
+                editValue: this._encoder.number(this.cpuService.cpu.memory.get(address)),
             });
         }
     }

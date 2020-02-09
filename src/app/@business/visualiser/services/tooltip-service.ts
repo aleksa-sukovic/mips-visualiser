@@ -54,6 +54,7 @@ export class TooltipService
         if (!this.visible) {
             this.fadeIn();
         }
+
         this.visible = true;
     }
 

@@ -27,6 +27,8 @@ export class VisualiserControllerComponent
         try {
             this.cpuService.load(instruction);
             this.toastrService.success('Instruction loaded');
+            this.svgService.reset();
+            this.scrollTo('MIPS');
         } catch (e) {
             this.toastrService.error('Instruction is either not valid or unsupported');
         }
@@ -54,7 +56,17 @@ export class VisualiserControllerComponent
 
         if (!this.cpuService.executing) {
             this.svgService.reset();
+            this.scrollTo('HEADER');
             this.toastrService.success('Successfully executed instruction');
+        }
+    }
+
+    protected scrollTo (id: string): void
+    {
+        const element = document.getElementById(id);
+
+        if (element) {
+            (element as HTMLElement).scrollIntoView({ behavior: 'smooth' });
         }
     }
 }

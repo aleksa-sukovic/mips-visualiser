@@ -2,8 +2,9 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock7 } from './clock-7';
-import config from '../../library/config';
+import config from '../../library/config/config';
 import { Clock3 } from '../3/clock-3';
+import Specification from '../../library/specification';
 
 describe('Clock 7', () => {
     let cpu: CPU = null;
@@ -25,11 +26,11 @@ describe('Clock 7', () => {
 
     it('reads data from calculated offset', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(config.word_length), new Clock7()]);
-        const memoryAddress = encoder.binary(128 + 1000, config.word_length);
-        const memoryData = encoder.binary(111, config.word_length);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(Specification.word_length), new Clock7()]);
+        const memoryAddress = encoder.binary(128 + 1000, Specification.word_length);
+        const memoryData = encoder.binary(111, Specification.word_length);
 
-        cpu.register('$2').value = encoder.binary(1000, config.word_length);
+        cpu.register('$2').value = encoder.binary(1000, Specification.word_length);
         cpu.memory.set(memoryAddress, memoryData);
 
         cpu.simulate(instruction);

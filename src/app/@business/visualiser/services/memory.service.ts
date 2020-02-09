@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { CPU } from '../../mips/cpu/cpu';
 import { BinaryEncoder } from '../../mips/library/binary-encoder/binary-encoder';
 import { CPUService } from './cpu.services';
-import config from '../../mips/library/config';
+import config from '../../mips/library/config/config';
+import Config from '../../mips/library/config/config';
 
 @Injectable({
     providedIn: 'root',
@@ -27,8 +28,8 @@ export class MemoryService
         this.deleteFromMemory(memoryItem.id);
 
         this._cpu.memory.set(
-            this._encoder.binary(parseInt(memoryItem.editAddress, 10), config.word_length),
-            this._encoder.binary(parseInt(memoryItem.editValue, 10), config.word_length)
+            this._encoder.binary(parseInt(memoryItem.editAddress, 10), Config.get().word_length),
+            this._encoder.binary(parseInt(memoryItem.editValue, 10), Config.get().word_length)
         );
 
         this.refreshMemory();

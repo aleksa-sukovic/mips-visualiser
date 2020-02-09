@@ -8,8 +8,15 @@ import { TooltipService } from '../../services/tooltip-service';
 })
 export class TooltipComponent
 {
+    public opacity = 1;
+
     public constructor (public tooltipService: TooltipService)
     {
         //
+    }
+
+    public handleMouseMove (): void
+    {
+        this.opacity = 0;
     }
 }

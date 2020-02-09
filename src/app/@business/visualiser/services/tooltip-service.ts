@@ -1,7 +1,7 @@
 import Anime from 'animejs/lib/anime.es.js';
 import { CPUService } from './cpu.services';
-import { findTooltipForElement } from '../../mips/library/config';
 import { Injectable } from '@angular/core';
+import Config from '../../mips/library/config/config';
 
 @Injectable({
     providedIn: 'root',
@@ -23,8 +23,8 @@ export class TooltipService
     public mouseMove ($event, useCurrentTarget: boolean = false): void
     {
         const target = useCurrentTarget ? $event.currentTarget : $event.target;
-        const tooltip = findTooltipForElement(target) ||
-            findTooltipForElement(target, this.cpuService.clock);
+        const tooltip = Config.elementTooltip(target) ||
+            Config.elementTooltip(target, this.cpuService.clock);
 
         if (tooltip) {
             this.show(

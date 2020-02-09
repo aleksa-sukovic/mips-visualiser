@@ -1,4 +1,4 @@
-<tr *ngIf="!register.edit" id="register_{{ register.id }}" (mousemove)="handleMouseMove($event)" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner">
+<tr *ngIf="!register.edit && register.visible" id="register_{{ register.id }}" (mousemove)="handleMouseMove($event)" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner">
     <td class="px-4 text-center font-thin py-2 w-1/2">
         {{ register.alias }}
     </td>
@@ -16,7 +16,7 @@
     </td>
 </tr>
 
-<tr *ngIf="register.edit" class="flex flex-row">
+<tr *ngIf="register.edit && register.visible" class="flex flex-row">
     <td colspan="2" class="border border-b-0 p-2 pb-0 font-bold w-full">
         <form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
             <div class="flex flex-row">
@@ -36,7 +36,7 @@
     </td>
 </tr>
 
-<tr *ngIf="register.edit" class="flex p-2">
+<tr *ngIf="register.edit && register.visible" class="flex p-2">
     <td class="w-full flex flex-row justify-end" colspan="2">
         <span class="inline-block mr-2 text-green-600 hover:text-green-800 cursor-pointer" (click)="handleFormSubmit(register)">
             Confirm

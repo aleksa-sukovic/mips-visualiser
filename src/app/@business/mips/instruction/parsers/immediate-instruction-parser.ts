@@ -1,8 +1,9 @@
 import { InstructionParser } from './instruction-parser';
 import { Register } from '../../register/models/register';
-import config from '../../library/config';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
+import Specification from '../../library/specification';
+import { RegisterFactory } from '../../register/factories/register-factory';
 
 export class ImmediateInstructionParser extends InstructionParser
 {
@@ -34,7 +35,8 @@ export class ImmediateInstructionParser extends InstructionParser
 
     protected register (value: string): Register
     {
-        const register = config.registers.find(it => it.hasAlias(value));
+        const registers = Specification.registers.map(it => RegisterFactory.fromSpecification(it));
+        const register = registers.find(it => it.hasAlias(value));
 
         if (!register) {
             throw new RegisterNotFoundException(value);

@@ -1,7 +1,7 @@
 import { Instruction } from '../instruction';
 import { InstructionEncoder } from '../encoders/instruction-encoder';
-import { Clock } from '../../clock/clock';
-import config, { findInstructionByOpcode } from '../../library/config';
+import { ClockFactory } from '../../clock/factories/clock-factory';
+import Specification from '../../library/specification';
 
 export class InstructionFactory
 {
@@ -18,18 +18,28 @@ export class InstructionFactory
     public static fromBinary (binary: string): Instruction
     {
         const instruction = new Instruction(binary, []);
-        const instructionCfg = findInstructionByOpcode(instruction.op);
+        const instructionCfg = Specification.instructions.find(it => it.opcode === instruction.op);
 
-        instruction.clocks = InstructionFactory.clocks(instructionCfg.opcode);
+        instruction.clocks = instructionCfg.clocks.map(it => ClockFactory.fromId(it));
         instruction.type = instructionCfg.type;
 
         return instruction;
     }
 
-    private static clocks (opcode: string): Clock[]
+    public static fromSpecification (specification: any): Instruction
     {
-        const instruction = config.instructions.find(it => it.opcode === opcode);
+        let binary = '';
 
-        return instruction ? instruction.clocks : [];
+        switch (specification.type) {
+            case 'R':
+                binary = specification.opcode + '00000000000000000000' + specification.funct;
+                break;
+            default:
+                binary = specification.opcode + '00000000000000000000000000';
+                break;
+        }
+        const clocks = specification.clocks.forEach(it => ClockFactory.fromId(it));
+
+        return new Instruction(binary, clocks);
     }
 }

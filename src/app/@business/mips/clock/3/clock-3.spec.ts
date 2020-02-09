@@ -2,8 +2,9 @@ import { CPU } from '../../cpu/cpu';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock3 } from './clock-3';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
+import config from '../../library/config/config';
 import { of } from 'rxjs';
+import Specification from '../../library/specification';
 
 describe('Clock 3', () => {
     let cpu: CPU = null;
@@ -13,7 +14,7 @@ describe('Clock 3', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(config.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(Specification.word_length)]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -26,17 +27,17 @@ describe('Clock 3', () => {
 
     it('calculates memory address', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(config.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(Specification.word_length)]);
 
         const baseRegister = 1000;
         const offset = 128;
         const memoryAddress = baseRegister + offset;
 
-        cpu.register('$2').value = encoder.binary(baseRegister, config.word_length);
+        cpu.register('$2').value = encoder.binary(baseRegister, Specification.word_length);
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.alu.result).toBe(encoder.binary(memoryAddress, config.word_length));
+        expect(cpu.alu.result).toBe(encoder.binary(memoryAddress, Specification.word_length));
     });
 });

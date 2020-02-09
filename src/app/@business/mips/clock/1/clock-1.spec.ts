@@ -1,8 +1,9 @@
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config';
+import config from '../../library/config/config';
 import { Clock1 } from './clock-1';
+import Specification from '../../library/specification';
 
 describe('Clock 1', () => {
     let cpu: CPU = null;
@@ -12,7 +13,7 @@ describe('Clock 1', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Specification.word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();
@@ -30,9 +31,9 @@ describe('Clock 1', () => {
 
     it('increments PC by 4', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Specification.word_length)]);
 
-        cpu.register('$pc').value = encoder.binary(0, config.word_length);
+        cpu.register('$pc').value = encoder.binary(0, Specification.word_length);
         cpu.simulate(instruction);
         cpu.execute();
 
@@ -42,7 +43,7 @@ describe('Clock 1', () => {
 
     it('reads instruction', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(config.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Specification.word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();

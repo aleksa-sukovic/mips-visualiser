@@ -4,13 +4,15 @@ export class Register
     protected _binary: string;
     protected _value: string;
     protected _editable: boolean;
+    protected _visible: boolean;
 
-    public constructor (aliases: string[], binary: string, value: string = '', editable: boolean = true)
+    public constructor (aliases: string[], binary: string, value: string = '', editable: boolean = true, visible: boolean = true)
     {
         this._aliases = aliases;
         this._binary = binary;
         this._value = value;
         this._editable = editable;
+        this._visible = visible;
     }
 
     public hasAlias (value: string): boolean
@@ -36,6 +38,11 @@ export class Register
     public get editable ()
     {
         return this._editable;
+    }
+
+    public get visible ()
+    {
+        return this._visible;
     }
 
     public get aliases ()

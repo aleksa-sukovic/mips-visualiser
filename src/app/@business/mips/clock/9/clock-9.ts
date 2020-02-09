@@ -31,7 +31,11 @@ export class Clock9  implements Clock
 
     protected writeToRegister (cpu: CPU): void
     {
+        // Determine write register, different for 'R' and 'I' type instructions
+        const destination = cpu.instruction.type === 'R' ?
+            cpu.instruction.rd : cpu.instruction.rt;
+
         // Writes ALU result to destination register.
-        cpu.register(cpu.instruction.rd).value = cpu.alu.result;
+        cpu.register(destination).value = cpu.alu.result;
     }
 }

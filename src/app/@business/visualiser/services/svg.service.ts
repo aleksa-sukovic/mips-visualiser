@@ -80,6 +80,16 @@ export class SvgService
         this.deEmphasize(this._elements);
     }
 
+    public reset (): void
+    {
+        this.deEmphasize(this._elements);
+        this._emphasizedIds = [];
+        this._activeClock = new NullClock();
+
+        // Fade in all elements
+        Anime({ targets: this._elements, keyframes: config.visual.opacitySteps.reverse(), duration: config.visual.animationDuration });
+    }
+
     protected findElements (ids: any[]): any[]
     {
         if (ids.length === 0) return [];

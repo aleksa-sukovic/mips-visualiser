@@ -24,13 +24,25 @@ export class VisualiserControllerComponent
 
     public handleInstructionLoad (instruction): void
     {
-        this.cpuService.load(instruction);
-        this.toastrService.success('Instruction loaded.');
+        try {
+            this.cpuService.load(instruction);
+            this.toastrService.success('Instruction loaded');
+        } catch (e) {
+            this.toastrService.error('Instruction is either not valid or unsupported');
+        }
     }
 
     public handleSimulateClick ()
     {
         console.log('Simulate.');
+    }
+
+    public handleReset (): void
+    {
+        this.cpuService.cpu.reset();
+        this.registersService.refreshRegisters();
+        this.memoryService.refreshMemory();
+        this.svgService.reset();
     }
 
     public handleForwardClick ()
@@ -39,5 +51,10 @@ export class VisualiserControllerComponent
         this.registersService.refreshRegisters();
         this.memoryService.refreshMemory();
         this.svgService.visualiseClock(this.cpuService.clock);
+
+        if (!this.cpuService.executing) {
+            this.svgService.reset();
+            this.toastrService.success('Successfully executed instruction');
+        }
     }
 }

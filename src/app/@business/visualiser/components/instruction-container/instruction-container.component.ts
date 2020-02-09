@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TooltipService } from '../../services/tooltip-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-instruction-container',
@@ -20,7 +21,7 @@ export class InstructionContainerComponent
     public instructionText: string;
     @Output() loaded = new EventEmitter<string>();
 
-    public constructor (private tooltipService: TooltipService)
+    public constructor (private tooltipService: TooltipService, private toastrService: ToastrService)
     {
         //
     }
@@ -33,8 +34,10 @@ export class InstructionContainerComponent
     public handleFormSubmit ()
     {
         if (!this.instructionText) {
+            this.toastrService.error('Please enter instruction to simulate');
             return;
         }
+
         this.loaded.emit(this.instructionText);
     }
 }

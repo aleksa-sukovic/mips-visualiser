@@ -1,7 +1,7 @@
 import { Instruction } from '../instruction';
 import { InstructionEncoder } from '../encoders/instruction-encoder';
 import { Clock } from '../../clock/clock';
-import config from '../../library/config';
+import config, { findInstructionByOpcode } from '../../library/config';
 
 export class InstructionFactory
 {
@@ -9,17 +9,20 @@ export class InstructionFactory
 
     public static fromSymbolic (symbolic: string): Instruction
     {
-        return InstructionFactory.fromBinary(
-            InstructionFactory.encoder.encode(symbolic),
-        );
+        const instruction = InstructionFactory.fromBinary(InstructionFactory.encoder.encode(symbolic));
+        instruction.symbolic = symbolic;
+
+        return instruction;
     }
 
     public static fromBinary (binary: string): Instruction
     {
         const instruction = new Instruction(binary, []);
+        const instructionCfg = findInstructionByOpcode(instruction.op);
 
-        instruction.clocks = InstructionFactory.clocks(instruction.op);
-        
+        instruction.clocks = InstructionFactory.clocks(instructionCfg.opcode);
+        instruction.type = instructionCfg.type;
+
         return instruction;
     }
 

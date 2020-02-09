@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
 import { TooltipService } from '../../services/tooltip-service';
 import { CPUService } from '../../services/cpu.services';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-player',
@@ -16,8 +17,11 @@ export class PlayerComponent
     @Output() simulate = new EventEmitter();
     @Output() forward = new EventEmitter();
 
-    public constructor (private tooltipService: TooltipService, public cpuService: CPUService)
-    {
+    public constructor (
+        private tooltipService: TooltipService,
+        public cpuService: CPUService,
+        private toastrService: ToastrService
+    ) {
         //
     }
 
@@ -28,11 +32,23 @@ export class PlayerComponent
 
     public handleExecuteClick ()
     {
+        if (!this.cpuService.loaded) {
+            this.toastrService.warning('Please load instruction.');
+
+            return;
+        }
+
         this.simulate.emit();
     }
 
     public handleForwardClick ()
     {
+        if (!this.cpuService.loaded) {
+            this.toastrService.warning('Please load instruction.');
+
+            return;
+        }
+
         this.forward.emit();
     }
 }

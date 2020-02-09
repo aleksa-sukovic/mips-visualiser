@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCheck, faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { TooltipService } from '../../services/tooltip-service';
 
 @Component({
     selector: 'app-register-item',
@@ -14,7 +15,7 @@ export class RegisterItemComponent
     public faClose = faWindowClose;
     public faCheck = faCheck;
 
-    public constructor ()
+    public constructor (private tooltipService: TooltipService)
     {
         this.register = {};
     }
@@ -38,5 +39,10 @@ export class RegisterItemComponent
     {
         register.edit = false;
         $event.stopPropagation();
+    }
+
+    public handleMouseMove ($event): void
+    {
+        this.tooltipService.mouseMove($event, true);
     }
 }

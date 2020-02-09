@@ -11,9 +11,9 @@
         </p>
     </div>
 
-    <div class="flex flex-row justify-between items-center p-3 bg-gray-300">
+    <div class="flex flex-row justify-between items-stretch p-3 bg-gray-300">
         <!-- Player controls -->
-        <div class="w-full">
+        <div>
             <ul>
                 <li class="mb-2 text-orange-800 inline hover:text-red-900 cursor-pointer" id="player_execute" (click)="handleExecuteClick()">
                     <fa-icon [icon]="faPlay" size="1x"></fa-icon>
@@ -26,6 +26,27 @@
                     <span *ngIf="cpuService.cpu.instruction && cpuService.clockIndex >= 0">({{ cpuService.clockIndex + 1 }}/{{ cpuService.cpu.instruction.clocks.length }})</span>
                 </li>
             </ul>
+        </div>
+        <div class="flex-grow flex flex-row justify-end" *ngIf="cpuService.loaded && cpuService.instruction">
+            <span class="text-gray-600 mr-3">
+                Loaded:
+                <span class="text-gray-900">{{ cpuService.instruction.symbolic }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Type:
+                <span class="text-gray-900">{{ cpuService.instruction.type }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Clocks:
+                <span class="text-gray-900">{{ cpuService.instruction.clocks.length }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Executed:
+                <span class="text-gray-900">{{ cpuService.executedClocks }}</span>
+            </span>
         </div>
     </div>
 </div>

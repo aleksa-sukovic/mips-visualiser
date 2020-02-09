@@ -40,6 +40,10 @@ export function isElementArrow (element) {
     return config.visual.nodes.arrows.find(it => it == element.id);
 }
 
+export function findInstructionByOpcode (opcode: string) {
+    return config.instructions.find(it => it.opcode === opcode);
+}
+
 const config = {
     word_length: 32,
     visual: {
@@ -83,6 +87,7 @@ const config = {
             alias: 'add',
             opcode: '000000',
             funct: '100000',
+            type: 'R',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -94,6 +99,7 @@ const config = {
             alias: 'addi',
             opcode: '001000',
             funct: '',
+            type: 'R',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -105,6 +111,7 @@ const config = {
             alias: 'sub',
             opcode: '000000',
             funct: '100010',
+            type: 'R',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -116,6 +123,7 @@ const config = {
             alias: 'j',
             opcode: '000010',
             funct: '',
+            type: 'J',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -126,6 +134,7 @@ const config = {
             alias: 'beq',
             opcode: '000100',
             funct: '',
+            type: 'I',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -136,6 +145,7 @@ const config = {
             alias: 'bne',
             opcode: '000101',
             funct: '',
+            type: 'I',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -146,6 +156,7 @@ const config = {
             alias: 'lw',
             opcode: '100011',
             funct: '',
+            type: 'I',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -158,6 +169,7 @@ const config = {
             alias: 'sw',
             opcode: '101011',
             funct: '',
+            type: 'I',
             clocks: [
                 new Clock1(32),
                 new Clock2(32),
@@ -167,11 +179,11 @@ const config = {
         },
     ],
     registers: [
-        new Register(['$ir'], 'ir', '0000', false),
-        new Register(['$pc'], 'pc', '00000', false),
-        new Register(['$target'], 'target', '00000', false),
-        new Register(['$memData'], 'memData', '00000', false),
-        new Register(['$0', '$zero'], '00000', '0000', false),
+        new Register(['$ir'], 'ir', '00000000000000000000000000000000', false),
+        new Register(['$pc'], 'pc', '00000000000000000000000000000000', false),
+        new Register(['$target'], 'target', '00000000000000000000000000000000', false),
+        new Register(['$memData'], 'memData', '00000000000000000000000000000000', false),
+        new Register(['$0', '$zero'], '00000', '00000000000000000000000000000000', false),
         new Register(['$1', '$at'], '00001'),
         new Register(['$2', '$v0'], '00010'),
         new Register(['$3', '$v1'], '00011'),
@@ -205,6 +217,7 @@ const config = {
         new Register(['$31', '$ra'], '11111')
     ],
     global_tooltips: [
+        // Instructions
         {
             ids: ['instruction_add'],
             title: '<div class="text-gray-900">ADD <br><span class="text-gray-500 text-sm font-normal italic">add $1, $2, $3</span></div>',
@@ -247,6 +260,7 @@ const config = {
             description: '<div>Stores the contents of $1 register at specified address.</div>',
             value: (cpu: CPU) => null,
         },
+        // Player
         {
             ids: ['player_execute'],
             title: 'Execute',
@@ -258,6 +272,223 @@ const config = {
             title: 'Next clock',
             description: '<div>Executes the next instruction clock.</div>',
             value: (cpu: CPU) => null,
+        },
+        // Registers
+        {
+            ids: ['register_ir'],
+            title: '$ir / Instruction Register',
+            description: '<div>Register holding the instruction currently being executed.</div>',
+            value: (cpu: CPU) => cpu.register('$0').value,
+        },
+        {
+            ids: ['register_pc'],
+            title: '$pc / Program Counter',
+            description: '<div>Register holding the address of next instruction to be executed.</div>',
+            value: (cpu: CPU) => cpu.register('$0').value,
+        },
+        {
+            ids: ['register_target'],
+            title: '$target / Target',
+            description: '<div>Register holding target jump address calculated in clock 2 of every instruction.</div>',
+            value: (cpu: CPU) => cpu.register('$0').value,
+        },
+        {
+            ids: ['register_memData'],
+            title: 'Memory Data',
+            description: '<div>Not an actual register, rather a helper container for data read from memory used by this visualisation.</div>',
+            value: (cpu: CPU) => cpu.register('$0').value,
+        },
+        {
+            ids: ['register_00000'],
+            title: '$0 / $zero',
+            description: '<div>Register constant.</div>',
+            value: (cpu: CPU) => cpu.register('$0').value,
+        },
+        {
+            ids: ['register_00001'],
+            title: '$1 / $at',
+            description: '<div>Register reserved for assembler.</div>',
+            value: (cpu: CPU) => cpu.register('$1').value,
+        },
+        {
+            ids: ['register_00010'],
+            title: '$2 / $v0',
+            description: '<div>Used for expression evaluation and function result.</div>',
+            value: (cpu: CPU) => cpu.register('$2').value,
+        },
+        {
+            ids: ['register_00011'],
+            title: '$3 / $v1',
+            description: '<div>Used for expression evaluation and function result.</div>',
+            value: (cpu: CPU) => cpu.register('$3').value,
+        },
+        {
+            ids: ['register_00100'],
+            title: '$4 / $a0',
+            description: '<div>Used for passing arguments.</div>',
+            value: (cpu: CPU) => cpu.register('$4').value,
+        },
+        {
+            ids: ['register_00101'],
+            title: '$5 / $a1',
+            description: '<div>Used for passing arguments.</div>',
+            value: (cpu: CPU) => cpu.register('$5').value,
+        },
+        {
+            ids: ['register_00110'],
+            title: '$6 / $a2',
+            description: '<div>Used for passing arguments.</div>',
+            value: (cpu: CPU) => cpu.register('$6').value,
+        },
+        {
+            ids: ['register_00111'],
+            title: '$7 / $a3',
+            description: '<div>Used for passing arguments.</div>',
+            value: (cpu: CPU) => cpu.register('$7').value,
+        },
+        {
+            ids: ['register_01000'],
+            title: '$8 / $t0',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$8').value,
+        },
+        {
+            ids: ['register_01001'],
+            title: '$9 / $t1',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$9').value,
+        },
+        {
+            ids: ['register_01010'],
+            title: '$10 / $t2',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$10').value,
+        },
+        {
+            ids: ['register_01011'],
+            title: '$11 / $t3',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$11').value,
+        },
+        {
+            ids: ['register_01100'],
+            title: '$12 / $t4',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$12').value,
+        },
+        {
+            ids: ['register_01101'],
+            title: '$13 / $t5',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$13').value,
+        },
+        {
+            ids: ['register_01110'],
+            title: '$14 / $t6',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$14').value,
+        },
+        {
+            ids: ['register_01111'],
+            title: '$15 / $t7',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$15').value,
+        },
+        {
+            ids: ['register_10000'],
+            title: '$16 / $s0',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$16').value,
+        },
+        {
+            ids: ['register_10001'],
+            title: '$17 / $s1',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$17').value,
+        },
+        {
+            ids: ['register_10010'],
+            title: '$18 / $s2',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$18').value,
+        },
+        {
+            ids: ['register_10011'],
+            title: '$19 / $s3',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$19').value,
+        },
+        {
+            ids: ['register_10100'],
+            title: '$20 / $s4',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$20').value,
+        },
+        {
+            ids: ['register_10101'],
+            title: '$21 / $s5',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$21').value,
+        },
+        {
+            ids: ['register_10110'],
+            title: '$22 / $s6',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$22').value,
+        },
+        {
+            ids: ['register_10111'],
+            title: '$23 / $s7',
+            description: '<div>Saved temporary register, preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$23').value,
+        },
+        {
+            ids: ['register_11000'],
+            title: '$24 / $t8',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$24').value,
+        },
+        {
+            ids: ['register_11001'],
+            title: '$25 / $t9',
+            description: '<div>Temporary register, not preserved between function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$25').value,
+        },
+        {
+            ids: ['register_11010'],
+            title: '$26 / $k0',
+            description: '<div>Register reserved for OS kernel.</div>',
+            value: (cpu: CPU) => cpu.register('$26').value,
+        },
+        {
+            ids: ['register_11011'],
+            title: '$27 / $k1',
+            description: '<div>Register reserved for OS kernel.</div>',
+            value: (cpu: CPU) => cpu.register('$27').value,
+        },
+        {
+            ids: ['register_11100'],
+            title: '$28 / $gp',
+            description: '<div>Register pointing to global area.</div>',
+            value: (cpu: CPU) => cpu.register('$28').value,
+        },
+        {
+            ids: ['register_11101'],
+            title: '$29 / $sp',
+            description: '<div>Register known as stack pointer.</div>',
+            value: (cpu: CPU) => cpu.register('$29').value,
+        },
+        {
+            ids: ['register_11110'],
+            title: '$30 / $fp',
+            description: '<div>Register known as frame pointer.</div>',
+            value: (cpu: CPU) => cpu.register('$29').value,
+        },
+        {
+            ids: ['register_11111'],
+            title: '$31 / $ra',
+            description: '<div>Register storing return address, used by function calls.</div>',
+            value: (cpu: CPU) => cpu.register('$31').value,
         }
     ],
     clocks: [

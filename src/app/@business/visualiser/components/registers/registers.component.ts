@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BinaryEncoder } from '../../../mips/library/binary-encoder/binary-encoder';
 import { RegistersService } from '../../services/registers.service';
 
@@ -10,6 +10,7 @@ import { RegistersService } from '../../services/registers.service';
 export class RegistersComponent
 {
     public registers: any[];
+    @Output() onReset = new EventEmitter();
 
     protected encoder: BinaryEncoder;
 
@@ -28,6 +29,6 @@ export class RegistersComponent
 
     public handleResetClick (): void
     {
-
+        this.onReset.emit(true);
     }
 }

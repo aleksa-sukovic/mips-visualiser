@@ -1,4 +1,4 @@
-<tr *ngIf="!register.edit" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner">
+<tr *ngIf="!register.edit" id="register_{{ register.id }}" (mousemove)="handleMouseMove($event)" (click)="handleEditClick(register)" [ngClass]="{ 'cursor-pointer': register.editable }" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner">
     <td class="px-4 text-center font-thin py-2 w-1/2">
         {{ register.alias }}
     </td>

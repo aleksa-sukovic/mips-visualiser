@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 })
 export class TooltipService
 {
-    public width = 250;
     public paddingBottom =  15;
     public visible = false;
 
@@ -21,10 +20,11 @@ export class TooltipService
         //
     }
 
-    public mouseMove ($event): void
+    public mouseMove ($event, useCurrentTarget: boolean = false): void
     {
-        const tooltip = findTooltipForElement($event.target) ||
-            findTooltipForElement($event.target, this.cpuService.clock);
+        const target = useCurrentTarget ? $event.currentTarget : $event.target;
+        const tooltip = findTooltipForElement(target) ||
+            findTooltipForElement(target, this.cpuService.clock);
 
         if (tooltip) {
             this.show(
@@ -41,6 +41,9 @@ export class TooltipService
 
     public show (mouseX: number, mouseY: number, title: string = '', description: string = '', value: string = ''): void
     {
+        // constraint tooltip [left size]
+        mouseX = mouseX - this.width / 2 > 0 ? mouseX : this.width / 2;
+
         this.tooltipTitle = title;
         this.tooltipDescription = description;
         this.tooltipValue = value;
@@ -66,6 +69,11 @@ export class TooltipService
     public tooltip (): any
     {
         return document.getElementById('tooltip') || {};
+    }
+
+    public get width ()
+    {
+        return this.tooltip().offsetWidth;
     }
 
     protected fadeIn (): void

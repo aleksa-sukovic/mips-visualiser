@@ -4,7 +4,6 @@ export class Memory
 
     public constructor ()
     {
-        this._store = { a: '1', b: '2', c: '3' };
         this._store = {};
     }
 
@@ -21,6 +20,15 @@ export class Memory
     public destroy (key: string): void
     {
         delete this._store[key];
+    }
+
+    public reset (): void
+    {
+        for (const key in this._store) {
+            if (this._store.hasOwnProperty(key)) {
+                delete this._store[key];
+            }
+        }
     }
 
     public addresses (): any[]

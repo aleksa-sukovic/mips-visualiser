@@ -19,7 +19,7 @@
             <span class="text-gray-600">Available instructions (hover for details):</span>
 
             <ul class="list-disc ml-10 mt-1 text-gray-600">
-                <li *ngFor="let instruction of availableInstructions" class="text-blue-900 cursor-pointer font-bold" id="instruction_{{ instruction.alias }}">
+                <li *ngFor="let instruction of availableInstructions" class="text-blue-900 cursor-pointer font-bold hover:bg-gray-300" id="instruction_{{ instruction.alias }}">
                     {{ instruction.alias }}
                 </li>
             </ul>

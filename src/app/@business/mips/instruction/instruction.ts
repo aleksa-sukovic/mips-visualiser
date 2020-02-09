@@ -3,6 +3,8 @@ import { Clock } from '../clock/clock';
 export class Instruction
 {
     protected _binary: string;
+    protected _symbolic: string;
+    protected _type: string;
     protected _clocks: Clock[];
 
     public constructor (binary: string, clocks: Clock[])
@@ -29,6 +31,26 @@ export class Instruction
     public get binary ()
     {
         return this._binary;
+    }
+
+    public set symbolic (value: string)
+    {
+        this._symbolic = value;
+    }
+
+    public get symbolic ()
+    {
+        return this._symbolic;
+    }
+
+    public set type (value: string)
+    {
+        this._type = value;
+    }
+
+    public get type ()
+    {
+        return this._type;
     }
 
     public get op (): string

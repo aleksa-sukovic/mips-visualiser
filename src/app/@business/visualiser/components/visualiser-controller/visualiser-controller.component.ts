@@ -3,6 +3,7 @@ import { CPUService } from '../../services/cpu.services';
 import { SvgService } from '../../services/svg.service';
 import { RegistersService } from '../../services/registers.service';
 import { MemoryService } from '../../services/memory.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-visualiser-controller',
@@ -16,6 +17,7 @@ export class VisualiserControllerComponent
         private registersService: RegistersService,
         private memoryService: MemoryService,
         private svgService: SvgService,
+        private toastrService: ToastrService,
     ) {
         //
     }
@@ -23,6 +25,7 @@ export class VisualiserControllerComponent
     public handleInstructionLoad (instruction): void
     {
         this.cpuService.load(instruction);
+        this.toastrService.success('Instruction loaded.');
     }
 
     public handleSimulateClick ()

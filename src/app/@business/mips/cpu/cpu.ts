@@ -29,7 +29,7 @@ export class CPU
         this._encoder = new BinaryEncoder();
         this._clocks = [];
         this._registers = Specification.registers.map(it => RegisterFactory.fromSpecification(it));
-        this._currentClock = 0;
+        this._currentClock = -1;
         this._instruction = null;
     }
 
@@ -70,7 +70,7 @@ export class CPU
 
     public done (): boolean
     {
-        return this._currentClock === this._clocks.length - 1;
+        return this._currentClock >= this._clocks.length - 1;
     }
 
     public reset (): void

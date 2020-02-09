@@ -104,21 +104,21 @@ describe('Immediate instruction parser', () => {
 
     it('parses I-type instruction', () => {
         const instruction = 'addi $1, $v1, 15';
-        const binary = '001000,00001,00011,0000000000001111';
+        const binary = '001000,00011,00001,0000000000001111';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });
 
     it('parses I-type instruction with negative immediate field', () => {
         const instruction = 'addi $1, $2, -15';
-        const binary = '001000,00001,00010,1111111111110001';
+        const binary = '001000,00010,00001,1111111111110001';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });
 
     it('parses I-type instruction with positive immediate field', () => {
         const instruction = 'addi $1, $2, 16';
-        const binary = '001000,00001,00010,0000000000010000';
+        const binary = '001000,00010,00001,0000000000010000';
 
         expect(parser.parse(instruction)).toBe(binary.replace(/,/g, ''));
     });

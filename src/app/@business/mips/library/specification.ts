@@ -50,7 +50,6 @@ const Specification = {
             clocks: [
                 'clock_1',
                 'clock_2',
-                'clock_3',
                 'clock_4',
                 'clock_9',
             ],
@@ -59,11 +58,11 @@ const Specification = {
             alias: 'addi',
             opcode: '001000',
             funct: '',
-            type: 'R',
+            type: 'I',
             clocks: [
                 'clock_1',
                 'clock_2',
-                'clock_4',
+                'clock_3',
                 'clock_9',
             ],
         },

@@ -19,8 +19,8 @@ export class ImmediateInstructionParser extends InstructionParser
     {
         const args = this.instructionArgs(value);
 
-        const rs = this.register(args[0]).binary;
-        const rt = this.register(args[1]).binary;
+        const rs = this.register(args[1]).binary;
+        const rt = this.register(args[0]).binary;
         const immediate = this.number(args[2]);
 
         return this.instruction(value).opcode + rs + rt + this._encoder.binary(immediate, 16);

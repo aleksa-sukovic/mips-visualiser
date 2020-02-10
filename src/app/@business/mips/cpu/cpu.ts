@@ -52,7 +52,7 @@ export class CPU
 
     public currentClock (): Clock
     {
-        return this.done() ? new NullClock() : this._clocks[this._currentClock];
+        return this._clocks[this._currentClock] || new NullClock();
     }
 
     public currentClockIndex (): number

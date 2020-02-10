@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Clock } from '../../mips/clock/clock';
 import Anime from 'animejs/lib/anime.es.js';
 import { NullClock } from '../../mips/clock/Null/NullClock';
-import Specification from '../../mips/library/specification';
 import Config from '../../mips/library/config/config';
 
 @Injectable({
@@ -15,6 +14,7 @@ export class SvgService
     protected _emphasizedIds: any[] = [];
     protected _fadeInKeyframes = Array.from(Config.get().visual.opacitySteps).reverse();
     protected _fadeOutKeyframes = Config.get().visual.opacitySteps;
+    protected _animationDuration = Config.get().visual.animationDuration;
 
     public visualiseClock (clock: Clock)
     {
@@ -22,10 +22,10 @@ export class SvgService
         const clockConfig = Config.clockConfig(clock);
 
         // Reduce opacity of all elements.
-        Anime({ targets: this._elements, keyframes: this._fadeOutKeyframes, duration: Config.get().visual.animationDuration });
+        Anime({ targets: this._elements, keyframes: this._fadeOutKeyframes, duration: this._animationDuration });
 
         // Fade in focused elements.
-        Anime({ targets: this.findElements(clockConfig.focus), keyframes: this._fadeInKeyframes, duration: Config.get().visual.animationDuration });
+        Anime({ targets: this.findElements(clockConfig.focus), keyframes: this._fadeInKeyframes, duration: this._animationDuration });
     }
 
     public mouseMove ($event): void
@@ -93,7 +93,17 @@ export class SvgService
         this._activeClock = new NullClock();
 
         // Fade in all elements
-        Anime({ targets: this._elements, duration: Config.get().visual.animationDuration, keyframes: this._fadeInKeyframes });
+        Anime({ targets: this._elements, duration: this._animationDuration, keyframes: this._fadeInKeyframes });
+    }
+
+    public set animationDuration (value)
+    {
+        this._animationDuration = value;
+    }
+
+    public get animationDuration ()
+    {
+        return this._animationDuration;
     }
 
     protected findElements (ids: any[]): any[]

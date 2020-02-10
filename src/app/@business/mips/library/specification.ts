@@ -1,5 +1,6 @@
 import { CPU } from '../cpu/cpu';
 import { BinaryEncoder } from './binary-encoder/binary-encoder';
+import { encode } from 'punycode';
 
 const encoder = new BinaryEncoder();
 
@@ -712,7 +713,11 @@ const Specification = {
                     ids: [128, 91, 33, 13, 22, 116, 18, 104, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
                     title: 'PC Value',
                     description: '<div>Value of PC is brought as first operand of ALU.</div>',
-                    value: (cpu: CPU) => encoder.number(cpu.register('$pc').value).toString(10),
+                    value: (cpu: CPU) => {
+                        const oldPc = encoder.number(cpu.register('$pc').value) - 4;
+                        const newPc = encoder.number(cpu.register('$pc').value).toString(10);
+                        return newPc + ' (' + oldPc + ' + 4)';
+                    },
                 }
             ],
         },

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { faCheck, faMarker, faPen, faTrash, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTrash, } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-memory-item',
@@ -29,7 +29,10 @@ export class MemoryItemComponent
     {
         item.edit = true;
         setTimeout(() => {
-            document.getElementById(`item_${item.id}_value`).focus();
+            const element = document.getElementById(`item_${item.id}_value`);
+
+            element.focus();
+            (element as HTMLInputElement).select();
         });
     }
 

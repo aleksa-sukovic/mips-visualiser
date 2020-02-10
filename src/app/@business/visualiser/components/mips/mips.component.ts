@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SvgService } from '../../services/svg.service';
 import { CPUService } from '../../services/cpu.services';
-import { InstructionFactory } from '../../../mips/instruction/factories/instruction-factory';
 import { TooltipService } from '../../services/tooltip-service';
 
 @Component({

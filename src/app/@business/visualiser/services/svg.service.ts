@@ -12,7 +12,9 @@ export class SvgService
 {
     protected _elements = [];
     protected _activeClock: Clock = new NullClock();
-protected _emphasizedIds: any[] = [];
+    protected _emphasizedIds: any[] = [];
+    protected _fadeInKeyframes = Array.from(Config.get().visual.opacitySteps).reverse();
+    protected _fadeOutKeyframes = Config.get().visual.opacitySteps;
 
     public visualiseClock (clock: Clock)
     {
@@ -20,10 +22,10 @@ protected _emphasizedIds: any[] = [];
         const clockConfig = Config.clockConfig(clock);
 
         // Reduce opacity of all elements.
-        Anime({ targets: this._elements, opacity: Config.get().visual.inactiveOpacity });
+        Anime({ targets: this._elements, keyframes: this._fadeOutKeyframes, duration: Config.get().visual.animationDuration });
 
         // Fade in focused elements.
-        Anime({ targets: this.findElements(clockConfig.focus), keyframes: Config.get().visual.opacitySteps.reverse(), duration: Config.get().visual.animationDuration });
+        Anime({ targets: this.findElements(clockConfig.focus), keyframes: this._fadeInKeyframes, duration: Config.get().visual.animationDuration });
     }
 
     public mouseMove ($event): void
@@ -91,7 +93,7 @@ protected _emphasizedIds: any[] = [];
         this._activeClock = new NullClock();
 
         // Fade in all elements
-        Anime({ targets: this._elements, duration: Config.get().visual.animationDuration });
+        Anime({ targets: this._elements, duration: Config.get().visual.animationDuration, keyframes: this._fadeInKeyframes });
     }
 
     protected findElements (ids: any[]): any[]

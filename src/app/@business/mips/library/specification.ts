@@ -747,6 +747,46 @@ const Specification = {
                     value: (cpu: CPU) => encoder.number(cpu.register('$pc').value).toString(10),
                 }
             ],
+        },
+        {
+            id: 'clock_2',
+            focus: [
+                // Control
+                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 'Control_op_text',
+                // AluSelA
+                170, 174, 140, 91, 13, 128, 139, 127, 33, 18, 12, 104, 22, 116,
+                'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text',
+                // Alu SelB
+               'ALUSelB_background', 'ALUSelB_text', 21, 117,
+                // AluOP
+                168, 186,
+                // AluControl
+                'ALU_Control_background', 'ALU_Control_text', 37,
+                // ALU
+                'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143,
+                // TargetWrite
+                167, 173,
+                // PC
+                'PC_text', 'PC_background',
+                // Target
+                11, 23, 25, 31, 115, 141, 'Target_text', 'Target_background',
+                // Instruction register
+                'instruction_background', 'instruction_label', 'instruction_25_0_label_text', 'instruction_25_0_label_dot',
+                'instruction_31_26_label_text', 'instruction_31_26_label_dot',
+                // AluOP from instruction
+                158, 13, 34, 102,
+                // Instruction load
+                95, 151, 152, 84, 83, 90, 107, '154', '153', '125', '109', '108', '94', '82', '74', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot',
+                '186', '148', '147', '123', '121', '119', '89', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background',
+                87, 93, 155, 106,
+                // Registers
+                'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_register_label_dot', 'write_register_label_text_2',
+                // Jump offset
+                '142', '114', '88', '86', '85', '48', '47', '46', '45', '30', '29', '24', '19', 'SHL_2_x2_text_1', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1',
+            ],
+            tooltips: [
+
+            ],
         }
     ],
 };

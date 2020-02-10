@@ -705,39 +705,7 @@ const Specification = {
         {
             id: 'clock_1',
             focus: [
-                // Control
-                'Control_background', 'Control_text', 'Control_claim', 'Control_background',
-                // MemRead
-                181, 162,
-                // AluSelA
-                170, 174,
-                // lorD
-                161, 180, 'lorD_background', 'lorD_text', 'lorD_0_text', 'lorD_0_dot', 130, 98,
-                // irWrite
-                164, 183,
-                // Alu SelB
-                169, 187, 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_1_dot', 'ALUSelB_1_text', 120, 35, 50, 21, 117,
-                // Alu SelA
-                'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 22, 116,
-                // AluOP
-                168, 186,
-                // pcWrite
-                159, 175, 177, 'OR_gate_background', 127, 129, 139, 97,
-                // pcSource
-                166, 185, 13,
-                // memory
-                'memory_background', 'mem_data_label_text', 'mem_data_label_dot', 'read_address_label_text', 'read_address_label_dot',
-                'memory_label',
-                134, 135, 156, 126,
-                // pc
-                'PC_background', 'PC_text', 128, 91, 140, 12, 18, 33, 104,
-                // Instruction register
-                'instruction_background', 'instruction_label',
-                // ALU
-                'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143,
-                23, 11, 25, 141, 28, 112, 'ALU_Control_background', 'ALU_Control_text', 37,
-                // MemToReg
-                'MemToReg_background', 'PCSource_0_dot', 'PCSource_0_text', 26, 96,
+                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 181, 162, 170, 174, 161, 180, 'lorD_background', 'lorD_text', 'lorD_0_text', 'lorD_0_dot', 130, 98, 164, 183, 169, 187, 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_1_dot', 'ALUSelB_1_text', 120, 35, 50, 21, 117, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 22, 116, 168, 186, 159, 175, 177, 'OR_gate_background', 127, 129, 139, 97, 166, 185, 13, 'memory_background', 'mem_data_label_text', 'mem_data_label_dot', 'read_address_label_text', 'read_address_label_dot', 'memory_label', 134, 135, 156, 126, 'PC_background', 'PC_text', 128, 91, 140, 12, 18, 33, 104, 'instruction_background', 'instruction_label', 'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143, 23, 11, 25, 141, 28, 112, 'ALU_Control_background', 'ALU_Control_text', 37, 'MemToReg_background', 'PCSource_0_dot', 'PCSource_0_text', 26, 96,
             ],
             tooltips: [
                 {
@@ -751,38 +719,7 @@ const Specification = {
         {
             id: 'clock_2',
             focus: [
-                // Control
-                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 'Control_op_text',
-                // AluSelA
-                170, 174, 140, 91, 13, 128, 139, 127, 33, 18, 12, 104, 22, 116,
-                'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text',
-                // Alu SelB
-               'ALUSelB_background', 'ALUSelB_text', 21, 117,
-                // AluOP
-                168, 186,
-                // AluControl
-                'ALU_Control_background', 'ALU_Control_text', 37,
-                // ALU
-                'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143,
-                // TargetWrite
-                167, 173,
-                // PC
-                'PC_text', 'PC_background',
-                // Target
-                11, 23, 25, 31, 115, 141, 'Target_text', 'Target_background',
-                // Instruction register
-                'instruction_background', 'instruction_label', 'instruction_25_0_label_text', 'instruction_25_0_label_dot',
-                'instruction_31_26_label_text', 'instruction_31_26_label_dot',
-                // AluOP from instruction
-                158, 13, 34, 102,
-                // Instruction load
-                95, 151, 152, 84, 83, 90, 107, '154', '153', '125', '109', '108', '94', '82', '74', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot',
-                '186', '148', '147', '123', '121', '119', '89', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background',
-                87, 93, 155, 106,
-                // Registers
-                'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_register_label_dot', 'write_register_label_text_2',
-                // Jump offset
-                '142', '114', '88', '86', '85', '48', '47', '46', '45', '30', '29', '24', '19', 'SHL_2_x2_text_1', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1',
+                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 'Control_op_text', 170, 174, 140, 91, 13, 128, 139, 127, 33, 18, 12, 104, 22, 116, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelB_background', 'ALUSelB_text', 21, 117, 168, 186, 'ALU_Control_background', 'ALU_Control_text', 37, 'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143, 167, 173, 'PC_text', 'PC_background', 11, 23, 25, 31, 115, 141, 'Target_text', 'Target_background', 'instruction_background', 'instruction_label', 'instruction_25_0_label_text', 'instruction_25_0_label_dot', 'instruction_31_26_label_text', 'instruction_31_26_label_dot', 158, 13, 34, 102, 95, 151, 152, 84, 83, 90, 107, '154', '153', '125', '109', '108', '94', '82', '74', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', '186', '148', '147', '123', '121', '119', '89', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background', 87, 93, 155, 106, 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', '142', '114', '88', '86', '85', '48', '47', '46', '45', '30', '29', '24', '19', 'SHL_2_x2_text_1', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1',
             ],
             tooltips: [
 
@@ -791,10 +728,7 @@ const Specification = {
         {
             id: 'clock_3',
             focus: [
-                '174', '170', '153', '152', '151', '116', '106', '105', '95', '93', '92', '87', '84', '83', '22', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background',
-                '21', '117', '81', '187', '169', '151', '148', '147', '123', '122', '95', '89', '78', '75', '190', '69', '62', '61', '59', '52', '51', '49', '38', '17', '3', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'Sign_Extend_background',
-                '186', '168', '37', '143', '32', 'ALU_Control_text', 'ALU_Control_background', 'Control_background', 'Control_text', 'Control_claim', 'Control_background',
-                '157', '150', '133', '132', '131', '101', '63', 'memory_background', 'memory_label', 'write_address_label_dot', 'write_address_label_text', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot',
+                '174', '170', '153', '152', '151', '116', '106', '105', '95', '93', '92', '87', '84', '83', '22', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background', '21', '117', '81', '187', '169', '151', '148', '147', '123', '122', '95', '89', '78', '75', '190', '69', '62', '61', '59', '52', '51', '49', '38', '17', '3', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'Sign_Extend_background', '186', '168', '37', '143', '32', 'ALU_Control_text', 'ALU_Control_background', 'Control_background', 'Control_text', 'Control_claim', 'Control_background', '157', '150', '133', '132', '131', '101', '63', 'memory_background', 'memory_label', 'write_address_label_dot', 'write_address_label_text', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot',
             ],
             tooltips: [
 
@@ -803,8 +737,7 @@ const Specification = {
         {
             id: 'clock_4',
             focus: [
-                '187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '144', '118', '117', '116', '106', '105', '95', '93', '92', '87', '84', '83', '55', '40', '39', '22', '21', '1', 'registers_background', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background',
-                '151', '148', '95', '89', '77', '190', '69', '57', '44', '37', '16', '15', 'registers_label', '154', '109', '94', '80', 'read_register_2_label_dot', 'read_register_2_label_text'
+                '187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '144', '118', '117', '116', '106', '105', '95', '93', '92', '87', '84', '83', '55', '40', '39', '22', '21', '1', 'registers_background', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', '151', '148', '95', '89', '77', '190', '69', '57', '44', '37', '16', '15', 'registers_label', '154', '109', '94', '80', 'read_register_2_label_dot', 'read_register_2_label_text'
             ],
             tooltips: [
 
@@ -814,6 +747,15 @@ const Specification = {
             id: 'clock_5',
             focus: [
                 '185', '179', '178', '177', '176', '174', '170', '160', '155', '153', '152', '151', '144', '118', '117', '116', '113', '109', '106', '95', '94', '93', '87', '84', '83', '81', '80', '55', '40', '39', '27', '22', '21', '1', 'AND_gate_background', 'OR_gate_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'PC_background', 'PC_text', 'ALU_zero_label_dot', 'ALU_zero_label_text', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'MemToReg_background', 'PCSource_text', 'PCSource_1_text', 'PCSource_1_dot', 'Target_background', 'Target_text', 'ALU_background', 'registers_background', 169, 187, 166, 26, 96,
+            ],
+            tooltips: [
+
+            ],
+        },
+        {
+            id: 'clock_6',
+            focus: [
+                '185', '177', '175', '166', '159', '155', '153', '152', '151', '142', '114', '96', '95', '88', '87', '86', '85', '84', '83', '48', '47', '46', '45', '30', '29', '26', '24', '19', '14', '12', '10', 'OR_gate_background', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'SHL_2_x2_text_1', 'PC_background', 'PC_text', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1', 'Control_background', 'Control_claim', 'Control_op_text', 'Control_text',
             ],
         }
     ],

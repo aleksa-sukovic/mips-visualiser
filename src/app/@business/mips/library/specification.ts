@@ -794,6 +794,17 @@ const Specification = {
                 '174', '170', '153', '152', '151', '116', '106', '105', '95', '93', '92', '87', '84', '83', '22', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background',
                 '21', '117', '81', '187', '169', '151', '148', '147', '123', '122', '95', '89', '78', '75', '190', '69', '62', '61', '59', '52', '51', '49', '38', '17', '3', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'Sign_Extend_background',
                 '186', '168', '37', '143', '32', 'ALU_Control_text', 'ALU_Control_background', 'Control_background', 'Control_text', 'Control_claim', 'Control_background',
+                '157', '150', '133', '132', '131', '101', '63', 'memory_background', 'memory_label', 'write_address_label_dot', 'write_address_label_text', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot',
+            ],
+            tooltips: [
+
+            ],
+        },
+        {
+            id: 'clock_4',
+            focus: [
+                '187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '144', '118', '117', '116', '106', '105', '95', '93', '92', '87', '84', '83', '55', '40', '39', '22', '21', '1', 'registers_background', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background',
+                '151', '148', '95', '89', '77', '190', '69', '57', '44', '37', '16', '15', 'registers_label', '154', '109', '94', '80', 'read_register_2_label_dot', 'read_register_2_label_text'
             ],
             tooltips: [
 

@@ -809,6 +809,12 @@ const Specification = {
             tooltips: [
 
             ],
+        },
+        {
+            id: 'clock_5',
+            focus: [
+                '185', '179', '178', '177', '176', '174', '170', '160', '155', '153', '152', '151', '144', '118', '117', '116', '113', '109', '106', '95', '94', '93', '87', '84', '83', '81', '80', '55', '40', '39', '27', '22', '21', '1', 'AND_gate_background', 'OR_gate_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'PC_background', 'PC_text', 'ALU_zero_label_dot', 'ALU_zero_label_text', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'MemToReg_background', 'PCSource_text', 'PCSource_1_text', 'PCSource_1_dot', 'Target_background', 'Target_text', 'ALU_background', 'registers_background', 169, 187, 166, 26, 96,
+            ],
         }
     ],
 };

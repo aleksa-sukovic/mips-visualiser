@@ -12,6 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class VisualiserControllerComponent
 {
+    private _interval: any = null;
+    public _intervalSpeed = 0;
+
     public constructor (
         private cpuService: CPUService,
         private registersService: RegistersService,
@@ -19,7 +22,7 @@ export class VisualiserControllerComponent
         private svgService: SvgService,
         private toastrService: ToastrService,
     ) {
-        //
+        this._intervalSpeed  = this.svgService.animationDuration;
     }
 
     public handleInstructionLoad (instruction): void
@@ -36,7 +39,8 @@ export class VisualiserControllerComponent
 
     public handleSimulateClick ()
     {
-        console.log('Simulate.');
+        this.handleForwardClick();
+        this._interval = setInterval(() => this.handleForwardClick(), this._intervalSpeed);
     }
 
     public handleReset (): void
@@ -55,10 +59,16 @@ export class VisualiserControllerComponent
         this.svgService.visualiseClock(this.cpuService.clock);
 
         if (!this.cpuService.executing) {
-            this.svgService.reset();
-            this.scrollTo('HEADER');
+            if (this._interval) clearInterval(this._interval);
+
             this.toastrService.success('Successfully executed instruction');
         }
+    }
+
+    public handleAnimationSpeedChange (speed): void
+    {
+        this.svgService.animationDuration = speed;
+        this._intervalSpeed = speed;
     }
 
     protected scrollTo (id: string): void

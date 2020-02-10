@@ -25,8 +25,17 @@
                     Execute next clock
                     <span *ngIf="cpuService.cpu.instruction && cpuService.clockIndex >= 0">({{ cpuService.clockIndex + 1 }}/{{ cpuService.cpu.instruction.clocks.length }})</span>
                 </li>
+
+                <li class="text-orange-800 inline ml-3 hover:text-red-900 cursor-pointer" id="animation_duration">
+                    <label>
+                        <input (change)="handleAnimationSpeedChange(speed)" #speed type="range" min="0.5" max="10" step="0.5" value="1" class="slider">
+                        Animation speed ({{ _animationSpeed / 1000 }}s)
+                    </label>
+                </li>
             </ul>
         </div>
+
+        <!-- Instruction information -->
         <div class="flex-grow flex flex-row justify-end" *ngIf="cpuService.loaded && cpuService.instruction">
             <span class="text-gray-600 mr-3">
                 Loaded:
@@ -46,6 +55,13 @@
             <span class="text-gray-600 mr-3">
                 Executed:
                 <span class="text-gray-900">{{ cpuService.executedClocks }}</span>
+            </span>
+        </div>
+
+        <!-- No instruction text -->
+        <div class="flex-grow flex flex-row justify-end" *ngIf="!cpuService.loaded || !cpuService.instruction">
+            <span class="text-gray-600 mr-3">
+                Instruction not loaded
             </span>
         </div>
     </div>

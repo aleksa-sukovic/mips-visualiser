@@ -17,7 +17,7 @@ protected _emphasizedIds: any[] = [];
     public visualiseClock (clock: Clock)
     {
         this._activeClock = clock;
-        const clockConfig = Config.findClockConfig(clock);
+        const clockConfig = Config.clockConfig(clock);
 
         // Reduce opacity of all elements.
         Anime({ targets: this._elements, opacity: Specification.visual.inactiveOpacity });

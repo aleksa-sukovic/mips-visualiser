@@ -10,36 +10,29 @@ export default class Config
     public static ELEMENT_LABEL = 'element_label';
     public static ELEMENT_COMPONENT = 'element_component';
 
-    protected static _config: any = Specification;
-
-    public static get ()
+    public static clockConfig (clock: Clock)
     {
-        return this._config;
+        return Specification.clocks.find(it => it.id === clock.id()) || Config.clockConfig(new NullClock());
     }
 
     public static elementTooltip (element, clock: Clock = null)
     {
         if (!clock) {
-            return Config._config.global_tooltips.find(it => it.ids.find(id => id == element.id));
+            return Specification.global_tooltips.find(it => it.ids.find(id => id == element.id));
         }
 
-        return Config.findClockConfig(clock).tooltips.find(it => it.ids.find(id => id == element.id));
-    }
-
-    public static findClockConfig (clock: Clock)
-    {
-        return this._config.clocks.find(it => it.id === clock.id()) || Config.findClockConfig(new NullClock());
+        return Config.clockConfig(clock).tooltips.find(it => it.ids.find(id => id == element.id));
     }
 
     public static elementType (element)
     {
-        if (this._config.visual.nodes.labels.find(it => it == element.id)) {
+        if (Specification.visual.nodes.labels.find(it => it == element.id)) {
             return Config.ELEMENT_LABEL;
-        } else if (this._config.visual.nodes.components.find(it => it == element.id)) {
+        } else if (Specification.visual.nodes.components.find(it => it == element.id)) {
             return Config.ELEMENT_COMPONENT;
-        } else if (this._config.visual.nodes.text.find(it => it == element.id)) {
+        } else if (Specification.visual.nodes.text.find(it => it == element.id)) {
             return Config.ELEMENT_TEXT;
-        } else if (this._config.visual.nodes.arrows.find(it => it == element.id)) {
+        } else if (Specification.visual.nodes.arrows.find(it => it == element.id)) {
             return Config.ELEMENT_ARROW;
         } else if (element.tagName === 'path') {
             return Config.ELEMENT_PATH;

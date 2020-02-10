@@ -757,6 +757,18 @@ const Specification = {
             focus: [
                 '185', '177', '175', '166', '159', '155', '153', '152', '151', '142', '114', '96', '95', '88', '87', '86', '85', '84', '83', '48', '47', '46', '45', '30', '29', '26', '24', '19', '14', '12', '10', 'OR_gate_background', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'SHL_2_x2_text_1', 'PC_background', 'PC_text', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1', 'Control_background', 'Control_claim', 'Control_op_text', 'Control_text',
             ],
+            tooltips: [
+
+            ],
+        },
+        {
+            id: 'clock_7',
+            focus: [
+                '186', '181', '174', '170', '168', '162', '157', '155', '152', '151', '150', '148', '147', '143', '133', '132', '130', '123', '122', '117', '116', '106', '105', '99', '98', '95', '93', '92', '89', '87', '84', '83', '78', '75', '190', '69', '63', '62', '61', '59', '52', '51', '49', '38', '37', '32', '22', '21', '17', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot', 'Sign_Extend_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background', 'Control_background', 'Control_claim', 'Control_text',
+            ],
+            tooltips: [
+
+            ],
         }
     ],
 };

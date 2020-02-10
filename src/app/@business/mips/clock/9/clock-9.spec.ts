@@ -2,9 +2,8 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock9 } from './clock-9';
-import config from '../../library/config/config';
 import { Clock4 } from '../4/clock-4';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 describe('Clock 9', () => {
     let cpu: CPU = null;
@@ -28,9 +27,9 @@ describe('Clock 9', () => {
     it('writes data to specified register', () => {
         const instr = InstructionFactory.fromSymbolic('add $1, $2, $3');
         const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock4(), new Clock9()]);
-        const $2 = encoder.binary(100, Specification.word_length);
-        const $3 = encoder.binary(200, Specification.word_length);
-        const $1 = encoder.binary(100 + 200, Specification.word_length);
+        const $2 = encoder.binary(100, Config.get().word_length);
+        const $3 = encoder.binary(200, Config.get().word_length);
+        const $1 = encoder.binary(100 + 200, Config.get().word_length);
 
         cpu.register('$2').value = $2;
         cpu.register('$3').value = $3;

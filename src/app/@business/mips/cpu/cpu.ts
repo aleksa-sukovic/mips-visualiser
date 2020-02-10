@@ -7,7 +7,6 @@ import { Instruction } from '../instruction/instruction';
 import { NullClock } from '../clock/Null/NullClock';
 import { BinaryEncoder } from '../library/binary-encoder/binary-encoder';
 import Config from '../library/config/config';
-import Specification from '../library/specification';
 import { RegisterFactory } from '../register/factories/register-factory';
 
 export class CPU
@@ -28,7 +27,7 @@ export class CPU
         this._memory = new Memory();
         this._encoder = new BinaryEncoder();
         this._clocks = [];
-        this._registers = Specification.registers.map(it => RegisterFactory.fromSpecification(it));
+        this._registers = Config.get().registers.map(it => RegisterFactory.fromSpecification(it));
         this._currentClock = -1;
         this._instruction = null;
     }

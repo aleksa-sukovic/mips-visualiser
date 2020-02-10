@@ -3,9 +3,7 @@ import { InstructionFactory } from '../../instruction/factories/instruction-fact
 import { Clock2 } from './clock-2';
 import { Clock1 } from '../1/clock-1';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import config from '../../library/config/config';
-import { of } from 'rxjs';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 describe('Clock 2', () => {
     let cpu: CPU = null;
@@ -15,7 +13,7 @@ describe('Clock 2', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock2(Specification.word_length)]);
+        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock2(Config.get().word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();
@@ -29,7 +27,7 @@ describe('Clock 2', () => {
 
     it('calculates branch target address', () => {
         const instr = InstructionFactory.fromSymbolic('beq $1, $2, 128');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock1(Specification.word_length), new Clock2(Specification.word_length)]);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock1(Config.get().word_length), new Clock2(Config.get().word_length)]);
 
         const offset = 128;
         const pcValue = 1000;
@@ -37,12 +35,12 @@ describe('Clock 2', () => {
         // PC is incremented by '4' in 'Clock1'.
         const branchAddress = pcValue + 4 + offset;
 
-        cpu.register('$pc').value = encoder.binary(pcValue, Specification.word_length);
+        cpu.register('$pc').value = encoder.binary(pcValue, Config.get().word_length);
         cpu.simulate(instr);
         cpu.nextClock();
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.register('$target').value).toBe(encoder.binary(branchAddress, Specification.word_length));
+        expect(cpu.register('$target').value).toBe(encoder.binary(branchAddress, Config.get().word_length));
     });
 });

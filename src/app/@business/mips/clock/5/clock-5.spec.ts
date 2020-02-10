@@ -2,9 +2,8 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock5 } from './clock-5';
-import config from '../../library/config/config';
 import { Instruction } from '../../instruction/instruction';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 describe('Clock 5', () => {
     let cpu: CPU = null;
@@ -37,16 +36,16 @@ describe('Clock 5', () => {
         const branchAddress = 1234;
         const pcValue = 1000;
 
-        cpu.register('$pc').value = encoder.binary(pcValue, Specification.word_length);
-        cpu.register('$target').value = encoder.binary(branchAddress, Specification.word_length);
-        cpu.register('$1').value = encoder.binary(operand1, Specification.word_length);
-        cpu.register('$2').value = encoder.binary(operand2, Specification.word_length);
+        cpu.register('$pc').value = encoder.binary(pcValue, Config.get().word_length);
+        cpu.register('$target').value = encoder.binary(branchAddress, Config.get().word_length);
+        cpu.register('$1').value = encoder.binary(operand1, Config.get().word_length);
+        cpu.register('$2').value = encoder.binary(operand2, Config.get().word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.register('$pc').value).toBe(encoder.binary(branchAddress, Specification.word_length));
+        expect(cpu.register('$pc').value).toBe(encoder.binary(branchAddress, Config.get().word_length));
     });
 
     it('does not update PC value if operands are not equal', () => {
@@ -55,14 +54,14 @@ describe('Clock 5', () => {
         const operand2 = 5;
         const pcValue = 2000;
 
-        cpu.register('$1').value = encoder.binary(operand1, Specification.word_length);
-        cpu.register('$2').value = encoder.binary(operand2, Specification.word_length);
-        cpu.register('$pc').value = encoder.binary(pcValue, Specification.word_length);
+        cpu.register('$1').value = encoder.binary(operand1, Config.get().word_length);
+        cpu.register('$2').value = encoder.binary(operand2, Config.get().word_length);
+        cpu.register('$pc').value = encoder.binary(pcValue, Config.get().word_length);
 
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.register('$pc').value).toBe(encoder.binary(pcValue, Specification.word_length));
+        expect(cpu.register('$pc').value).toBe(encoder.binary(pcValue, Config.get().word_length));
     });
 });

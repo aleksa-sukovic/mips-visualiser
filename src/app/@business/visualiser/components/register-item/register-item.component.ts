@@ -31,7 +31,12 @@ export class RegisterItemComponent
         if (register.editable) {
             register.edit = true;
             register.editValue = register.value;
-            setTimeout(() => document.getElementById(`register_${register.alias}`).focus());
+            setTimeout(() => {
+                const element = document.getElementById(`register_${register.alias}`);
+
+                element.focus();
+                (element as HTMLInputElement).select();
+            });
         }
     }
 

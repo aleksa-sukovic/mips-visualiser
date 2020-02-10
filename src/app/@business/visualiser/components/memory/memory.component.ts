@@ -43,6 +43,11 @@ export class MemoryComponent
             editValue: 0,
             editAddress: 1,
         });
-        setTimeout(() => document.getElementById('item_new_address').focus());
+        setTimeout(() => {
+            const element = document.getElementById('item_new_address');
+
+            element.focus();
+            (element as HTMLInputElement).select();
+        });
     }
 }

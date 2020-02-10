@@ -8,9 +8,9 @@
 </tr>
 
 <form *ngIf="item.edit" #itemForm="ngForm" (ngSubmit)="handleFormSubmit(item)" >
-    <!-- Address value column -->
-    <tr class="flex justify-center p-2 text-gray-500">
-        <td class="font-bold w-1/2">
+    <tr class="flex justify-center p-2 text-gray-500 bg-gray-400">
+        <!-- Address value column -->
+        <td class="font-bold w-1/2 bg-gray-400">
             <input type="number"
                    id="item_{{ item.id }}_address"
                    name="item_{{ item.id }}"
@@ -23,7 +23,7 @@
         </td>
 
         <!-- Edit value column -->
-        <td class="font-bold w-1/2">
+        <td class="font-bold w-1/2 bg-gray-400">
             <input type="number"
                    id="item_{{ item.id }}_value"
                    name="item_{{ item.id }}_value"
@@ -34,8 +34,9 @@
                    required>
         </td>
     </tr>
-    <tr class="flex p-2">
-        <td class="w-full flex flex-row justify-end" colspan="2">
+
+    <tr class="flex p-2 bg-gray-400">
+        <td class="w-full flex flex-row justify-end bg-gray-400" colspan="2">
             <span class="inline-block mr-2 text-green-600 hover:text-green-800 cursor-pointer" (click)="handleFormSubmit(item)">
                 Confirm
                 <fa-icon [icon]="faCheck"></fa-icon>

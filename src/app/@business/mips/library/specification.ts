@@ -172,7 +172,7 @@ const Specification = {
             id: 'pc',
             aliases: ['$pc'],
             value:  0,
-            editable: false,
+            editable: true,
             visible: true,
         },
         {
@@ -186,14 +186,14 @@ const Specification = {
             id: 'memData',
             aliases: ['$memData'],
             value:  0,
-            editable: false,
+            editable: true,
             visible: false,
         },
         {
             id: '00000',
             aliases: ['$0', '$zero'],
             value:  0,
-            editable: true,
+            editable: false,
             visible: true,
         },
         {

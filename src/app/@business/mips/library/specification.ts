@@ -787,6 +787,15 @@ const Specification = {
             tooltips: [
 
             ],
+        },
+        {
+            id: 'clock_10',
+            focus: [
+                '189', '188', '187', '186', '184', '181', '180', '174', '172', '171', '170', '169', '168', '165', '162', '161', '157', '156', '155', '154', '153', '152', '151', '150', '148', '147', '143', '136', '134', '133', '132', '130', '123', '122', '116', '111', '108', '106', '105', '98', '95', '94', '93', '92', '89', '87', '84', '83', '81', '78', '75', '74', '73', '70', '190', '66', '69', '63', '62', '61', '59', '52', '51', '49', '38', '37', '32', '22', '17', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'MemToReg_Background', 'MemToReg_text', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'read_address_label_dot', 'read_address_label_text', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot', 'Sign_Extend_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background', 'ALUSelA_background', 'memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'Control_background', 'Control_claim', 'Control_text',
+            ],
+            tooltips: [
+
+            ],
         }
     ],
 };

@@ -10,15 +10,22 @@ export default class Config
     public static ELEMENT_LABEL = 'element_label';
     public static ELEMENT_COMPONENT = 'element_component';
 
+    protected static _config: any = Object.assign({}, Specification);
+
+    public static get (): any
+    {
+        return Config._config;
+    }
+
     public static clockConfig (clock: Clock)
     {
-        return Specification.clocks.find(it => it.id === clock.id()) || Config.clockConfig(new NullClock());
+        return Config.get().clocks.find(it => it.id === clock.id()) || Config.clockConfig(new NullClock());
     }
 
     public static elementTooltip (element, clock: Clock = null)
     {
         if (!clock) {
-            return Specification.global_tooltips.find(it => it.ids.find(id => id == element.id));
+            return Config.get().global_tooltips.find(it => it.ids.find(id => id == element.id));
         }
 
         return Config.clockConfig(clock).tooltips.find(it => it.ids.find(id => id == element.id));
@@ -26,13 +33,13 @@ export default class Config
 
     public static elementType (element)
     {
-        if (Specification.visual.nodes.labels.find(it => it == element.id)) {
+        if (Config.get().visual.nodes.labels.find(it => it == element.id)) {
             return Config.ELEMENT_LABEL;
-        } else if (Specification.visual.nodes.components.find(it => it == element.id)) {
+        } else if (Config.get().visual.nodes.components.find(it => it == element.id)) {
             return Config.ELEMENT_COMPONENT;
-        } else if (Specification.visual.nodes.text.find(it => it == element.id)) {
+        } else if (Config.get().visual.nodes.text.find(it => it == element.id)) {
             return Config.ELEMENT_TEXT;
-        } else if (Specification.visual.nodes.arrows.find(it => it == element.id)) {
+        } else if (Config.get().visual.nodes.arrows.find(it => it == element.id)) {
             return Config.ELEMENT_ARROW;
         } else if (element.tagName === 'path') {
             return Config.ELEMENT_PATH;

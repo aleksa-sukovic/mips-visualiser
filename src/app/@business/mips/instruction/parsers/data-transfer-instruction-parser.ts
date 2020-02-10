@@ -3,7 +3,7 @@ import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { Register } from '../../register/models/register';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
 import { RegisterFactory } from '../../register/factories/register-factory';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 export class DataTransferInstructionParser extends InstructionParser
 {
@@ -28,7 +28,7 @@ export class DataTransferInstructionParser extends InstructionParser
 
     protected register (value: string): Register
     {
-        const registers = Specification.registers.map(it => RegisterFactory.fromSpecification(it));
+        const registers = Config.get().registers.map(it => RegisterFactory.fromSpecification(it));
         const register = registers.find(it => it.hasAlias(value));
 
         if (!register) {

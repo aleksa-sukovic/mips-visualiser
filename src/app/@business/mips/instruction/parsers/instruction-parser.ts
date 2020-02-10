@@ -1,5 +1,5 @@
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 export abstract class InstructionParser
 {
@@ -15,7 +15,7 @@ export abstract class InstructionParser
 
     protected instruction (value: string): { alias: string, opcode: string, funct: string, type: string, clocks: string[] }
     {
-        for (const instruction of Specification.instructions) {
+        for (const instruction of Config.get().instructions) {
             if (value.startsWith(instruction.alias + ' ')) {
                 return instruction;
             }

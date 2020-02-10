@@ -9,7 +9,7 @@ import { Clock6 } from '../6/clock-6';
 import { Clock8 } from '../8/clock-8';
 import { Clock9 } from '../9/clock-9';
 import { Clock10 } from '../10/clock-10';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 export class ClockFactory
 {
@@ -17,11 +17,11 @@ export class ClockFactory
     {
         switch (id) {
             case 'clock_1':
-                return new Clock1(Specification.word_length);
+                return new Clock1(Config.get().word_length);
             case 'clock_2':
-                return new Clock2(Specification.word_length);
+                return new Clock2(Config.get().word_length);
             case 'clock_3':
-                return new Clock3(Specification.word_length);
+                return new Clock3(Config.get().word_length);
             case 'clock_4':
                 return new Clock4();
             case 'clock_5':

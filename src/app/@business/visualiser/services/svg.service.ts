@@ -20,10 +20,10 @@ protected _emphasizedIds: any[] = [];
         const clockConfig = Config.clockConfig(clock);
 
         // Reduce opacity of all elements.
-        Anime({ targets: this._elements, opacity: Specification.visual.inactiveOpacity });
+        Anime({ targets: this._elements, opacity: Config.get().visual.inactiveOpacity });
 
         // Fade in focused elements.
-        Anime({ targets: this.findElements(clockConfig.focus), keyframes: Specification.visual.opacitySteps.reverse(), duration: Specification.visual.animationDuration });
+        Anime({ targets: this.findElements(clockConfig.focus), keyframes: Config.get().visual.opacitySteps.reverse(), duration: Config.get().visual.animationDuration });
     }
 
     public mouseMove ($event): void
@@ -91,7 +91,7 @@ protected _emphasizedIds: any[] = [];
         this._activeClock = new NullClock();
 
         // Fade in all elements
-        Anime({ targets: this._elements, duration: Specification.visual.animationDuration });
+        Anime({ targets: this._elements, duration: Config.get().visual.animationDuration });
     }
 
     protected findElements (ids: any[]): any[]

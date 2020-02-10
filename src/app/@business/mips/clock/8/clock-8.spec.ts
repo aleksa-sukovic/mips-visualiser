@@ -2,9 +2,8 @@ import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock8 } from './clock-8';
-import config from '../../library/config/config';
 import { Clock3 } from '../3/clock-3';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 describe('Clock 8', () => {
     let cpu: CPU = null;
@@ -26,12 +25,12 @@ describe('Clock 8', () => {
 
     it('writes data to calculated address', () => {
         const instr = InstructionFactory.fromSymbolic('sw $1, 128($2)');
-        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(Specification.word_length), new Clock8()]);
-        const writeAddress = encoder.binary(1000 + 128, Specification.word_length);
-        const writeValue = encoder.binary(111, Specification.word_length);
+        const spy = spyOnProperty(instr, 'clocks').and.returnValue([new Clock3(Config.get().word_length), new Clock8()]);
+        const writeAddress = encoder.binary(1000 + 128, Config.get().word_length);
+        const writeValue = encoder.binary(111, Config.get().word_length);
 
         cpu.register('$1').value = writeValue;
-        cpu.register('$2').value = encoder.binary(1000, Specification.word_length);
+        cpu.register('$2').value = encoder.binary(1000, Config.get().word_length);
 
         cpu.simulate(instr);
         cpu.execute();

@@ -1,7 +1,7 @@
 import { Instruction } from '../instruction';
 import { InstructionEncoder } from '../encoders/instruction-encoder';
 import { ClockFactory } from '../../clock/factories/clock-factory';
-import Specification from '../../library/specification';
+import Config from '../../library/config/config';
 
 export class InstructionFactory
 {
@@ -18,7 +18,7 @@ export class InstructionFactory
     public static fromBinary (binary: string): Instruction
     {
         const instruction = new Instruction(binary, []);
-        const instructionCfg = Specification.instructions.find(it => it.opcode === instruction.op);
+        const instructionCfg = Config.get().instructions.find(it => it.opcode === instruction.op);
 
         instruction.clocks = instructionCfg.clocks.map(it => ClockFactory.fromId(it));
         instruction.type = instructionCfg.type;
@@ -32,7 +32,7 @@ export class InstructionFactory
 
         switch (specification.type) {
             case 'R':
-                binary = specification.opcode + '00000000000000000000' + specification.funct;
+                binary = specification.opcode + '00000000000000000000' + Config.get().funct;
                 break;
             default:
                 binary = specification.opcode + '00000000000000000000000000';

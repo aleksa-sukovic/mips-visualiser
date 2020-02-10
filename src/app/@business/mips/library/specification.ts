@@ -787,6 +787,17 @@ const Specification = {
             tooltips: [
 
             ],
+        },
+        {
+            id: 'clock_3',
+            focus: [
+                '174', '170', '153', '152', '151', '116', '106', '105', '95', '93', '92', '87', '84', '83', '22', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background',
+                '21', '117', '81', '187', '169', '151', '148', '147', '123', '122', '95', '89', '78', '75', '190', '69', '62', '61', '59', '52', '51', '49', '38', '17', '3', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'Sign_Extend_background',
+                '186', '168', '37', '143', '32', 'ALU_Control_text', 'ALU_Control_background', 'Control_background', 'Control_text', 'Control_claim', 'Control_background',
+            ],
+            tooltips: [
+
+            ],
         }
     ],
 };

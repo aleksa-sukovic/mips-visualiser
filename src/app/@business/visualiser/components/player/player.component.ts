@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
 import { TooltipService } from '../../services/tooltip-service';
 import { CPUService } from '../../services/cpu.services';
@@ -18,7 +18,7 @@ export class PlayerComponent
     @Output() forward = new EventEmitter();
     @Output() animationChange = new EventEmitter();
 
-    private _animationSpeed = 1000;
+    public _animationSpeed = 1000;
 
     public constructor (
         private tooltipService: TooltipService,

@@ -1,0 +1,55 @@
+<tr *ngIf="!item.edit" (click)="handleEditClick(item)" class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner cursor-pointer">
+    <td class="px-4 text-center font-thin py-2 w-1/2">
+        {{ item.address }}
+    </td>
+    <td class="px-4 py-2 font-bold w-1/2 font-light text-center">
+        {{ item.value }}
+    </td>
+</tr>
+
+<form *ngIf="item.edit" #itemForm="ngForm" (ngSubmit)="handleFormSubmit(item)" >
+    <tr class="flex justify-center p-2 text-gray-500 bg-gray-400">
+        <!-- Address value column -->
+        <td class="font-bold w-1/2 bg-gray-400">
+            <input type="number"
+                   id="item_{{ item.id }}_address"
+                   name="item_{{ item.id }}"
+                   placeholder="Value"
+                   [(ngModel)]="item.editAddress"
+                   class="border w-full rounded mr-1 p-1 border-gray-500 outline-none"
+                   min="1"
+                   max="2000000"
+                   required>
+        </td>
+
+        <!-- Edit value column -->
+        <td class="font-bold w-1/2 bg-gray-400">
+            <input type="number"
+                   id="item_{{ item.id }}_value"
+                   name="item_{{ item.id }}_value"
+                   placeholder="Value"
+                   [(ngModel)]="item.editValue"
+                   class="border w-full rounded ml-1 p-1 border-gray-500 outline-none"
+                   max="2000000"
+                   required>
+        </td>
+    </tr>
+
+    <tr class="flex p-2 bg-gray-400">
+        <td class="w-full flex flex-row justify-end bg-gray-400" colspan="2">
+            <span class="inline-block mr-2 text-green-600 hover:text-green-800 cursor-pointer" (click)="handleFormSubmit(item)">
+                Confirm
+                <fa-icon [icon]="faCheck"></fa-icon>
+            </span>
+
+            <span class="inline-block text-red-600 hover:text-red-800 cursor-pointer" (click)="handleItemDelete(item)">
+                Delete
+                <fa-icon [icon]="faTrash"></fa-icon>
+            </span>
+        </td>
+    </tr>
+
+    <!-- Submit button -->
+    <button type="submit" class="hidden"></button>
+</form>
+

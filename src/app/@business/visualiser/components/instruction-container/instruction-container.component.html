@@ -1,0 +1,35 @@
+<div class="h-full p-2 border bg-gray-200 flex flex-col items-stretch"  (mousemove)="handleMouseMove($event)">
+    <p class="text-2xl p-3 pb-0 text-gray-900">Instruction editing</p>
+
+    <form #instructionForm="ngForm" (ngSubmit)="handleFormSubmit()" class="p-4 pt-1 flex flex-col flex-grow items-stretch">
+        <p class="text-gray-600 mb-3">Instructions can use both registers and RAM</p>
+
+        <!-- Input -->
+        <input type="text"
+               id="instruction"
+               name="instruction"
+               placeholder="Enter instruction"
+               [(ngModel)]="instructionText"
+               [ngClass]="{ 'border-red-500': !instructionForm.valid && !instructionForm.pristine }"
+               class="border rounded p-2 w-full border-gray-500 outline-none"
+               required>
+
+        <!-- Manual -->
+        <div class="mt-3 text-gray-500 flex-grow">
+            <span class="text-gray-600">Available instructions (hover for details):</span>
+
+            <ul class="list-disc ml-10 mt-1 text-gray-600">
+                <li *ngFor="let instruction of availableInstructions" class="text-blue-900 cursor-pointer font-bold hover:bg-gray-300" id="instruction_{{ instruction.alias }}">
+                    {{ instruction.alias }}
+                </li>
+            </ul>
+
+            <span class="mt-2 inline-block">Make sure you spell check your instructions.</span>
+        </div>
+
+        <!-- Load button -->
+        <div class="text-center mt-3">
+            <button type="submit" class="block w-full px-2 py-1 bg-green-500 flex-grow rounded text-white hover:bg-green-600 hover:text-green-900">Load</button>
+        </div>
+    </form>
+</div>

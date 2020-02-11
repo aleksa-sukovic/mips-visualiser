@@ -1,0 +1,36 @@
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+    - '12'
+
+addons:
+    chrome: stable
+
+cache:
+    directories:
+        - ./node_modules
+
+install:
+    - npm install
+
+jobs:
+    include:
+        - stage: test
+          name: "Run unit tests"
+          script: npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+        - stage: deploy
+          name: "Deploy to GitHub Pages"
+          script: npm run build -- --prod=true
+          deploy:
+              provider: pages
+              skip_cleanup: true
+              github_token: $GITHUB_TOKEN
+              keep_history: true
+
+stages:
+    - test
+    - name: deploy
+      if: branch = master
+

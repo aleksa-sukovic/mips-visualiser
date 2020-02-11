@@ -27,6 +27,7 @@ jobs:
               provider: pages
               skip_cleanup: true
               github_token: $GITHUB_TOKEN
+              local_dir: dist/mips-visualiser
               keep_history: true
 
 stages:

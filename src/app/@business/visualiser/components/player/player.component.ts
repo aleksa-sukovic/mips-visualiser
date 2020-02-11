@@ -41,23 +41,11 @@ export class PlayerComponent
 
     public handleExecuteClick ()
     {
-        if (!this.cpuService.loaded) {
-            this.toastrService.warning('Please load instruction.');
-
-            return;
-        }
-
         this.simulate.emit();
     }
 
     public handleForwardClick ()
     {
-        if (!this.cpuService.loaded) {
-            this.toastrService.warning('Please load instruction.');
-
-            return;
-        }
-
         this.forward.emit();
     }
 }

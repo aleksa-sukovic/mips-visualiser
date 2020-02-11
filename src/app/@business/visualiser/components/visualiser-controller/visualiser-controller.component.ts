@@ -29,6 +29,8 @@ export class VisualiserControllerComponent
     {
         try {
             this.cpuService.load(instruction);
+            this.registersService.refreshRegisters();
+            this.memoryService.refreshMemory();
             this.toastrService.success('Instruction loaded');
             this.svgService.reset();
             this.scrollTo('MIPS');
@@ -39,6 +41,12 @@ export class VisualiserControllerComponent
 
     public handleSimulateClick ()
     {
+        if (!this.cpuService.loaded) {
+            this.toastrService.warning('Please load instruction.');
+            this.scrollTo('HEADER');
+            return;
+        }
+
         this.handleForwardClick();
         this._interval = setInterval(() => this.handleForwardClick(), this._intervalSpeed);
     }
@@ -53,11 +61,20 @@ export class VisualiserControllerComponent
 
     public handleForwardClick ()
     {
+        // Check if instruction is loaded
+        if (!this.cpuService.loaded) {
+            this.toastrService.warning('Please load instruction.');
+            this.scrollTo('HEADER');
+            return;
+        }
+
+        // Execute next clock
         this.cpuService.next();
         this.registersService.refreshRegisters();
         this.memoryService.refreshMemory();
         this.svgService.visualiseClock(this.cpuService.clock);
 
+        // Cleanup instruction execution
         if (!this.cpuService.executing) {
             if (this._interval) clearInterval(this._interval);
 
@@ -68,7 +85,7 @@ export class VisualiserControllerComponent
     public handleAnimationSpeedChange (speed): void
     {
         this.svgService.animationDuration = speed;
-        this._intervalSpeed = speed;
+        this._intervalSpeed = speed * 2;
     }
 
     protected scrollTo (id: string): void

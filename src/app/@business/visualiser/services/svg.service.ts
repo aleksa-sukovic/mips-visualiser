@@ -34,8 +34,8 @@ export class SvgService
         this.deEmphasize(this.findElements(this._emphasizedIds));
 
         if (tooltip) {
-            this.emphasize(this.findElements(tooltip.ids));
-            this._emphasizedIds = tooltip.ids;
+            this.emphasize(this.findElements(tooltip.ids.concat(tooltip.additional)));
+            this._emphasizedIds = tooltip.ids.concat(tooltip.additional);
         }
     }
 

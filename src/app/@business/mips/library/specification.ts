@@ -892,10 +892,79 @@ const Specification = {
         {
             id: 'clock_2',
             focus: [
-                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 'Control_op_text', 170, 174, 140, 91, 13, 128, 139, 127, 33, 18, 12, 104, 22, 116, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelB_background', 'ALUSelB_text', 21, 117, 168, 186, 'ALU_Control_background', 'ALU_Control_text', 37, 'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143, 167, 173, 'PC_text', 'PC_background', 11, 23, 25, 31, 115, 141, 'Target_text', 'Target_background', 'instruction_background', 'instruction_label', 'instruction_25_0_label_text', 'instruction_25_0_label_dot', 'instruction_31_26_label_text', 'instruction_31_26_label_dot', 158, 13, 34, 102, 95, 151, 152, 84, 83, 90, 107, '154', '153', '125', '109', '108', '94', '82', '74', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', '186', '148', '147', '123', '121', '119', '89', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background', 87, 93, 155, 106, 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', '142', '114', '88', '86', '85', '48', '47', '46', '45', '30', '29', '24', '19', 'SHL_2_x2_text_1', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1',
+                'Control_background', 'Control_text', 'Control_claim', 'Control_background', 'Control_op_text', 170, 174, 140, 91, 13, 128, 139, 127, 33, 18, 12, 104, 22, 116, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelB_background', 'ALUSelB_text', 21, 117, 168, 186, 'ALU_Control_background', 'ALU_Control_text', 37, 'ALU_background', 'ALU_text', 'ALU_result_label_text', 'ALU_result_label_dot', 32, 143, 167, 173, 'PC_text', 'PC_background', 11, 23, 25, 31, 115, 141, 'Target_text', 'Target_background', 'instruction_background', 'instruction_label', 'instruction_25_0_label_text', 'instruction_25_0_label_dot', 'instruction_31_26_label_text', 'instruction_31_26_label_dot', 158, 13, 34, 102, 95, 151, 152, 84, 83, 90, 107, '154', '153', '109', '108', '94', '74', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', '186', '148', '147', '123', '121', '119', '89', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background', 87, 93, 155, 106, 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', '142', '114', '88', '86', '85', '48', '47', '46', '45', '30', '29', '24', '19', 'SHL_2_x2_text_1', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1', 79, 80, 81, 'PCSource_1_text', 'PCSource_1_dot', 27, 113,
             ],
             tooltips: [
-
+                {
+                    ids: ['140', '139', '128', '127', '104', '91', '33', '18', '13', '12', 'Control_dot', 'PC_background', 'PC_text'],
+                    additional: [],
+                    title: '<div class="text-center">PC</div>',
+                    description: '<div>Current value of PC (incremented by 4 in first clock) is brought as first argument of ALU.</div>',
+                    value: (cpu: CPU) => cpu.register('$pc').value,
+                },
+                {
+                    ids: ['21', '117', '151', '148', '147', '123', '121', '119', '104', '95', '89', '78', '75', '190', '69', '62', '61', '60', '59', '53', '52', '51', '49', '36', '4', 'Sign_Extend_text', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_3_text', 'ALUSelB_3_dot', 'SHL_2_x2_text', 'SHL_2_x2_background', 'Sign_Extend_background'],
+                    additional: ['instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
+                    title: '<div class="text-center">Instruction offset</div>',
+                    description: '<div>16-bit offset read from instruction is brought as second ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.instruction.offset,
+                },
+                {
+                    ids: [143, 141, 115, 32, 31, 25, 23, 11, 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'Target_background', 'Target_text', 'ALU_background'],
+                    additional: [],
+                    title: '<div class="text-center">ALU</div>',
+                    description: '<div>In second clock, ALU is used to calculate the target branch address. Address is calculated by adding 16-bit offset read from instruction to current value of the PC register.</div>',
+                    value: (cpu: CPU) => cpu.instruction.offset,
+                },
+                {
+                    ids: ['174', '170', '116', '22', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_0_text', 'ALUSelA_0_dot'],
+                    additional: ['140', '139', '128', '127', '104', '91', '33', '18', '13', '12', 'PC_background', 'PC_text'],
+                    title: '<div class="text-center">ALUSelA</div>',
+                    description: '<div>Selects PC source as first ALU operand.</div>',
+                    value: (cpu: CPU) => cpu.register('$pc').value,
+                },
+                {
+                    ids: ['instruction_background', 'instruction_label', 'instruction_25_0_label_dot', 'instruction_25_0_label_text', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', '158', '119', '155', '154', '153', '152', '151', '148', '147', '142', '122', '121', '119', '114', '109', '107', '106', '102', '95', '94', '93', '90', '89', '88', '87', '86', '85', '84', '83', '77', '75', '74', '190', '69', '62', '61', '60', '59', '57', '53', '52', '51', '49', '47', '45', '44', '38', '36', '34', '30', '29', '24', '19', '17', '16', '15', '14', '13', '12', '11', '4', '3', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', 'Sign_Extend_text', 'SHL_2_x2_text', 'SHL_2_x2_text_1', 'SHL_2_x2_background', 'Sign_Extend_background', 'SHL_2_x2_background_1', '108'],
+                    additional: [],
+                    title: '<div class="text-center">Instruction loading</div>',
+                    description: '<div>Instruction is parsed and appropriate portions of it are distributed across the CPU.</div>',
+                    value: (cpu: CPU) => cpu.instruction.binary,
+                },
+                {
+                    ids: ['registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2'],
+                    additional: ['155', '153', '152', '151', '109', '106', '95', '94', '93', '84', '83', '87', '154'],
+                    title: '<div class="text-center">Registers</div>',
+                    description: '<div>Register pointers are initialized from instruction.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: [167, 173],
+                    additional: ['Target_text', 'Target_background'],
+                    title: '<div class="text-center">TargetWrite</div>',
+                    description: '<div>Control signal allowing for write into $target register to happen.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['186', '168', '37', 'ALU_Control_text', 'ALU_Control_background'],
+                    additional: [],
+                    title: '<div class="text-center">ALU Control signal</div>',
+                    description: '<div>Instructs ALU to do addition.</div>',
+                    value: (cpu: CPU) => cpu.alu.op,
+                },
+                {
+                    ids: ['PCSource_background', 'PCSource_text', 'PCSource_0_text', 'PCSource_0_dot', 'PCSource_2_text', 'PCSource_2_dot', 'PCSource_1_text', 'PCSource_1_dot'],
+                    additional: [],
+                    title: '<div class="text-center">PCSource</div>',
+                    description: '<div>Determines what value will be sent to the PC register. In this clock, the possible jump address is brought at second input and branch address is brought first input.</div>',
+                    value: (cpu: CPU) => cpu.alu.op,
+                },
+                {
+                    ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    additional: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    title: '<div class="text-center">Control Unit</div>',
+                    description: '<div>Sends out control signals.</div>',
+                    value: (cpu: CPU) => null,
+                },
             ],
         },
         {

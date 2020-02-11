@@ -29,6 +29,7 @@ jobs:
               github_token: $GITHUB_TOKEN
               local_dir: dist/mips-visualiser
               keep_history: true
+              committer_from_gh: true
 
 stages:
     - test

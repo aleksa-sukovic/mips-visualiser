@@ -1041,10 +1041,79 @@ const Specification = {
         {
             id: 'clock_4',
             focus: [
-                '187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '144', '118', '117', '116', '106', '105', '95', '93', '92', '87', '84', '83', '55', '40', '39', '22', '21', '1', 'registers_background', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', '151', '148', '95', '89', '77', '190', '69', '57', '44', '37', '16', '15', 'registers_label', '154', '109', '94', '80', 'read_register_2_label_dot', 'read_register_2_label_text'
+                '32', '143', '187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '144', '118', '117', '116', '106', '105', '95', '93', '92', '87', '84', '83', '55', '40', '39', '22', '21', '1', 'registers_background', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', '151', '148', '95', '89', '77', '190', '69', '57', '44', '37', '16', '15', 'registers_label', '154', '109', '94', '80', 'read_register_2_label_dot', 'read_register_2_label_text'
             ],
             tooltips: [
-
+                {
+                    ids: ['116', '92', '22', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
+                    additional: ['155', '153', '152', '151', '106', '95', '93', '87', '84', '83', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', '116'],
+                    title: '<div class="text-center">ALUSelA/div>',
+                    description: '<div>Value of instruction specified register (RS) is brought as first ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.register(cpu.instruction.rs).value,
+                },
+                {
+                    ids: ['144', '118', '117', '55', '40', '39', '21', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot'],
+                    additional: ['1', '154', '153', '152', '151', '109', '95', '94', '84', '83', 'registers_background', 'registers_label', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
+                    title: '<div class="text-center">ALUSelB</div>',
+                    description: '<div>Value of instruction specified register (RT) is brought as first ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.register(cpu.instruction.rt).value,
+                },
+                {
+                    ids: [169, 187],
+                    additional: ['144', '118', '117', '55', '40', '39', '21', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot'],
+                    title: '<div class="text-center">ALUSelB/div>',
+                    description: '<div>Chooses value of instruction specified register (RT) as second ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.control.aluSelB,
+                },
+                {
+                    ids: [170, 174],
+                    additional: ['116', '92', '22', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
+                    title: '<div class="text-center">ALUSelA/div>',
+                    description: '<div>Chooses value of instruction specified register (RS) as first ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.control.aluSelA,
+                },
+                {
+                    ids: ['87', '155', '154', '153', '152', '151', '109', '106', '95', '94', '93', '84', '83', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2'],
+                    additional: ['instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
+                    title: '<div class="text-center">Registers</div>',
+                    description: '<div>Values of instruction specified registers are brought as ALU arguments.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['instruction_background', 'instruction_label', 'instruction_25_0_label_dot', 'instruction_25_0_label_text', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
+                    additional: ['155', '154', '153', '152', '151', '109', '106', '95', '94', '93', '87', '84', '83', '106', '148', '89', '190', '69', '57', '44', '37', '16', '15', 'ALU_Control_text', 'ALU_Control_background'],
+                    title: '<div class="text-center">Registers</div>',
+                    description: '<div>Values of instruction specified registers and funct field are read.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['151', '148', '95', '89', '190', '69', '57', '44', '37', '16', '15', 'ALU_Control_text', 'ALU_Control_background'],
+                    additional: [],
+                    title: '<div class="text-center">ALU Operation</div>',
+                    description: '<div>In third clock of R-type instruction, ALU is being told to use "funct" field read from instruction. This means that the instruction itself is responsible for determining what operation ALU will do on specified arguments.</div>',
+                    value: (cpu: CPU) => cpu.instruction.funct,
+                },
+                {
+                    ids: [168, 186],
+                    additional: ['151', '148', '95', '89', '190', '69', '57', '44', '37', '16', '15', 'ALU_Control_text', 'ALU_Control_background'],
+                    title: '<div class="text-center">ALUOp</div>',
+                    description: '<div>Tells the ALU to use "funct" field from instruction.</div>',
+                    value: (cpu: CPU) => cpu.control.aluOp,
+                },
+                {
+                    ids: ['143', '32', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background'],
+                    additional: ['144', '118', '117', '116', '105', '92', '55', '40', '39', '22', '21', 'registers_background', 'registers_label', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALUSelA_background', '186', '168', '37', 'ALU_Control_text', 'ALU_Control_background'],
+                    title: '<div class="text-center">ALU</div>',
+                    description: '<div>In third clock of R-type instructions, ALU does the requested operation on specified arguments (RS and RT registers). Also with the help of ALUOp control signal, ALU is being told to use the instruction\'s "funct" field to determine the operation to execute.</div>',
+                    value: (cpu: CPU) => cpu.alu.result,
+                },
+                {
+                    ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    additional: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    title: '<div class="text-center">Control Unit</div>',
+                    description: '<div>Sends out control signals.</div>',
+                    value: (cpu: CPU) => null,
+                },
             ],
         },
         {

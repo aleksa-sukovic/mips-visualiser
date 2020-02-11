@@ -51,10 +51,11 @@ When using MIPS simulator, these are the steps you could follow:
     1. **add**
     2. **addi**
     3. **sub**
-    4. **beq**
-    5. **bne**
-    6. **lw**
-    7. **sw**
+    4. **slt**
+    5. **beq**
+    6. **bne**
+    7. **lw**
+    8. **sw**
     
 - Instructions modify registers and memory in real time, so be sure to check out changed values after execution.
 

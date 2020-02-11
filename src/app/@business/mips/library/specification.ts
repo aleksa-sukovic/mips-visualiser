@@ -1,6 +1,5 @@
 import { CPU } from '../cpu/cpu';
 import { BinaryEncoder } from './binary-encoder/binary-encoder';
-import { encode } from 'punycode';
 
 const encoder = new BinaryEncoder();
 

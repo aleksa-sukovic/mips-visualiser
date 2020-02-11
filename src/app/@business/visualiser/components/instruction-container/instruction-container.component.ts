@@ -11,6 +11,7 @@ export class InstructionContainerComponent
 {
     public availableInstructions = [
         { alias: 'add', example: 'add $1, $2, $3' },
+        { alias: 'addi', example: 'addi $1, $2, 250' },
         { alias: 'sub', example: 'sub $1, $2, $3' },
         { alias: 'beq', example: 'beq $1, $2, 128' },
         { alias: 'bne', example: 'bne $2, $3, 256' },

@@ -78,18 +78,6 @@ const Specification = {
             ],
         },
         {
-            alias: 'addi',
-            opcode: '001000',
-            funct: '',
-            type: 'I',
-            clocks: [
-                'clock_1',
-                'clock_2',
-                'clock_3',
-                'clock_9',
-            ],
-        },
-        {
             alias: 'sub',
             opcode: '000000',
             funct: '100010',
@@ -102,14 +90,27 @@ const Specification = {
             ],
         },
         {
-            alias: 'j',
-            opcode: '000010',
-            funct: '',
-            type: 'J',
+            alias: 'slt',
+            opcode: '000000',
+            funct: '101010',
+            type: 'R',
             clocks: [
                 'clock_1',
                 'clock_2',
-                'clock_6',
+                'clock_4',
+                'clock_9',
+            ],
+        },
+        {
+            alias: 'addi',
+            opcode: '001000',
+            funct: '',
+            type: 'I',
+            clocks: [
+                'clock_1',
+                'clock_2',
+                'clock_3',
+                'clock_9',
             ],
         },
         {
@@ -157,6 +158,17 @@ const Specification = {
                 'clock_2',
                 'clock_3',
                 'clock_8',
+            ],
+        },
+        {
+            alias: 'j',
+            opcode: '000010',
+            funct: '',
+            type: 'J',
+            clocks: [
+                'clock_1',
+                'clock_2',
+                'clock_6',
             ],
         },
     ],
@@ -469,6 +481,13 @@ const Specification = {
             additional: [],
             title: '<div class="text-gray-900">LW <br><span class="text-gray-500 text-sm font-normal italic">sw $1, 256($2)</span></div>',
             description: '<div>Stores the contents of $1 register at specified address.</div>',
+            value: (cpu: CPU) => null,
+        },
+        {
+            ids: ['instruction_slt'],
+            additional: [],
+            title: '<div class="text-gray-900">SLT <br><span class="text-gray-500 text-sm font-normal italic">slt $1, $2, $3</span></div>',
+            description: '<div>Sets register $1 to \'1\' if $2 < $3 or to \'0\' otherwise.</div>',
             value: (cpu: CPU) => null,
         },
         // Player

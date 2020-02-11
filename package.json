@@ -11,7 +11,7 @@
     },
     "private": true,
     "dependencies": {
-        "@angular/animations": "~8.2.14",
+        "@angular/animations": "^8.2.14",
         "@angular/common": "~8.2.14",
         "@angular/compiler": "~8.2.14",
         "@angular/core": "~8.2.14",
@@ -20,7 +20,12 @@
         "@angular/platform-browser-dynamic": "~8.2.14",
         "@angular/router": "~8.2.14",
         "@babel/polyfill": "^7.7.0",
+        "@fortawesome/angular-fontawesome": "^0.5.0",
+        "@fortawesome/fontawesome-svg-core": "^1.2.27",
+        "@fortawesome/free-solid-svg-icons": "^5.12.1",
+        "animejs": "^3.1.0",
         "core-js": "^2.5.4",
+        "ngx-toastr": "11.3.3",
         "rxjs": "~6.5.4",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"
@@ -46,7 +51,7 @@
         "postcss-loader": "^3.0.0",
         "postcss-scss": "^2.0.0",
         "protractor": "~5.4.0",
-        "tailwindcss": "^1.1.4",
+        "tailwindcss": "^1.2.0",
         "ts-node": "~7.0.0",
         "tslint": "~5.11.0",
         "typescript": "~3.5.3"

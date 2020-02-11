@@ -1,0 +1,68 @@
+<div class="bg-gray-200 border border-b-0" (mousemove)="handleMouseMove($event)">
+    <!-- Title -->
+    <p class="text-2xl p-3 pb-0 text-gray-900">Interact with processor</p>
+
+    <!-- Description -->
+    <div class="p-4 pt-1">
+        <p class="text-gray-600">
+            Examine the CPU in different cycles of instruction execution.
+            <br>
+            Hover over any element to see details.
+        </p>
+    </div>
+
+    <div class="flex flex-row justify-between items-stretch p-3 bg-gray-300">
+        <!-- Player controls -->
+        <div>
+            <ul>
+                <li class="mb-2 text-orange-800 inline hover:text-red-900 cursor-pointer" id="player_execute" (click)="handleExecuteClick()">
+                    <fa-icon [icon]="faPlay" size="1x"></fa-icon>
+                    Execute instruction
+                </li>
+
+                <li class="text-orange-800 inline ml-3 hover:text-red-900 cursor-pointer" id="player_forward" (click)="handleForwardClick()">
+                    <fa-icon [icon]="faForward" size="1x" class=""></fa-icon>
+                    Execute next clock
+                    <span *ngIf="cpuService.cpu.instruction && cpuService.clockIndex >= 0">({{ cpuService.clockIndex + 1 }}/{{ cpuService.cpu.instruction.clocks.length }})</span>
+                </li>
+
+                <li class="text-orange-800 inline ml-3 hover:text-red-900 cursor-pointer" id="animation_duration">
+                    <label>
+                        <input (change)="handleAnimationSpeedChange(speed)" #speed type="range" min="0.5" max="10" step="0.5" value="1" class="slider">
+                        Animation speed ({{ _animationSpeed / 1000 }}s)
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Instruction information -->
+        <div class="flex-grow flex flex-row justify-end" *ngIf="cpuService.loaded && cpuService.instruction">
+            <span class="text-gray-600 mr-3">
+                Loaded:
+                <span class="text-gray-900">{{ cpuService.instruction.symbolic }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Type:
+                <span class="text-gray-900">{{ cpuService.instruction.type }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Clocks:
+                <span class="text-gray-900">{{ cpuService.instruction.clocks.length }}</span>
+            </span>
+
+            <span class="text-gray-600 mr-3">
+                Executed:
+                <span class="text-gray-900">{{ cpuService.executedClocks }}</span>
+            </span>
+        </div>
+
+        <!-- No instruction text -->
+        <div class="flex-grow flex flex-row justify-end" *ngIf="!cpuService.loaded || !cpuService.instruction">
+            <span class="text-gray-600 mr-3">
+                Instruction not loaded
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="h-full p-2 border bg-gray-200 flex flex-col items-stretch">
+    <p class="text-2xl p-3 pb-0 text-gray-900">Memory editing</p>
+
+    <div class="p-4 pt-1 flex-grow flex flex-col items-stretch">
+        <p class="text-gray-600 mb-3">Create, modify and delete values from RAM memory</p>
+
+        <table class="table-fixed overflow-y-scroll inline-block border rounded w-full" *ngIf="memory.length" style="max-height: 50vh">
+            <thead class="flex flex-col">
+            <tr class="flex flex-row justify-around">
+                <th class="w-1/2 px-4 py-2 font-normal text-center bg-orange-700 text-white">Address</th>
+                <th class="w-1/2 px-4 py-2 font-normal text-center bg-orange-700 text-white">Value</th>
+            </tr>
+            </thead>
+            <tbody class="flex flex-col pt-2">
+            <app-memory-item [item]="item" (submit)="handleMemoryEdit($event)" (delete)="handleMemoryItemDelete($event)"
+                             *ngFor="let item of memory"></app-memory-item>
+            </tbody>
+        </table>
+
+        <div *ngIf="!memory.length" class="p-2 text-center text-gray-500 text-sm w-full bg-gray-300">
+            No custom memory values defined.
+        </div>
+
+        <div class="flex flex-row p-0 mt-3 flex-grow items-end">
+            <button (click)="handleAddButtonClick()" class="block px-2 py-1 bg-gray-800 rounded w-full text-white hover:bg-gray-900 hover:text-gray-500" style="height: 32px">
+                <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>

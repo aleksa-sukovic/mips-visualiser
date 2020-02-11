@@ -25,7 +25,7 @@ module.exports = function (config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['ChromeHeadless'],
+        browsers: ['ChromeHeadless', 'ChromeHeadlessNoSandbox'],
         customLaunchers: {
             'ChromeHeadless': {
                 base: 'Chrome',
@@ -34,7 +34,11 @@ module.exports = function (config) {
                     '--headless',
                     '--disable-gpu',
                     '--remote-debugging-port=9222'
-                ]
+                ],
+            },
+            'ChromeHeadlessNoSandbox': {
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox'],
             }
         },
         singleRun: false,

@@ -59,7 +59,8 @@
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
                                 }
-                            ]
+                            ],
+                            "baseHref": "https://aleksa-sukovic.github.io/mips-visualiser/"
                         }
                     }
                 },

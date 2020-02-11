@@ -43,6 +43,7 @@ export class TooltipService
     {
         // constraint tooltip [left size]
         mouseX = mouseX - this.width / 2 > 0 ? mouseX : this.width / 2;
+        mouseX = mouseX + this.width > screen.availWidth ? screen.availWidth - this.width : mouseX;
 
         this.tooltipTitle = title;
         this.tooltipDescription = description;

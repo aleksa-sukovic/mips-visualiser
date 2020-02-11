@@ -1,0 +1,53 @@
+<tr *ngIf="!register.edit && register.visible" (mousemove)="handleMouseMove($event)" (click)="handleEditClick(register)"  class="flex flex-row mb-2 bg-white border-b border-gray-300 text-gray-800 hover:shadow-md shadow-inner cursor-pointer">
+    <td class="px-4 text-center font-thin py-2 w-1/2">
+        <span class="underline" id="register_{{ register.id }}">
+            {{ register.alias }}
+        </span>
+    </td>
+
+    <td class="px-4 py-2 w-1/2 flex font-light flex-row justify-between">
+        <!-- Empty element to keep value centered -->
+        <span></span>
+
+        <!-- Register value -->
+        <span class="font-bold">{{ register.value }}</span>
+
+        <!-- Edit icon -->
+        <fa-icon [icon]="faEdit" *ngIf="register.editable" class="text-orange-700 "></fa-icon>
+        <span *ngIf="!register.editable" style="width: 16px"></span>
+    </td>
+</tr>
+
+<tr *ngIf="register.edit && register.visible" class="flex flex-row">
+    <td colspan="2" class="border border-b-0 p-2 pb-0 font-bold w-full bg-gray-400">
+        <form (ngSubmit)="handleFormSubmit(register)" #registerForm="ngForm" *ngIf="register.edit">
+            <div class="flex flex-row">
+                <!-- Edit input -->
+                <input type="number"
+                       id="register_{{ register.alias }}"
+                       name="register_{{ register.alias }}"
+                       placeholder="Value"
+                       [(ngModel)]="register.editValue"
+                       [ngClass]="{ 'border-red-500': !registerForm.valid && !registerForm.pristine }"
+                       class="border rounded p-1 w-full border-gray-500 outline-none box-content"
+                       min="-2000000"
+                       max="2000000"
+                       required>
+            </div>
+        </form>
+    </td>
+</tr>
+
+<tr *ngIf="register.edit && register.visible" class="flex p-2 mb-2 bg-gray-400">
+    <td class="w-full flex flex-row justify-end bg-gray-400" colspan="2">
+        <span class="inline-block mr-2 text-green-700 hover:text-green-900 cursor-pointer" (click)="handleFormSubmit(register)">
+            Confirm
+            <fa-icon [icon]="faCheck"></fa-icon>
+        </span>
+
+        <span class="inline-block text-gray-800 hover:text-gray-900 cursor-pointer" (click)="handleCloseClick($event, register)">
+            Cancel
+            <fa-icon [icon]="faClose"></fa-icon>
+        </span>
+    </td>
+</tr>

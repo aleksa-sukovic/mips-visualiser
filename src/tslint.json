@@ -12,6 +12,19 @@
             "element",
             "app",
             "kebab-case"
-        ]
+        ],
+        "variable-name": {
+            "options": [
+                "ban-keywords",
+                "check-format",
+                "allow-leading-underscore",
+                "allow-pascal-case"
+            ]
+        },
+        "no-trailing-whitespace": false,
+        "prefer-for-of": false,
+        "max-line-length": false,
+        "curly": false,
+        "triple-equals": false
     }
 }

@@ -1,0 +1,27 @@
+<div class="h-full p-2 border border-l bg-gray-200 flex flex-col items-stretch">
+    <p class="text-2xl p-3 pb-0 text-gray-900">Manipulate individual registers</p>
+
+    <div class="p-4 pt-1 flex-grow flex flex-col items-stretch">
+        <p class="mb-3 block text-gray-600">
+            Update values of individual registers
+        </p>
+        <table class="table-fixed overflow-auto inline-block w-full" style="height: 40vh">
+            <thead class="flex flex-col">
+            <tr class="flex flex-row justify-around">
+                <th class="w-1/2 p-3 text-center font-normal text-white bg-orange-700 text-left">Aliases</th>
+                <th class="w-1/2 px-4 p-3 font-normal text-white bg-orange-700 text-center">Value</th>
+            </tr>
+            </thead>
+            <tbody class="flex flex-col pt-2">
+            <app-register-item *ngFor="let register of registers" [register]="register" (submit)="handleRegisterEdit($event)"></app-register-item>
+            </tbody>
+        </table>
+
+        <div class="flex flex-row p-0 mt-3 flex-grow items-end">
+            <button (click)="handleResetClick()" class="block px-2 py-1 bg-gray-800 rounded w-full text-white hover:bg-gray-900 hover:text-gray-500" style="height: 32px">
+                Reset
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -1340,10 +1340,58 @@ const Specification = {
         {
             id: 'clock_9',
             focus: [
-                '189', '188', '186', '184', '174', '171', '170', '165', '155', '153', '152', '151', '150', '148', '144', '143', '125', '124', '118', '117', '116', '110', '109', '107', '106', '105', '95', '94', '93', '92', '90', '89', '87', '84', '83', '82', '81', '80', '79', '78', '77', '73', '72', '71', '190', '68', '67', '69', '63', '57', '55', '44', '40', '39', '32', '22', '21', '16', '15', '1', 'RegDst_background', 'RegDst_text', 'RegDst_1_text', 'RegDst_1_dot', 'MemToReg_Background', 'MemToReg_text', 'MemToReg_0_text', 'MemToReg_0_dot', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'registers_background', '168',
+                '189', '188', '186', '184', '174', '171', '170', '165', '155', '153', '152', '151', '150', '148', '144', '143', '125', '124', '118', '117', '116', '110', '109', '107', '106', '105', '95', '94', '93', '92', '90', '89', '87', '84', '83', '82', '81', '80', '79', '78', '77', '73', '72', '71', '190', '68', '67', '69', '63', '57', '55', '44', '40', '39', '32', '22', '21', '16', '15', '1', 'RegDst_background', 'RegDst_text', 'RegDst_1_text', 'RegDst_1_dot', 'MemToReg_Background', 'MemToReg_text', 'MemToReg_0_text', 'MemToReg_0_dot', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Control_background', 'Control_claim', 'Control_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'registers_background', '168', '169', '187', '172',
             ],
             tooltips: [
-
+                {
+                    ids: ['187', '186', '174', '170', '169', '168', '155', '154', '153', '152', '151', '148', '144', '118', '117', '116', '109', '106', '105', '95', '94', '93', '92', '89', '87', '84', '83', '190', '69', '57', '55', '44', '40', '39', '37', '22', '21', '16', '15', '5', '1', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_label', 'instruction_25_0_label_dot', 'instruction_25_0_label_text', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'instruction_background', 'instruction_label', 'instruction_25_0_label_dot', 'instruction_25_0_label_text', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'ALUSelB_background', 'registers_background'],
+                    additional: [],
+                    title: '<div class="text-center">Preserving ALU result</div>',
+                    description: '<div>Entire state from third clock remains the same which means that ALU result to be address from which the word will be loaded.</div>',
+                    value: (cpu: CPU) => cpu.alu.result,
+                },
+                {
+                    ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    additional: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    title: '<div class="text-center">Control Unit</div>',
+                    description: '<div>Sends out control signals.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['125', '107', '90', '82', 'RegDst_background', 'RegDst_text', 'RegDst_0_text', 'RegDst_0_dot', 'RegDst_1_text', 'RegDst_1_dot', 151, 95, 84, 152],
+                    additional: ['registers_background'],
+                    title: '<div class="text-center">Write register</div>',
+                    description: '<div>Instruction specified write register RD.</div>',
+                    value: (cpu: CPU) => cpu.instruction.rd,
+                },
+                {
+                    ids: ['150', '143', '124', '110', '73', '72', '71', '68', '67', '63', '32', 'MemToReg_Background', 'MemToReg_text', 'MemToReg_0_text', 'MemToReg_0_dot', 'MemToReg_1_text', 'MemToReg_1_dot'],
+                    additional: ['registers_background'],
+                    title: '<div class="text-center">Write data</div>',
+                    description: '<div>Value to be written to destination register. What value? Value is ALU result of executing operation specified with "funct" instruction field on registers RT and RS in third clock.</div>',
+                    value: (cpu: CPU) => cpu.alu.result,
+                },
+                {
+                    ids: [171, 188],
+                    additional: ['registers_background'],
+                    title: '<div class="text-center">RegWrite</div>',
+                    description: '<div>Allows writing to destination register to happen.</div>',
+                    value: (cpu: CPU) => cpu.control.regWrite,
+                },
+                {
+                    ids: [172, 189],
+                    additional: ['RegDst_background'],
+                    title: '<div class="text-center">MemToReg</div>',
+                    description: '<div>Selects ALU result as data to be written to destination register.</div>',
+                    value: (cpu: CPU) => cpu.control.memToReg,
+                },
+                {
+                    ids: [165, 184],
+                    additional: ['MemToReg_Background'],
+                    title: '<div class="text-center">RegDst</div>',
+                    description: '<div>Selects instruction specified register RD as write register.</div>',
+                    value: (cpu: CPU) => cpu.control.regDst,
+                },
             ],
         },
         {

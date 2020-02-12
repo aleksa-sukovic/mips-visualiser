@@ -35,7 +35,7 @@ export class PlayerComponent
 
     public handleAnimationSpeedChange ($element): void
     {
-        this._animationSpeed = parseFloat($element.value) * 1000;
+        this._animationSpeed = parseFloat($element.value) * 1000 * 2;
         this.animationChange.emit(this._animationSpeed);
     }
 

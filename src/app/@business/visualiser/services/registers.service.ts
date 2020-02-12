@@ -24,7 +24,7 @@ export class RegistersService
 
     public updateRegister (id: string, value: string): void
     {
-        this._cpu.register(id).value = this._encoder.binary(parseInt(value, 10), Config.get().word_length);
+        this._cpu.register(id).value = this._encoder.binary(parseInt(value, 10) || 0, Config.get().word_length);
 
         this.refreshRegisters();
     }

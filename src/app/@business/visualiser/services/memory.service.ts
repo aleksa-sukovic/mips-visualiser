@@ -28,8 +28,8 @@ export class MemoryService
         this.deleteFromMemory(memoryItem.id);
 
         this._cpu.memory.set(
-            this._encoder.binary(parseInt(memoryItem.editAddress, 10), Config.get().word_length),
-            this._encoder.binary(parseInt(memoryItem.editValue, 10), Config.get().word_length)
+            this._encoder.binary(parseInt(memoryItem.editAddress, 10) || 0, Config.get().word_length),
+            this._encoder.binary(parseInt(memoryItem.editValue, 10) || 0, Config.get().word_length)
         );
 
         this.refreshMemory();

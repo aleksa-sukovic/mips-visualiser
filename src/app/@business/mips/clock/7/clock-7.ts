@@ -1,6 +1,7 @@
 import { Clock } from '../clock';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
+import Config from '../../library/config/config';
 
 export class Clock7  implements Clock
 {
@@ -31,6 +32,7 @@ export class Clock7  implements Clock
     protected readData (cpu: CPU): void
     {
         // Read data from address calculated in 'Clock3' to 'memData' register.
-        cpu.register('$memData').value = cpu.memory.get(cpu.alu.result);
+        cpu.register('$memData').value = cpu.memory.get(cpu.alu.result) ||
+            this._encoder.binary(0, Config.get().word_length);
     }
 }

@@ -18,7 +18,7 @@ export class PlayerComponent
     @Output() forward = new EventEmitter();
     @Output() animationChange = new EventEmitter();
 
-    public _animationSpeed = 1000;
+    public _animationSpeed = 500;
 
     public constructor (
         private tooltipService: TooltipService,

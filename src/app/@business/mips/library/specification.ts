@@ -1261,7 +1261,7 @@ const Specification = {
                     ids: ['187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '148', '147', '143', '123', '122', '117', '116', '106', '105', '95', '93', '92', '89', '87', '84', '83', '190', '69', '62', '61', '59', '52', '49', '38', '37', '32', '22', '21', '17', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background'],
                     additional: [],
                     title: '<div class="text-center">Preserving ALU result</div>',
-                    description: '<div>Entire state from third clock remains the same in order for ALU result to be address from which the word will be loaded.</div>',
+                    description: '<div>Entire state from third clock remains the same which means that ALU result to be address from which the word will be loaded.</div>',
                     value: (cpu: CPU) => cpu.alu.result,
                 },
                 {
@@ -1290,10 +1290,51 @@ const Specification = {
         {
             id: 'clock_8',
             focus: [
-                '186', '181', '174', '170', '168', '162', '157', '155', '152', '151', '150', '148', '147', '143', '133', '123', '122', '117', '116', '106', '105', '95', '93', '92', '89', '87', '84', '83', '78', '75', '190', '69', '63', '62', '61', '59', '52', '51', '49', '38', '37', '32', '22', '21', '17', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text', 'Sign_Extend_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background', 'Control_background', 'Control_claim', 'Control_text', '169', '187', '131', '101', '100', '65', '58', '39', '2', 'write_address_label_dot', 'write_address_label_text', 'write_data_label_dot_1', 'write_data_label_text_1', '56', '54', '1',
+                '186', '181', '174', '170', '168', '162', '157', '155', '152', '151', '150', '148', '147', '143', '133', '123', '122', '117', '116', '106', '105', '95', '93', '92', '89', '87', '84', '83', '78', '75', '190', '69', '63', '62', '61', '59', '52', '51', '49', '38', '37', '32', '22', '21', '17', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text', 'Sign_Extend_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background', 'Control_background', 'Control_claim', 'Control_text', '169', '187', '131', '101', '100', '65', '58', '39', '2', 'write_address_label_dot', 'write_address_label_text', 'write_data_label_dot_1', 'write_data_label_text_1', '56', '54', '1', '154', '109', '94', 'read_register_2_label_dot', 'read_register_2_label_text',
             ],
             tooltips: [
-
+                {
+                    ids: ['187', '186', '174', '170', '169', '168', '155', '153', '152', '151', '148', '147', '143', '123', '122', '117', '116', '106', '105', '95', '93', '92', '89', '87', '84', '83', '190', '69', '62', '61', '59', '52', '49', '38', '37', '32', '22', '21', '17', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_1_label_dot', 'read_data_1_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'write_register_label_dot', 'write_register_label_text_2', 'write_data_label_dot_2', 'write_data_label_text_2', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'Sign_Extend_text', 'ALUSelA_background', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_2_text', 'ALUSelB_2_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_Control_text', 'ALU_background', 'ALU_Control_background', 'Sign_Extend_background'],
+                    additional: [],
+                    title: '<div class="text-center">Preserving ALU result</div>',
+                    description: '<div>Entire state from third clock remains the same which means that ALU result to be address from which the word will be loaded.</div>',
+                    value: (cpu: CPU) => cpu.alu.result,
+                },
+                {
+                    ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    additional: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    title: '<div class="text-center">Control Unit</div>',
+                    description: '<div>Sends out control signals.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['154', '109', '100', '94', '65', '58', '56', '54', '39', '1', 'read_register_2_label_dot', 'read_register_2_label_text', 'write_data_label_dot_1', 'write_data_label_text_1'],
+                    additional: ['registers_background', 'registers_label', 'write_register_label_text_2'],
+                    title: '<div class="text-center">Write register</div>',
+                    description: '<div>Destination register, specified by instruction, which will be populated with value read from memory.</div>',
+                    value: (cpu: CPU) => cpu.instruction.rt,
+                },
+                {
+                    ids: ['157', '143', '133', '132', '63', '150'],
+                    additional: [],
+                    title: '<div class="text-center">Write address</div>',
+                    description: '<div>Address computed in third clock by adding 16-bit offset to base register (RS).</div>',
+                    value: (cpu: CPU) => cpu.alu.result,
+                },
+                {
+                    ids: ['memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_text', 'write_address_label_dot', 'write_address_label_text', 'write_data_label_dot_1', 'write_data_label_text_1'],
+                    additional: ['157', '150', '143', '133', '131', '101', '100', '65', '63', '58', '56', '54', '39', '2', '1'],
+                    title: '<div class="text-center">Memory</div>',
+                    description: '<div>In this clock value in memory is written. What address? Address was calculated in previous step and is the output of ALU unit. What value? Value of instruction specified register RT.</div>',
+                    value: (cpu: CPU) => cpu.memory.get(cpu.alu.result),
+                },
+                {
+                    ids: [162, 181],
+                    additional: ['memory_background', 'memory_label', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text'],
+                    title: '<div class="text-center">MemRead</div>',
+                    description: '<div>Allows reading from RAM memory.</div>',
+                    value: (cpu: CPU) => cpu.control.memRead,
+                },
             ],
         },
         {

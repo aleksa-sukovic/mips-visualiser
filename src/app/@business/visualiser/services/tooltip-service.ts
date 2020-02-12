@@ -42,8 +42,9 @@ export class TooltipService
     public show (mouseX: number, mouseY: number, title: string = '', description: string = '', value: string = ''): void
     {
         // constraint tooltip [left size]
+        const browserWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         mouseX = mouseX - this.width / 2 > 0 ? mouseX : this.width / 2;
-        mouseX = mouseX + this.width > screen.availWidth ? screen.availWidth - this.width : mouseX;
+        mouseX = mouseX + this.width > browserWidth ? browserWidth - this.width / 2 : mouseX;
 
         this.tooltipTitle = title;
         this.tooltipDescription = description;

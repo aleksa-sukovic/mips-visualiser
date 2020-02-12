@@ -857,7 +857,7 @@ const Specification = {
                     additional: ['140', '139', '129', '128', '127', '104', '97', '91', '33', '18', '13', '12'],
                     title: '<div class="text-center">PC register</div>',
                     description: '<div>Holds the current instruction.<br>In first clock, instruction is read from address PC is pointing to. Also, value of PC is incremented by 4, so it points to the next instruction to be executed.</div>',
-                    value: (cpu: CPU) => cpu.register('$pc'),
+                    value: (cpu: CPU) => cpu.register('$pc').value,
                 },
                 {
                     ids: ['lorD_background', 'lorD_text', 'lorD_0_text', 'lorD_0_dot', 'lorD_1_text', 'lorD_1_dot', '180', '161'],

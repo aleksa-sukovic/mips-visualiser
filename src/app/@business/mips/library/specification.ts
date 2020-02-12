@@ -6,7 +6,7 @@ const encoder = new BinaryEncoder();
 const Specification = {
     word_length: 32,
     visual: {
-        animationDuration: 1000,
+        animationDuration: 500,
         emphasizeColor: '#dd6b20',
         emphasizeTextColor: '#fff',
         emphasizeLabelColor: '#fff',
@@ -775,7 +775,7 @@ const Specification = {
                     ids: [128, 91, 33, 13, 22, 116, 18, 104, 'ALUSelA_background', 'ALUSelA_0_dot', 'ALUSelA_0_text', 'ALUSelA_text', 'ALUSelA_1_text', 'ALUSelA_1_dot'],
                     additional: [],
                     title: 'PC Value',
-                    description: '<div>Value of PC is brought as first operand of ALU.</div>',
+                    description: '<div>Value of PC is brought as first ALU argument.</div>',
                     value: (cpu: CPU) => {
                         const oldPc = encoder.number(cpu.register('$pc').value) - 4;
                         const newPc = encoder.number(cpu.register('$pc').value).toString(10);
@@ -787,7 +787,7 @@ const Specification = {
                     additional: [],
                     title: 'PC Increment',
                     description: '<div>PC value is incremented by word length which is 4.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.alu.op2,
                 },
                 {
                     ids: ['143', '141', '112', '32', '28', '25', '23', '11', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background'],
@@ -800,15 +800,15 @@ const Specification = {
                     ids: ['170', '174'],
                     additional: ['140', '139', '128', '127', '104', '91', '33', '18', '13', '12', '116', '22', 'PC_background', 'PC_text', 'ALUSelA_background'],
                     title: '<div class="text-center">ALUSelA <br>(first ALU operand control)</div>',
-                    description: '<div>Chooses PC value to be first operand of the ALU.</div>',
+                    description: '<div>Chooses PC value to be first ALU argument.</div>',
                     value: (cpu: CPU) => null,
                 },
                 {
                     ids: ['169', '187'],
                     additional: ['120', '50', '35', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_1_text', 'ALUSelB_1_dot'],
                     title: '<div class="text-center">ALUSelB <br>(second ALU operand control)</div>',
-                    description: '<div>Chooses immediate value of 4 as second operand of the ALU.</div>',
-                    value: (cpu: CPU) => null,
+                    description: '<div>Chooses immediate value of 4 as second ALU argument.</div>',
+                    value: (cpu: CPU) => cpu.alu.op2,
                 },
                 {
                     ids: ['166', '185'],
@@ -836,35 +836,35 @@ const Specification = {
                     additional: [],
                     title: '<div class="text-center">Instruction register (IR)</divc>',
                     description: '<div>Holds the instruction read from memory.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.register('$ir').value,
                 },
                 {
                     ids: ['164', '183'],
                     additional: [],
                     title: '<div class="text-center">IRWrite</div>',
                     description: '<div>Control signal allowing for new, incremented value of PC to be written.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.control.irWrite,
                 },
                 {
                     ids: ['162', '181'],
                     additional: ['memory_background', 'memory_label', 'read_address_label_dot', 'read_address_label_text'],
                     title: '<div class="text-center">MemRead</div>',
                     description: '<div>Control signal allowing read operation to fetch the instruction PC is pointing to.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.control.memRead,
                 },
                 {
                     ids: ['PC_background', 'PC_text'],
                     additional: ['140', '139', '129', '128', '127', '104', '97', '91', '33', '18', '13', '12'],
                     title: '<div class="text-center">PC register</div>',
                     description: '<div>Holds the current instruction.<br>In first clock, instruction is read from address PC is pointing to. Also, value of PC is incremented by 4, so it points to the next instruction to be executed.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.register('$pc'),
                 },
                 {
                     ids: ['lorD_background', 'lorD_text', 'lorD_0_text', 'lorD_0_dot', 'lorD_1_text', 'lorD_1_dot', '180', '161'],
                     additional: ['130', '98', 'read_address_label_dot', 'read_address_label_text', 'memory_background'],
                     title: '<div class="text-center">lorD</div>',
                     description: '<div>Chooses PC value as read address.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.control.lorD,
                 },
                 {
                     ids: ['memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text', 'write_address_label_dot', 'write_address_label_text', 'write_data_label_dot_1', 'write_data_label_text_1'],
@@ -899,7 +899,7 @@ const Specification = {
                     ids: ['140', '139', '128', '127', '104', '91', '33', '18', '13', '12', 'Control_dot', 'PC_background', 'PC_text'],
                     additional: [],
                     title: '<div class="text-center">PC</div>',
-                    description: '<div>Current value of PC (incremented by 4 in first clock) is brought as first argument of ALU.</div>',
+                    description: '<div>Current value of PC (incremented by 4 in first clock) is brought as first ALU argument.</div>',
                     value: (cpu: CPU) => cpu.register('$pc').value,
                 },
                 {
@@ -942,7 +942,7 @@ const Specification = {
                     additional: ['Target_text', 'Target_background'],
                     title: '<div class="text-center">TargetWrite</div>',
                     description: '<div>Control signal allowing for write into $target register to happen.</div>',
-                    value: (cpu: CPU) => null,
+                    value: (cpu: CPU) => cpu.control.targetWrite,
                 },
                 {
                     ids: ['186', '168', '37', 'ALU_Control_text', 'ALU_Control_background'],
@@ -955,8 +955,8 @@ const Specification = {
                     ids: ['PCSource_background', 'PCSource_text', 'PCSource_0_text', 'PCSource_0_dot', 'PCSource_2_text', 'PCSource_2_dot', 'PCSource_1_text', 'PCSource_1_dot'],
                     additional: [],
                     title: '<div class="text-center">PCSource</div>',
-                    description: '<div>Determines what value will be sent to the PC register. In this clock, the possible jump address is brought at second input and branch address is brought first input.</div>',
-                    value: (cpu: CPU) => cpu.alu.op,
+                    description: '<div>Determines what value will be sent to the PC register. In this clock, the possible jump address is brought as second input and address of possible branching is brought as first input.</div>',
+                    value: (cpu: CPU) => cpu.control.pcSource,
                 },
                 {
                     ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
@@ -1011,8 +1011,8 @@ const Specification = {
                 {
                     ids: ['157', '150', '143', '133', '132', '131', '101', '99', '63', '32', 'memory_background', 'memory_label', 'mem_data_label_dot', 'mem_data_label_text', 'read_address_label_dot', 'read_address_label_text', 'write_address_label_dot', 'write_address_label_text', 'write_data_label_dot_1', 'write_data_label_text_1', 'lorD_background', 'lorD_text', 'lorD_1_text', 'lorD_1_dot', 'ALU_result_label_dot', 'ALU_result_label_text', 'ALU_text', 'ALU_background'],
                     additional: [],
-                    title: '<div class="text-center">ALU Operation</div>',
-                    description: '<div>In clock 3 of LW and SW instruction ALU calculates the address by adding instruction specified base register (RS) with 16-bit offset also read from the instruction.</div>',
+                    title: '<div class="text-center">ALU</div>',
+                    description: '<div>In clock 3 of LW and SW instructions ALU calculates the address by adding instruction specified base register (RS) with 16-bit offset which is also read from the instruction.</div>',
                     value: (cpu: CPU) => cpu.alu.result,
                 },
                 {
@@ -1055,7 +1055,7 @@ const Specification = {
                     ids: ['144', '118', '117', '55', '40', '39', '21', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot'],
                     additional: ['1', '154', '153', '152', '151', '109', '95', '94', '84', '83', 'registers_background', 'registers_label', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
                     title: '<div class="text-center">ALUSelB</div>',
-                    description: '<div>Value of instruction specified register (RT) is brought as first ALU argument.</div>',
+                    description: '<div>Value of instruction specified register (RT) is brought as second ALU argument.</div>',
                     value: (cpu: CPU) => cpu.register(cpu.instruction.rt).value,
                 },
                 {
@@ -1090,7 +1090,7 @@ const Specification = {
                     ids: ['151', '148', '95', '89', '190', '69', '57', '44', '37', '16', '15', 'ALU_Control_text', 'ALU_Control_background'],
                     additional: [],
                     title: '<div class="text-center">ALU Operation</div>',
-                    description: '<div>In third clock of R-type instruction, ALU is being told to use "funct" field read from instruction. This means that the instruction itself is responsible for determining what operation ALU will do on specified arguments.</div>',
+                    description: '<div>In third clock of R-type instruction, ALU is being told to use "funct" field read from instruction. This means that the instruction itself is responsible for determining what operation ALU will do its arguments.</div>',
                     value: (cpu: CPU) => cpu.instruction.funct,
                 },
                 {
@@ -1127,20 +1127,20 @@ const Specification = {
                     additional: ['155', '153', '152', '151', '106', '95', '93', '87', '84', '83', 'registers_background', 'registers_label', 'read_register_1_label_dot', 'read_register_1_label_text', 'read_data_1_label_text', '170', '174'],
                     title: '<div class="text-center">First ALU argument</div>',
                     description: '<div>First ALU argument is instruction specified register RS.</div>',
-                    value: (cpu: CPU) => cpu.register(cpu.instruction.rs),
+                    value: (cpu: CPU) => cpu.register(cpu.instruction.rs).value,
                 },
                 {
                     ids: ['144', '118', '117', '55', '40', '39', '21', '1', 'ALUSelB_background', 'ALUSelB_text', 'ALUSelB_0_text', 'ALUSelB_0_dot'],
                     additional: ['187', '169', '154', '153', '152', '151', '109', '95', '94', '84', '83', 'registers_background', 'registers_label', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text'],
                     title: '<div class="text-center">Second ALU argument</div>',
                     description: '<div>Second ALU argument is instruction specified register RT.</div>',
-                    value: (cpu: CPU) => cpu.register(cpu.instruction.rt),
+                    value: (cpu: CPU) => cpu.register(cpu.instruction.rt).value,
                 },
                 {
                     ids: [169, 187],
                     additional: ['187', '169', '154', '153', '152', '151', '109', '95', '94', '84', '83', 'registers_background', 'registers_label', 'read_register_2_label_dot', 'read_register_2_label_text', 'read_data_2_label_dot', 'read_data_2_label_text', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'ALUSelB_background', '144', '118', '55', '40', '39', '1'],
                     title: '<div class="text-center">ALUSelB</div>',
-                    description: '<div>Uses instruction specified register RT as first ALU argument.</div>',
+                    description: '<div>Uses instruction specified register RT as second ALU argument.</div>',
                     value: (cpu: CPU) => cpu.control.aluSelB,
                 },
                 {
@@ -1154,7 +1154,7 @@ const Specification = {
                     ids: ['179', 'ALU_zero_label_dot', 'ALU_zero_label_text', 'ALU_text', 'ALU_background'],
                     additional: [],
                     title: '<div class="text-center">ALU operation</div>',
-                    description: '<div>In third clock of beq instructions ALU is used to determine if two arguments are equal. How? ALU is being told to subtract two arguments. If result of subtraction is 0 then operands are indeed equal.</div>',
+                    description: '<div>In third clock of beq instructions ALU is used to determine if two arguments are equal. How? ALU is being told to subtract two the arguments. If result of subtraction is 0 then operands are indeed equal.</div>',
                     value: (cpu: CPU) => cpu.alu.result,
                 },
                 {

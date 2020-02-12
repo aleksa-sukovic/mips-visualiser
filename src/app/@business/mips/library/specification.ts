@@ -1211,10 +1211,44 @@ const Specification = {
         {
             id: 'clock_6',
             focus: [
-                '185', '177', '175', '166', '159', '155', '153', '152', '151', '142', '114', '96', '95', '88', '87', '86', '85', '84', '83', '48', '47', '46', '45', '30', '29', '26', '24', '19', '14', '12', '10', 'OR_gate_background', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'SHL_2_x2_text_1', 'PC_background', 'PC_text', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1', 'Control_background', 'Control_claim', 'Control_op_text', 'Control_text',
+                '185', '177', '175', '166', '159', '155', '153', '152', '151', '142', '114', '96', '95', '88', '87', '86', '85', '84', '83', '48', '47', '46', '45', '30', '29', '26', '24', '19', '14', '12', '10', 'OR_gate_background', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'SHL_2_x2_text_1', 'PC_background', 'PC_text', 'MemToReg_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', 'SHL_2_x2_background_1', 'Control_background', 'Control_claim', 'Control_op_text', 'Control_text', 'PCSource_background',
             ],
             tooltips: [
-
+                {
+                    ids: ['155', '153', '152', '151', '142', '114', '95', '88', '87', '86', '85', '84', '83', '47', '45', '30', '29', '24', '19', '14', '12', '10', 'instruction_background', 'instruction_label', 'instruction_31_26_label_dot', 'instruction_31_26_label_text', 'SHL_2_x2_text_1', 'SHL_2_x2_background_1', 'PCSource_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot'],
+                    additional: [],
+                    title: '<div class="text-center">Jump address</div>',
+                    description: '<div>Jump address is 25-bit instruction specified value.</div>',
+                    value: (cpu: CPU) => cpu.instruction.address,
+                },
+                {
+                    ids: ['96', '26', 'PC_background', 'PC_text'],
+                    additional: ['185', '166', 'PCSource_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot'],
+                    title: '<div class="text-center">PC value update</div>',
+                    description: '<div>In order to complete jump, PC register is updated with instruction specified address.</div>',
+                    value: (cpu: CPU) => cpu.register('$pc').value,
+                },
+                {
+                    ids: [166, 185],
+                    additional: ['185', '166', 'PCSource_background', 'PCSource_text', 'PCSource_2_text', 'PCSource_2_dot', '26', '96'],
+                    title: '<div class="text-center">PCSource</div>',
+                    description: '<div>Passes instruction specified 25-bit address to PC register.</div>',
+                    value: (cpu: CPU) => cpu.control.pcSource,
+                },
+                {
+                    ids: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    additional: ['Control_background', 'Control_claim', 'Control_dot', 'Control_op_text', 'Control_text'],
+                    title: '<div class="text-center">Control Unit</div>',
+                    description: '<div>Sends out control signals.</div>',
+                    value: (cpu: CPU) => null,
+                },
+                {
+                    ids: ['177', '175', '159', 'OR_gate_background'],
+                    additional: [],
+                    title: '<div class="text-center">PCWrite</div>',
+                    description: '<div>Signal allowing write to PC register to happen. Since PCWrite is brought to OR gate and its value is 1, output of a gate will be 1, which means write is allowed.</div>',
+                    value: (cpu: CPU) => cpu.control.pcWrite,
+                },
             ],
         },
         {

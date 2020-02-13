@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
 import { TooltipService } from '../../services/tooltip-service';
 import { CPUService } from '../../services/cpu.services';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-player',
@@ -23,7 +22,6 @@ export class PlayerComponent
     public constructor (
         private tooltipService: TooltipService,
         public cpuService: CPUService,
-        private toastrService: ToastrService
     ) {
         //
     }

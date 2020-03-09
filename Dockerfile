@@ -3,6 +3,10 @@ FROM node:12.2.0
 
 LABEL maintainer="Aleksa Sukovic"
 
+# Args
+ARG USER_ID
+ARG USER_GROUP
+
 # install Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -28,6 +32,11 @@ COPY ./ /var/www
 RUN mkdir /scripts
 COPY entrypoint.sh /scripts/
 RUN ["chmod", "-R", "+x", "/scripts/"]
+
+# Set non-root user
+RUN usermod --uid $USER_ID node
+RUN groupmod --gid $USER_GROUP node
+USER node
 
 ENTRYPOINT [ "/scripts/entrypoint.sh" ]
 CMD [ ]

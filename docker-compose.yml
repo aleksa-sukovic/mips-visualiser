@@ -6,6 +6,9 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                USER_ID: 1000
+                USER_GROUP: 1000
         volumes:
             - '.:/var/www'
         ports:

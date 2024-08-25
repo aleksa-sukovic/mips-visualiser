@@ -36,6 +36,8 @@ export class ClockFactory
                 return new Clock9();
             case 'clock_10':
                 return new Clock10();
+            default:
+                return null;
         }
     }
 }

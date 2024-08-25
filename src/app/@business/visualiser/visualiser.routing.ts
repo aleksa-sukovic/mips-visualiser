@@ -9,4 +9,4 @@ const routes: Routes = [
     },
 ];
 
-export const VisualiserRouting: ModuleWithProviders = RouterModule.forChild(routes);
+export const VisualiserRouting: ModuleWithProviders<any> = RouterModule.forChild(routes);

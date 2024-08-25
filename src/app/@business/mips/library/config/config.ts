@@ -43,6 +43,8 @@ export default class Config
             return Config.ELEMENT_ARROW;
         } else if (element.tagName === 'path') {
             return Config.ELEMENT_PATH;
+        } else {
+            return null;
         }
     }
 }

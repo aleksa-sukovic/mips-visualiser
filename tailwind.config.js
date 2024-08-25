@@ -1,7 +1,9 @@
+CONTENT = ["src/**/*.html"];
+SAFELIST = process.env.NODE_ENV === 'development' ? [{ pattern: /.*/ }] : [];
+
 module.exports = {
-    prefix: '',
-    important: false,
-    separator: ':',
+    content: CONTENT,
+    safelist: SAFELIST,
     theme: {
         screens: {
             sm: '640px',

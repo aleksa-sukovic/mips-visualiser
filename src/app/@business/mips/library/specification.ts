@@ -479,7 +479,7 @@ const Specification = {
         {
             ids: ['instruction_sw'],
             additional: [],
-            title: '<div class="text-gray-900">LW <br><span class="text-gray-500 text-sm font-normal italic">sw $1, 256($2)</span></div>',
+            title: '<div class="text-gray-900">SW <br><span class="text-gray-500 text-sm font-normal italic">sw $1, 256($2)</span></div>',
             description: '<div>Stores the contents of $1 register at specified address.</div>',
             value: (cpu: CPU) => null,
         },

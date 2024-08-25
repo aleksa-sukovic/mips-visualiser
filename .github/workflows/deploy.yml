@@ -1,0 +1,21 @@
+name: ALSK
+on:
+    push:
+        branches:
+            - master
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - name: Angular Deploy gh-pages Actions
+          uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
+          with:
+              github_access_token: ${{ secrets.GH_PAGES_TOKEN }}
+              build_configuration: production
+              base_href: https://aleksa-sukovic.github.io/mips-visualiser/
+              deploy_branch: gh-pages
+              angular_dist_build_folder: dist/mips-visualiser/browser

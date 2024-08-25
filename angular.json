@@ -49,7 +49,7 @@
                         "polyfills": [
                             "src/polyfills.ts"
                         ],
-                        "tsConfig": "tsconfig.app.json",
+                        "tsConfig": "src/tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
                             "src/favicon.ico",

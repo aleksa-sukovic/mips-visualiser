@@ -1,25 +1,16 @@
 <div class="flex flex-col items-center p-4 pt-5 text-white bg-blue-900">
     <span class="flex flex-row mb-4">
-        <!-- GitHub -->
-        <a href="https://github.com/aleksa-sukovic"
-           target="_blank"
-           class="mr-2 text-white align-middle">
-            <img src="assets/svg/github.svg" width="18px" height="18px" alt="Github Link">
-        </a>
-
-        <!-- LinkedIn -->
-        <a href="https://me.linkedin.com/in/aleksa-sukovic"
-           target="_blank"
-           class="ml-2 text-white align-middle hover:underline hover:text-blue-100">
-            <img src="assets/svg/linked-in.svg" width="18px" height="18px" alt="LinkedIn Link">
-        </a>
-
-        <!-- Website -->
-        <a href="https://aleksa-sukovic.github.io"
-           target="_blank"
-           class="ml-4 text-white align-middle hover:underline hover:text-blue-100">
-            <img src="assets/svg/website.svg" width="18px" height="18px" alt="Portfolio Link">
-        </a>
+        <div class="flex flex-row items-center justify-center mb-2 text-center">
+            <app-url-icon icon="assets/svg/github.svg" label="GitHub" url="https://github.com/aleksa-sukovic" class="mr-2"></app-url-icon>
+            <app-url-icon icon="assets/svg/linkedin.svg" label="LinkedIn" url="https://www.linkedin.com/in/aleksa-sukovic" class="ml-2 mr-2"></app-url-icon>
+            <app-url-icon
+                icon="assets/svg/scholar.svg"
+                label="Scholar"
+                url="https://scholar.google.com/citations?user=HqkjkXIAAAAJ"
+                class="ml-2 mr-2"
+            ></app-url-icon>
+            <app-url-icon icon="assets/svg/website.svg" label="Website" url="https://aleksa-sukovic.github.io" class="ml-2 mr-2"></app-url-icon>
+        </div>
     </span>
 
     <span class="pb-0 mb-0 text-sm font-thin">

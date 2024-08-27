@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { SharedModule } from './@shared/shared.modules';
 import { GlobalModule } from './@global/global.module';
@@ -23,8 +26,10 @@ import { VisualiserControllerComponent } from './@business/visualiser/components
         GlobalModule,
 
         VisualiserModule,
+
+        AngularSvgIconModule.forRoot(),
     ],
-    providers: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())],
     bootstrap: [
         AppComponent,
     ]

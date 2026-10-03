@@ -54,7 +54,6 @@
                         "browser": "src/main.ts"
                     },
                     "configurations": {
-                        "defaultConfiguration": "production",
                         "production": {
                             "fileReplacements": [
                                 {
@@ -70,7 +69,7 @@
                                 }
                             ],
                             "outputHashing": "all",
-                            "baseHref": "https://aleksa-sukovic.github.io/mips-visualiser/"
+                            "baseHref": "/mips-visualiser/"
                         },
                         "development": {
                             "optimization": false,
@@ -86,7 +85,8 @@
                             "scripts": [],
                             "polyfills": []
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular/build:dev-server",

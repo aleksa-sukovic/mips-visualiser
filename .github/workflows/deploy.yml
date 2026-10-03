@@ -35,7 +35,7 @@ jobs:
               run: npm test -- --watch=false
 
             - name: Build production application
-              run: npm run build
+              run: npm run build -- --configuration production
 
             - name: Configure GitHub Pages
               uses: actions/configure-pages@v6

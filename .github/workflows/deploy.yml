@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         steps:
             - name: Checkout repository
               uses: actions/checkout@v7
@@ -38,7 +38,7 @@ jobs:
               run: npm run build
 
             - name: Configure GitHub Pages
-              uses: actions/configure-pages@v5
+              uses: actions/configure-pages@v6
 
             - name: Upload GitHub Pages artifact
               uses: actions/upload-pages-artifact@v5
@@ -49,9 +49,9 @@ jobs:
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         needs: build
         steps:
             - name: Deploy to GitHub Pages
               id: deployment
-              uses: actions/deploy-pages@v4
+              uses: actions/deploy-pages@v5

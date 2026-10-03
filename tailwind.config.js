@@ -1,5 +1,5 @@
-CONTENT = ["src/**/*.html"];
-SAFELIST = process.env.NODE_ENV === 'development' ? [{ pattern: /.*/ }] : [];
+const CONTENT = ['src/**/*.html'];
+const SAFELIST = process.env.NODE_ENV === 'development' ? [{ pattern: /.*/ }] : [];
 
 module.exports = {
     content: CONTENT,
@@ -306,10 +306,9 @@ module.exports = {
             disc: 'disc',
             decimal: 'decimal',
         },
-        margin: (theme, { negative }) => ({
+        margin: theme => ({
             auto: 'auto',
             ...theme('spacing'),
-            ...negative(theme('spacing')),
         }),
         maxHeight: {
             full: '100%',

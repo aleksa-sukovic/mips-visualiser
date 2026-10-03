@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it } from "vitest";
 import { BinaryEncoder } from './binary-encoder';
 import { OverflowException } from '../exceptions/overflow-exception';
 
@@ -14,7 +15,7 @@ describe('Binary Converter ', () => {
         expect(converter.binary(5)).toBe('0101');
     });
 
-    it('adds result padding result', ()  => {
+    it('adds result padding result', () => {
         expect(converter.binary(7, 5)).toBe('00111');
         expect(converter.binary(0, 5)).toBe('00000');
         expect(converter.binary(3, 3)).toBe('011');

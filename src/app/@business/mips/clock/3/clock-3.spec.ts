@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { CPU } from '../../cpu/cpu';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { Clock3 } from './clock-3';
@@ -12,7 +13,7 @@ describe('Clock 3', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(Config.get().word_length)]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock3(Config.get().word_length)]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -25,7 +26,7 @@ describe('Clock 3', () => {
 
     it('calculates memory address', () => {
         const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock3(Config.get().word_length)]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock3(Config.get().word_length)]);
 
         const baseRegister = 1000;
         const offset = 128;

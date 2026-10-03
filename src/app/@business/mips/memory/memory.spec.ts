@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it } from "vitest";
 import { Memory } from './memory';
 
 describe('Memory', () => {

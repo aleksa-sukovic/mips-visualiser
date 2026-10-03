@@ -1,4 +1,5 @@
-import {InstructionFactory} from './factories/instruction-factory';
+import { describe, expect, it } from "vitest";
+import { InstructionFactory } from './factories/instruction-factory';
 
 describe('Instruction', () => {
     it('parses OP field', () => {

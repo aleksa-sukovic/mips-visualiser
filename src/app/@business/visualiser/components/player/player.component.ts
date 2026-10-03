@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
 import { TooltipService } from '../../services/tooltip-service';
 import { CPUService } from '../../services/cpu.services';
@@ -6,7 +6,9 @@ import { CPUService } from '../../services/cpu.services';
 @Component({
     selector: 'app-player',
     templateUrl: './player.component.html',
-    styleUrls: ['./player.component.scss']
+    styleUrls: ['./player.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class PlayerComponent
 {

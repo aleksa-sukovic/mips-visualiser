@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CPUService } from '../../services/cpu.services';
 import { SvgService } from '../../services/svg.service';
 import { RegistersService } from '../../services/registers.service';
 import { MemoryService } from '../../services/memory.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../../../@shared/services/toast.service';
 
 @Component({
     selector: 'app-visualiser-controller',
     templateUrl: './visualiser-controller.html',
-    styleUrls: ['./visualiser-controller.component.scss']
+    styleUrls: ['./visualiser-controller.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class VisualiserControllerComponent
 {
@@ -20,7 +22,7 @@ export class VisualiserControllerComponent
         private registersService: RegistersService,
         private memoryService: MemoryService,
         private svgService: SvgService,
-        private toastrService: ToastrService,
+        private toastrService: ToastService,
     ) {
         this._intervalSpeed  = this.svgService.animationDuration;
     }

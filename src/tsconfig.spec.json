@@ -4,12 +4,17 @@
         "outDir": "../out-tsc/spec",
         "types": []
     },
-    "files": [
-        "test.ts",
-        "polyfills.ts"
-    ],
     "include": [
+        "polyfills.ts",
         "**/*.spec.ts",
         "**/*.d.ts"
-    ]
+    ],
+    "angularCompilerOptions": {
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        }
+    }
 }

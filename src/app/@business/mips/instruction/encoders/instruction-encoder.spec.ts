@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it } from "vitest";
 import { InstructionEncoder } from './instruction-encoder';
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
 

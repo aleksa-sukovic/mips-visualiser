@@ -1,4 +1,4 @@
-import Anime from 'animejs/lib/anime.es.js';
+import { animate } from 'animejs';
 import { CPUService } from './cpu.services';
 import { Injectable } from '@angular/core';
 import Config from '../../mips/library/config/config';
@@ -81,8 +81,7 @@ export class TooltipService
 
     protected fadeIn (): void
     {
-        Anime({
-            targets: this.tooltip(),
+        animate(this.tooltip(), {
             keyframes: [
                 { opacity: 0 },
                 { opacity: 0.2 },
@@ -97,8 +96,7 @@ export class TooltipService
 
     protected fadeOut (): void
     {
-        Anime({
-            targets: this.tooltip(),
+        animate(this.tooltip(), {
             keyframes: [
                 { opacity: 1 },
                 { opacity: 0.8 },

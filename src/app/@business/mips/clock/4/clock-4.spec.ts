@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it, type Mock, vi } from "vitest";
 import { CPU } from '../../cpu/cpu';
 import { Clock4 } from './clock-4';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
@@ -8,13 +9,13 @@ import Config from '../../library/config/config';
 describe('Clock IV', () => {
     let cpu: CPU = null;
     let instruction: Instruction;
-    let spy: jasmine.Spy;
+    let spy: Mock;
     const encoder = new BinaryEncoder();
 
     beforeAll(() => {
         cpu = new CPU();
         instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock4()]);
+        spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock4()]);
     });
 
     it('sets the CPU control signals', () => {

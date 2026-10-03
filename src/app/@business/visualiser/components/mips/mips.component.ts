@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SvgService } from '../../services/svg.service';
 import { CPUService } from '../../services/cpu.services';
 import { TooltipService } from '../../services/tooltip-service';
@@ -6,7 +6,9 @@ import { TooltipService } from '../../services/tooltip-service';
 @Component({
     selector: 'app-mips',
     templateUrl: './mips.component.html',
-    styleUrls: ['./mips.component.scss']
+    styleUrls: ['./mips.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class MipsComponent implements OnInit
 {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Clock } from '../../mips/clock/clock';
-import Anime from 'animejs/lib/anime.es.js';
+import { animate } from 'animejs';
 import { NullClock } from '../../mips/clock/Null/NullClock';
 import Config from '../../mips/library/config/config';
 
@@ -12,7 +12,7 @@ export class SvgService
     protected _elements = [];
     protected _activeClock: Clock = new NullClock();
     protected _emphasizedIds: any[] = [];
-    protected _fadeInKeyframes = Array.from(Config.get().visual.opacitySteps).reverse();
+    protected _fadeInKeyframes = Array.from(Config.get().visual.opacitySteps).reverse() as any[];
     protected _fadeOutKeyframes = Config.get().visual.opacitySteps;
     protected _animationDuration = Config.get().visual.animationDuration;
 
@@ -22,10 +22,10 @@ export class SvgService
         const clockConfig = Config.clockConfig(clock);
 
         // Reduce opacity of all elements.
-        Anime({ targets: this._elements, keyframes: this._fadeOutKeyframes, duration: this._animationDuration });
+        animate(this._elements, { keyframes: this._fadeOutKeyframes, duration: this._animationDuration });
 
         // Fade in focused elements.
-        Anime({ targets: this.findElements(clockConfig.focus), keyframes: this._fadeInKeyframes, duration: this._animationDuration });
+        animate(this.findElements(clockConfig.focus), { keyframes: this._fadeInKeyframes, duration: this._animationDuration });
     }
 
     public mouseMove ($event): void
@@ -43,17 +43,17 @@ export class SvgService
     {
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
-                Anime({ targets: element, fill: Config.get().visual.emphasizeTextColor });
+                animate(element, { fill: Config.get().visual.emphasizeTextColor });
             } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
-                Anime({ targets: element, fill: Config.get().visual.emphasizeLabelColor });
+                animate(element, { fill: Config.get().visual.emphasizeLabelColor });
             }  else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
-                Anime({ targets: element, fill: Config.get().visual.emphasizeComponentColor });
+                animate(element, { fill: Config.get().visual.emphasizeComponentColor });
             } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
-                Anime({ targets: element, fill: Config.get().visual.emphasizeColor });
+                animate(element, { fill: Config.get().visual.emphasizeColor });
             } else if (Config.elementType(element) === Config.ELEMENT_PATH) {
-                Anime({ targets: element, stroke: Config.get().visual.emphasizeColor });
+                animate(element, { stroke: Config.get().visual.emphasizeColor });
             } else {
-                Anime({ targets: element, fill: Config.get().visual.emphasizeColor });
+                animate(element, { fill: Config.get().visual.emphasizeColor });
             }
         });
     }
@@ -62,17 +62,17 @@ export class SvgService
     {
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
-                Anime({ targets: element, fill: Config.get().visual.deEmphasizeTextColor });
+                animate(element, { fill: Config.get().visual.deEmphasizeTextColor });
             } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
-                Anime({ targets: element, fill: Config.get().visual.deEmphasizeLabelColor });
+                animate(element, { fill: Config.get().visual.deEmphasizeLabelColor });
             } else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
-                Anime({ targets: element, fill: Config.get().visual.deEmphasizeComponentColor });
+                animate(element, { fill: Config.get().visual.deEmphasizeComponentColor });
             } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
-                Anime({ targets: element, fill: Config.get().visual.deEmphasizeColor });
+                animate(element, { fill: Config.get().visual.deEmphasizeColor });
             } else if (Config.elementType(element) === Config.ELEMENT_PATH) {
-                Anime({ targets: element, stroke: Config.get().visual.deEmphasizeColor });
+                animate(element, { stroke: Config.get().visual.deEmphasizeColor });
             } else {
-                Anime({ targets: element, fill: Config.get().visual.deEmphasizeColor });
+                animate(element, { fill: Config.get().visual.deEmphasizeColor });
             }
         });
     }
@@ -93,7 +93,7 @@ export class SvgService
         this._activeClock = new NullClock();
 
         // Fade in all elements
-        Anime({ targets: this._elements, duration: this._animationDuration, keyframes: this._fadeInKeyframes });
+        animate(this._elements, { duration: this._animationDuration, keyframes: this._fadeInKeyframes });
     }
 
     public set animationDuration (value)

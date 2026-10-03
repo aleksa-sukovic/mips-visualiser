@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it } from "vitest";
 import { RegisterInstructionParser } from './register-instruction-parser';
 import { InstructionNotFoundException } from '../exceptions/instruction-not-found-exception';
 import { RegisterNotFoundException } from '../exceptions/register-not-found-exception';
@@ -13,7 +14,7 @@ describe('Register instruction parser', () => {
         parser = new RegisterInstructionParser();
     });
 
-    it('recognises R-type instruction', ()  => {
+    it('recognises R-type instruction', () => {
         const instruction1 = 'add $x, $y, $z';
         const instruction2 = 'ADD $x,$y,$z';
         const instruction3 = 'AdD $x,      $y, $z';
@@ -23,7 +24,7 @@ describe('Register instruction parser', () => {
         expect(parser.match(instruction3)).toBe(true);
     });
 
-    it('dismisses instructions of inappropriate type', ()  => {
+    it('dismisses instructions of inappropriate type', () => {
         const instruction1 = 'lw $x, 1024($y)';
         const instruction2 = 'jal 2048';
         const instruction3 = 'beq $x, $y, 1024';
@@ -82,7 +83,7 @@ describe('Immediate instruction parser', () => {
         parser = new ImmediateInstructionParser();
     });
 
-    it('recognizes I-type instructions', ()  => {
+    it('recognizes I-type instructions', () => {
         const instruction1 = 'addi $1, $2, 15';
         const instruction2 = 'addi $2, $3, -145';
         const instruction3 = 'addi $v0, $v1, +76';
@@ -92,7 +93,7 @@ describe('Immediate instruction parser', () => {
         expect(parser.match(instruction3)).toBe(true);
     });
 
-    it('dismisses instructions of inappropriate type', ()  => {
+    it('dismisses instructions of inappropriate type', () => {
         const instruction1 = 'add $1, $2, $3';
         const instruction2 = 'j 5096';
         const instruction3 = 'sw $x, 0($y)';
@@ -155,7 +156,7 @@ describe('Jump instruction parser', () => {
         expect(parser.match(instruction)).toBe(true);
     });
 
-    it('dismisses instructions of inappropriate type', ()  => {
+    it('dismisses instructions of inappropriate type', () => {
         const instruction1 = 'add $1, $2, $3';
         const instruction2 = 'sw $x, 0($y)';
 
@@ -189,7 +190,7 @@ describe('Data transfer instruction parser', () => {
         expect(parser.match(instruction3)).toBe(true);
     });
 
-    it('dismisses instructions of inappropriate type', ()  => {
+    it('dismisses instructions of inappropriate type', () => {
         const instruction1 = 'add $1, $2, $3';
         const instruction2 = 'beq $x, $y, 1024';
         const instruction3 = 'j 5096';

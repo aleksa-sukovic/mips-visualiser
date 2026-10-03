@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { faCheck, faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { TooltipService } from '../../services/tooltip-service';
 
 @Component({
     selector: 'app-register-item',
     templateUrl: './register-item.component.html',
-    styleUrls: ['./register-item.component.scss']
+    styleUrls: ['./register-item.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RegisterItemComponent
 {

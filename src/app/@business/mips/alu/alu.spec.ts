@@ -1,4 +1,5 @@
-import {ALU} from './alu';
+import { beforeEach, describe, expect, it } from "vitest";
+import { ALU } from './alu';
 
 describe('ALU', () => {
     let alu;

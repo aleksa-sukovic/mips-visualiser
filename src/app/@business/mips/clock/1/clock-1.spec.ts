@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
@@ -12,7 +13,7 @@ describe('Clock 1', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Config.get().word_length)]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock1(Config.get().word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();
@@ -30,7 +31,7 @@ describe('Clock 1', () => {
 
     it('increments PC by 4', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Config.get().word_length)]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock1(Config.get().word_length)]);
 
         cpu.register('$pc').value = encoder.binary(0, Config.get().word_length);
         cpu.simulate(instruction);
@@ -42,7 +43,7 @@ describe('Clock 1', () => {
 
     it('reads instruction', () => {
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock1(Config.get().word_length)]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock1(Config.get().word_length)]);
 
         cpu.simulate(instruction);
         cpu.execute();

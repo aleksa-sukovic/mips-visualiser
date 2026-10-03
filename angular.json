@@ -56,8 +56,7 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "src/assets/styles/toastr.scss"
+                            "src/styles.css"
                         ],
                         "browser": "src/main.ts"
                     },
@@ -85,6 +84,16 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
+                        },
+                        "testing": {
+                            "aot": false,
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "styles": [
+                                "src/styles.css"
+                            ],
+                            "scripts": [],
+                            "polyfills": []
                         }
                     }
                 },
@@ -101,20 +110,14 @@
                     "defaultConfiguration": "development"
                 },
                 "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
+                    "builder": "@angular/build:unit-test",
                     "options": {
-                        "main": "src/test.ts",
-                        "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
-                        "karmaConfig": "src/karma.conf.js",
-                        "styles": [
-                            "src/styles.scss"
+                        "reporters": [
+                            "default"
                         ],
-                        "scripts": [],
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ]
+                        "buildTarget": ":build:testing",
+                        "runner": "vitest"
                     }
                 }
             }
@@ -122,5 +125,31 @@
     },
     "cli": {
         "analytics": false
+    },
+    "schematics": {
+        "@schematics/angular:component": {
+            "type": "component"
+        },
+        "@schematics/angular:directive": {
+            "type": "directive"
+        },
+        "@schematics/angular:service": {
+            "type": "service"
+        },
+        "@schematics/angular:guard": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+            "typeSeparator": "."
+        }
     }
 }

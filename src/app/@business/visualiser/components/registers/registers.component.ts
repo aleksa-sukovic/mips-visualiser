@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { BinaryEncoder } from '../../../mips/library/binary-encoder/binary-encoder';
 import { RegistersService } from '../../services/registers.service';
 
 @Component({
     selector: 'app-registers',
     templateUrl: './registers.component.html',
-    styleUrls: ['./registers.component.scss']
+    styleUrls: ['./registers.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class RegistersComponent
 {

@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { InstructionFactory } from '../instruction/factories/instruction-factory';
 import { Clock } from '../clock/clock';
 import { Clock1 } from '../clock/1/clock-1';
@@ -14,17 +15,13 @@ describe('CPU', () => {
 
         cpu.simulate(instruction);
 
-        expect(
-            cpu.memory.get(cpu.register('$pc').value)
-        ).toBe(instruction.binary);
+        expect(cpu.memory.get(cpu.register('$pc').value)).toBe(instruction.binary);
     });
 
     it('resets control unit after each clock', () => {
-        class TestClock implements Clock
-        {
-            public id (): string { return ''; }
-            public execute (aCpu: CPU): void
-            {
+        class TestClock implements Clock {
+            public id(): string { return ''; }
+            public execute(aCpu: CPU): void {
                 const defaultCPU = new CPU();
 
                 expect(aCpu.control.pcWrite).toBe(defaultCPU.control.pcWrite);
@@ -45,8 +42,7 @@ describe('CPU', () => {
         }
 
         const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        spyOnProperty(instruction, 'clocks')
-            .and.returnValue([new Clock1(Config.get().word_length), new TestClock()]);
+        vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock1(Config.get().word_length), new TestClock()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();

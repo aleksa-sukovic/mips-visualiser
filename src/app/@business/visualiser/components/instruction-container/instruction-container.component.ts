@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { TooltipService } from '../../services/tooltip-service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../../../@shared/services/toast.service';
 
 @Component({
     selector: 'app-instruction-container',
     templateUrl: './instruction-container.component.html',
-    styleUrls: ['./instruction-container.component.scss']
+    styleUrls: ['./instruction-container.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class InstructionContainerComponent
 {
@@ -22,7 +24,7 @@ export class InstructionContainerComponent
     public instructionText: string;
     @Output() loaded = new EventEmitter<string>();
 
-    public constructor (private tooltipService: TooltipService, private toastrService: ToastrService)
+    public constructor (private tooltipService: TooltipService, private toastrService: ToastService)
     {
         //
     }

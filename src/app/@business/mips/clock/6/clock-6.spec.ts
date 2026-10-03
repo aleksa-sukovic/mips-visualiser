@@ -1,3 +1,4 @@
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { CPU } from '../../cpu/cpu';
 import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
 import { InstructionFactory } from '../../instruction/factories/instruction-factory';
@@ -12,7 +13,7 @@ describe('Clock 6', () => {
 
     it('sets the CPU control signals', () => {
         const instruction = InstructionFactory.fromSymbolic('j 1024');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock6()]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock6()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
@@ -24,7 +25,7 @@ describe('Clock 6', () => {
 
     it('sets the PC value to specified address', () => {
         const instruction = InstructionFactory.fromSymbolic('j 1024');
-        const spy = spyOnProperty(instruction, 'clocks').and.returnValue([new Clock6()]);
+        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock6()]);
         let finalPcValue = '';
 
         cpu.register('$pc').value = encoder.binary(1000, Config.get().word_length);

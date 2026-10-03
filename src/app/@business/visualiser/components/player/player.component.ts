@@ -1,17 +1,16 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { faPlay, faForward } from '@fortawesome/free-solid-svg-icons';
-import { TooltipService } from '../../services/tooltip-service';
-import { CPUService } from '../../services/cpu.services';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from "@angular/core";
+import { faPlay, faForward } from "@fortawesome/free-solid-svg-icons";
+import { TooltipService } from "../../services/tooltip-service";
+import { CPUService } from "../../services/cpu.services";
 
 @Component({
-    selector: 'app-player',
-    templateUrl: './player.component.html',
-    styleUrls: ['./player.component.scss'],
+    selector: "app-player",
+    templateUrl: "./player.component.html",
+    styleUrls: ["./player.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class PlayerComponent
-{
+export class PlayerComponent {
     public faForward = faForward;
     public faPlay = faPlay;
 
@@ -21,31 +20,27 @@ export class PlayerComponent
 
     public _animationSpeed = 500;
 
-    public constructor (
+    public constructor(
         private tooltipService: TooltipService,
         public cpuService: CPUService,
     ) {
         //
     }
 
-    public handleMouseMove ($event): void
-    {
+    public handleMouseMove($event): void {
         this.tooltipService.mouseMove($event);
     }
 
-    public handleAnimationSpeedChange ($element): void
-    {
+    public handleAnimationSpeedChange($element): void {
         this._animationSpeed = parseFloat($element.value) * 1000 * 2;
         this.animationChange.emit(this._animationSpeed);
     }
 
-    public handleExecuteClick ()
-    {
+    public handleExecuteClick() {
         this.simulate.emit();
     }
 
-    public handleForwardClick ()
-    {
+    public handleForwardClick() {
         this.forward.emit();
     }
 }

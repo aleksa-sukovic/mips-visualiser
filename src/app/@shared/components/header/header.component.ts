@@ -1,16 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
+    selector: "app-header",
+    templateUrl: "./header.component.html",
+    styleUrls: ["./header.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class HeaderComponent
-{
-    public constructor ()
-    {
+export class HeaderComponent {
+    public constructor() {
         //
     }
 }

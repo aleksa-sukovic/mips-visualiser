@@ -1,12 +1,10 @@
-import { Register } from '../models/register';
-import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
+import { Register } from "../models/register";
+import { BinaryEncoder } from "../../library/binary-encoder/binary-encoder";
 
-export class RegisterFactory
-{
+export class RegisterFactory {
     protected static encoder = new BinaryEncoder();
 
-    public static fromSpecification (specification: any): Register
-    {
+    public static fromSpecification(specification: any): Register {
         return new Register(
             specification.aliases,
             specification.id,

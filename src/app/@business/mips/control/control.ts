@@ -1,5 +1,4 @@
-export class Control
-{
+export class Control {
     protected _pcWrite: string;
     protected _pcWriteCond: string;
     protected _lorD: string;
@@ -15,166 +14,136 @@ export class Control
     protected _regWrite: string;
     protected _regDst: string;
 
-    public constructor ()
-    {
+    public constructor() {
         this.reset();
     }
 
-    public reset (): void
-    {
-        this._pcWrite = '0';
-        this._pcWriteCond = '0';
-        this._lorD = '0';
-        this._memRead = '0';
-        this._memWrite = '0';
-        this._irWrite = '0';
-        this._memToReg = '0';
-        this._pcSource = '00';
-        this._targetWrite = '0';
-        this._aluOp = '00';
-        this._aluSelA = '0';
-        this._aluSelB = '00';
-        this._regWrite = '0';
-        this._regDst = '0';
+    public reset(): void {
+        this._pcWrite = "0";
+        this._pcWriteCond = "0";
+        this._lorD = "0";
+        this._memRead = "0";
+        this._memWrite = "0";
+        this._irWrite = "0";
+        this._memToReg = "0";
+        this._pcSource = "00";
+        this._targetWrite = "0";
+        this._aluOp = "00";
+        this._aluSelA = "0";
+        this._aluSelB = "00";
+        this._regWrite = "0";
+        this._regDst = "0";
     }
 
-    public set pcWrite (value: string)
-    {
+    public set pcWrite(value: string) {
         this._pcWrite = value;
     }
 
-    public get pcWrite ()
-    {
+    public get pcWrite() {
         return this._pcWrite;
     }
 
-    public set pcWriteCond (value: string)
-    {
+    public set pcWriteCond(value: string) {
         this._pcWriteCond = value;
     }
 
-    public get pcWriteCond ()
-    {
+    public get pcWriteCond() {
         return this._pcWriteCond;
     }
 
-    public set lorD (value: string)
-    {
+    public set lorD(value: string) {
         this._lorD = value;
     }
 
-    public get lorD ()
-    {
+    public get lorD() {
         return this._lorD;
     }
 
-    public set memRead (value: string)
-    {
+    public set memRead(value: string) {
         this._memRead = value;
     }
 
-    public get memRead ()
-    {
+    public get memRead() {
         return this._memRead;
     }
 
-    public set memWrite (value: string)
-    {
+    public set memWrite(value: string) {
         this._memWrite = value;
     }
 
-    public get memWrite ()
-    {
+    public get memWrite() {
         return this._memWrite;
     }
 
-    public set irWrite (value: string)
-    {
+    public set irWrite(value: string) {
         this._irWrite = value;
     }
 
-    public get irWrite ()
-    {
+    public get irWrite() {
         return this._irWrite;
     }
 
-    public set memToReg (value: string)
-    {
+    public set memToReg(value: string) {
         this._memToReg = value;
     }
 
-    public get memToReg ()
-    {
+    public get memToReg() {
         return this._memToReg;
     }
 
-    public set pcSource (value: string)
-    {
+    public set pcSource(value: string) {
         this._pcSource = value;
     }
 
-    public get pcSource ()
-    {
+    public get pcSource() {
         return this._pcSource;
     }
 
-    public set targetWrite (value: string)
-    {
+    public set targetWrite(value: string) {
         this._targetWrite = value;
     }
 
-    public get targetWrite ()
-    {
+    public get targetWrite() {
         return this._targetWrite;
     }
 
-    public set aluOp (value: string)
-    {
+    public set aluOp(value: string) {
         this._aluOp = value;
     }
 
-    public get aluOp ()
-    {
+    public get aluOp() {
         return this._aluOp;
     }
 
-    public set aluSelA (value: string)
-    {
+    public set aluSelA(value: string) {
         this._aluSelA = value;
     }
 
-    public get aluSelA ()
-    {
+    public get aluSelA() {
         return this._aluSelA;
     }
 
-    public set aluSelB (value: string)
-    {
+    public set aluSelB(value: string) {
         this._aluSelB = value;
     }
 
-    public get aluSelB ()
-    {
+    public get aluSelB() {
         return this._aluSelB;
     }
 
-    public set regWrite (value: string)
-    {
+    public set regWrite(value: string) {
         this._regWrite = value;
     }
 
-    public get regWrite ()
-    {
+    public get regWrite() {
         return this._regWrite;
     }
 
-    public set regDst (value: string)
-    {
+    public set regDst(value: string) {
         this._regDst = value;
     }
 
-    public get regDst ()
-    {
+    public get regDst() {
         return this._regDst;
     }
 }

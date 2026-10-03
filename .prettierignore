@@ -1,0 +1,5 @@
+.agents/
+.angular/
+dist/
+node_modules/
+skills-lock.json

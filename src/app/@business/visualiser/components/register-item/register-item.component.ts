@@ -1,35 +1,31 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
-import { faCheck, faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { TooltipService } from '../../services/tooltip-service';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from "@angular/core";
+import { faCheck, faEdit, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { TooltipService } from "../../services/tooltip-service";
 
 @Component({
-    selector: 'app-register-item',
-    templateUrl: './register-item.component.html',
-    styleUrls: ['./register-item.component.scss'],
+    selector: "app-register-item",
+    templateUrl: "./register-item.component.html",
+    styleUrls: ["./register-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class RegisterItemComponent
-{
+export class RegisterItemComponent {
     @Input() register: any;
     @Output() submit = new EventEmitter();
     public faEdit = faEdit;
     public faClose = faWindowClose;
     public faCheck = faCheck;
 
-    public constructor (private tooltipService: TooltipService)
-    {
+    public constructor(private tooltipService: TooltipService) {
         this.register = {};
     }
 
-    public handleFormSubmit (register)
-    {
+    public handleFormSubmit(register) {
         this.submit.emit(register);
         register.edit = false;
     }
 
-    public handleEditClick (register)
-    {
+    public handleEditClick(register) {
         if (register.editable) {
             register.edit = true;
             register.editValue = register.value;
@@ -42,14 +38,12 @@ export class RegisterItemComponent
         }
     }
 
-    public handleCloseClick ($event, register)
-    {
+    public handleCloseClick($event, register) {
         register.edit = false;
         $event.stopPropagation();
     }
 
-    public handleMouseMove ($event): void
-    {
+    public handleMouseMove($event): void {
         this.tooltipService.mouseMove($event, false);
     }
 }

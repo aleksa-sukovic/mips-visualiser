@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Clock } from '../../mips/clock/clock';
-import { animate } from 'animejs';
-import { NullClock } from '../../mips/clock/Null/NullClock';
-import Config from '../../mips/library/config/config';
+import { Injectable } from "@angular/core";
+import { Clock } from "../../mips/clock/clock";
+import { animate } from "animejs";
+import { NullClock } from "../../mips/clock/Null/NullClock";
+import Config from "../../mips/library/config/config";
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root",
 })
-export class SvgService
-{
+export class SvgService {
     protected _elements = [];
     protected _activeClock: Clock = new NullClock();
     protected _emphasizedIds: any[] = [];
@@ -16,8 +15,7 @@ export class SvgService
     protected _fadeOutKeyframes = Config.get().visual.opacitySteps;
     protected _animationDuration = Config.get().visual.animationDuration;
 
-    public visualiseClock (clock: Clock)
-    {
+    public visualiseClock(clock: Clock) {
         this._activeClock = clock;
         const clockConfig = Config.clockConfig(clock);
 
@@ -28,8 +26,7 @@ export class SvgService
         animate(this.findElements(clockConfig.focus), { keyframes: this._fadeInKeyframes, duration: this._animationDuration });
     }
 
-    public mouseMove ($event): void
-    {
+    public mouseMove($event): void {
         const tooltip = Config.elementTooltip($event.target, this._activeClock);
         this.deEmphasize(this.findElements(this._emphasizedIds));
 
@@ -39,14 +36,13 @@ export class SvgService
         }
     }
 
-    public emphasize (elements): void
-    {
+    public emphasize(elements): void {
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
                 animate(element, { fill: Config.get().visual.emphasizeTextColor });
             } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
                 animate(element, { fill: Config.get().visual.emphasizeLabelColor });
-            }  else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
+            } else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
                 animate(element, { fill: Config.get().visual.emphasizeComponentColor });
             } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
                 animate(element, { fill: Config.get().visual.emphasizeColor });
@@ -58,8 +54,7 @@ export class SvgService
         });
     }
 
-    public deEmphasize (elements): void
-    {
+    public deEmphasize(elements): void {
         elements.forEach(element => {
             if (Config.elementType(element) === Config.ELEMENT_TEXT) {
                 animate(element, { fill: Config.get().visual.deEmphasizeTextColor });
@@ -77,8 +72,7 @@ export class SvgService
         });
     }
 
-    public set elements (values: NodeListOf<Element>)
-    {
+    public set elements(values: NodeListOf<Element>) {
         this._elements.splice(0, this._elements.length);
 
         values.forEach(it => this._elements.push(it));
@@ -86,8 +80,7 @@ export class SvgService
         this.deEmphasize(this._elements);
     }
 
-    public reset (): void
-    {
+    public reset(): void {
         this.deEmphasize(this._elements);
         this._emphasizedIds = [];
         this._activeClock = new NullClock();
@@ -96,24 +89,27 @@ export class SvgService
         animate(this._elements, { duration: this._animationDuration, keyframes: this._fadeInKeyframes });
     }
 
-    public set animationDuration (value)
-    {
+    public set animationDuration(value) {
         this._animationDuration = value;
     }
 
-    public get animationDuration ()
-    {
+    public get animationDuration() {
         return this._animationDuration;
     }
 
-    protected findElements (ids: any[]): any[]
-    {
+    protected findElements(ids: any[]): any[] {
         if (ids.length === 0) return [];
         const result = [];
 
-        document.querySelectorAll(ids.map(it => {
-            return parseInt(it, 10) ? `[id="${it}"]` : `#${it}`;
-        }).join(',')).forEach(it => result.push(it));
+        document
+            .querySelectorAll(
+                ids
+                    .map(it => {
+                        return parseInt(it, 10) ? `[id="${it}"]` : `#${it}`;
+                    })
+                    .join(","),
+            )
+            .forEach(it => result.push(it));
 
         return result;
     }

@@ -1,10 +1,10 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { VisualiserControllerComponent } from './components/visualiser-controller/visualiser-controller.component';
+import { ModuleWithProviders } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { VisualiserControllerComponent } from "./components/visualiser-controller/visualiser-controller.component";
 
 const routes: Routes = [
     {
-        path: '',
+        path: "",
         component: VisualiserControllerComponent,
     },
 ];

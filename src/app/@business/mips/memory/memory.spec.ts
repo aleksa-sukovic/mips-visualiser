@@ -1,14 +1,14 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Memory } from './memory';
+import { Memory } from "./memory";
 
-describe('Memory', () => {
+describe("Memory", () => {
     let memory: Memory = null;
 
-    beforeAll(() => memory = new Memory());
+    beforeAll(() => (memory = new Memory()));
 
-    it('Sets data to memory address', () => {
-        memory.set('123', 10);
+    it("Sets data to memory address", () => {
+        memory.set("123", 10);
 
-        expect(memory.get('123')).toBe(10);
+        expect(memory.get("123")).toBe(10);
     });
 });

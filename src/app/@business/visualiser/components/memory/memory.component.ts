@@ -1,44 +1,39 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { MemoryService } from '../../services/memory.service';
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { MemoryService } from "../../services/memory.service";
 
 @Component({
-    selector: 'app-memory',
-    templateUrl: './memory.component.html',
-    styleUrls: ['./memory.component.scss'],
+    selector: "app-memory",
+    templateUrl: "./memory.component.html",
+    styleUrls: ["./memory.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class MemoryComponent
-{
+export class MemoryComponent {
     public memory: any[];
     public faPlus = faPlus;
 
-    public constructor (private memoryService: MemoryService)
-    {
+    public constructor(private memoryService: MemoryService) {
         this.memory = memoryService.memory();
     }
 
-    public handleMemoryEdit (memoryItem): void
-    {
+    public handleMemoryEdit(memoryItem): void {
         this.memoryService.updateMemory(memoryItem);
     }
 
-    public handleMemoryItemDelete (memoryItem): void
-    {
+    public handleMemoryItemDelete(memoryItem): void {
         this.memoryService.deleteFromMemory(memoryItem.id);
     }
 
-    public handleAddButtonClick (): void
-    {
-        const addNewItemInputVisible = this.memory.find(it => it.id === 'new');
+    public handleAddButtonClick(): void {
+        const addNewItemInputVisible = this.memory.find(it => it.id === "new");
 
         if (addNewItemInputVisible) {
             return;
         }
 
         this.memory.push({
-            id: 'new',
+            id: "new",
             address: 1,
             value: 0,
             edit: true,
@@ -46,7 +41,7 @@ export class MemoryComponent
             editAddress: 1,
         });
         setTimeout(() => {
-            const element = document.getElementById('item_new_address');
+            const element = document.getElementById("item_new_address");
 
             element.focus();
             (element as HTMLInputElement).select();

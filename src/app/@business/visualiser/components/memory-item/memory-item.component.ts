@@ -1,34 +1,30 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
-import { faCheck, faTrash, } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from "@angular/core";
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-    selector: 'app-memory-item',
-    templateUrl: './memory-item.component.html',
-    styleUrls: ['./memory-item.component.scss'],
+    selector: "app-memory-item",
+    templateUrl: "./memory-item.component.html",
+    styleUrls: ["./memory-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class MemoryItemComponent
-{
+export class MemoryItemComponent {
     @Input() item;
     @Output() submit = new EventEmitter();
     @Output() delete = new EventEmitter();
     public faCheck = faCheck;
     public faTrash = faTrash;
 
-    public constructor ()
-    {
+    public constructor() {
         //
     }
 
-    public handleFormSubmit (item): void
-    {
+    public handleFormSubmit(item): void {
         this.submit.emit(item);
         item.edit = false;
     }
 
-    public handleEditClick (item): void
-    {
+    public handleEditClick(item): void {
         item.edit = true;
         setTimeout(() => {
             const element = document.getElementById(`item_${item.id}_value`);
@@ -38,8 +34,7 @@ export class MemoryItemComponent
         });
     }
 
-    public handleItemDelete (item): void
-    {
+    public handleItemDelete(item): void {
         this.delete.emit(item);
     }
 }

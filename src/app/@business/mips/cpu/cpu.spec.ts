@@ -1,26 +1,28 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import { InstructionFactory } from '../instruction/factories/instruction-factory';
-import { Clock } from '../clock/clock';
-import { Clock1 } from '../clock/1/clock-1';
-import Config from '../library/config/config';
-import { CPU } from './cpu';
+import { InstructionFactory } from "../instruction/factories/instruction-factory";
+import { Clock } from "../clock/clock";
+import { Clock1 } from "../clock/1/clock-1";
+import Config from "../library/config/config";
+import { CPU } from "./cpu";
 
-describe('CPU', () => {
+describe("CPU", () => {
     let cpu: CPU = null;
 
-    beforeAll(() => cpu = new CPU());
+    beforeAll(() => (cpu = new CPU()));
 
-    it('properly initialises CPU when simulate method is called', () => {
-        const instruction = InstructionFactory.fromSymbolic('add $a0, $v0, $v1');
+    it("properly initialises CPU when simulate method is called", () => {
+        const instruction = InstructionFactory.fromSymbolic("add $a0, $v0, $v1");
 
         cpu.simulate(instruction);
 
-        expect(cpu.memory.get(cpu.register('$pc').value)).toBe(instruction.binary);
+        expect(cpu.memory.get(cpu.register("$pc").value)).toBe(instruction.binary);
     });
 
-    it('resets control unit after each clock', () => {
+    it("resets control unit after each clock", () => {
         class TestClock implements Clock {
-            public id(): string { return ''; }
+            public id(): string {
+                return "";
+            }
             public execute(aCpu: CPU): void {
                 const defaultCPU = new CPU();
 
@@ -41,8 +43,8 @@ describe('CPU', () => {
             }
         }
 
-        const instruction = InstructionFactory.fromSymbolic('add $1, $2, $3');
-        vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock1(Config.get().word_length), new TestClock()]);
+        const instruction = InstructionFactory.fromSymbolic("add $1, $2, $3");
+        vi.spyOn(instruction, "clocks", "get").mockReturnValue([new Clock1(Config.get().word_length), new TestClock()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();

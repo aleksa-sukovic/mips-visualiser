@@ -4,9 +4,7 @@
         "outDir": "../out-tsc/app",
         "types": []
     },
-    "exclude": [
-        "**/*.spec.ts"
-    ],
+    "exclude": ["**/*.spec.ts"],
     "angularCompilerOptions": {
         "extendedDiagnostics": {
             "checks": {

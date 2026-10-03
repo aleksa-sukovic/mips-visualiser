@@ -1,25 +1,10 @@
 {
     "extends": "../tslint.json",
     "rules": {
-        "directive-selector": [
-            true,
-            "attribute",
-            "app",
-            "camelcase"
-        ],
-        "component-selector": [
-            true,
-            "element",
-            "app",
-            "kebab-case"
-        ],
+        "directive-selector": [true, "attribute", "app", "camelcase"],
+        "component-selector": [true, "element", "app", "kebab-case"],
         "variable-name": {
-            "options": [
-                "ban-keywords",
-                "check-format",
-                "allow-leading-underscore",
-                "allow-pascal-case"
-            ]
+            "options": ["ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
         },
         "no-trailing-whitespace": false,
         "prefer-for-of": false,

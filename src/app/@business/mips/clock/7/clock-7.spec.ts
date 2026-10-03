@@ -1,42 +1,42 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import { CPU } from '../../cpu/cpu';
-import { BinaryEncoder } from '../../library/binary-encoder/binary-encoder';
-import { InstructionFactory } from '../../instruction/factories/instruction-factory';
-import { Clock7 } from './clock-7';
-import { Clock3 } from '../3/clock-3';
-import Config from '../../library/config/config';
+import { CPU } from "../../cpu/cpu";
+import { BinaryEncoder } from "../../library/binary-encoder/binary-encoder";
+import { InstructionFactory } from "../../instruction/factories/instruction-factory";
+import { Clock7 } from "./clock-7";
+import { Clock3 } from "../3/clock-3";
+import Config from "../../library/config/config";
 
-describe('Clock 7', () => {
+describe("Clock 7", () => {
     let cpu: CPU = null;
     const encoder = new BinaryEncoder();
 
-    beforeAll(() => cpu = new CPU());
+    beforeAll(() => (cpu = new CPU()));
 
-    it('sets the CPU control signals', () => {
-        const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock7()]);
+    it("sets the CPU control signals", () => {
+        const instruction = InstructionFactory.fromSymbolic("lw $1, 128($2)");
+        const spy = vi.spyOn(instruction, "clocks", "get").mockReturnValue([new Clock7()]);
 
         cpu.simulate(instruction);
         cpu.nextClock();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.control.memRead).toBe('1');
-        expect(cpu.control.lorD).toBe('1');
+        expect(cpu.control.memRead).toBe("1");
+        expect(cpu.control.lorD).toBe("1");
     });
 
-    it('reads data from calculated offset', () => {
-        const instruction = InstructionFactory.fromSymbolic('lw $1, 128($2)');
-        const spy = vi.spyOn(instruction, 'clocks', 'get').mockReturnValue([new Clock3(Config.get().word_length), new Clock7()]);
+    it("reads data from calculated offset", () => {
+        const instruction = InstructionFactory.fromSymbolic("lw $1, 128($2)");
+        const spy = vi.spyOn(instruction, "clocks", "get").mockReturnValue([new Clock3(Config.get().word_length), new Clock7()]);
         const memoryAddress = encoder.binary(128 + 1000, Config.get().word_length);
         const memoryData = encoder.binary(111, Config.get().word_length);
 
-        cpu.register('$2').value = encoder.binary(1000, Config.get().word_length);
+        cpu.register("$2").value = encoder.binary(1000, Config.get().word_length);
         cpu.memory.set(memoryAddress, memoryData);
 
         cpu.simulate(instruction);
         cpu.execute();
 
         expect(spy).toHaveBeenCalled();
-        expect(cpu.register('$memData').value).toBe(memoryData);
+        expect(cpu.register("$memData").value).toBe(memoryData);
     });
 });

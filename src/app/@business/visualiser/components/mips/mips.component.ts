@@ -1,34 +1,31 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { SvgService } from '../../services/svg.service';
-import { CPUService } from '../../services/cpu.services';
-import { TooltipService } from '../../services/tooltip-service';
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { SvgService } from "../../services/svg.service";
+import { CPUService } from "../../services/cpu.services";
+import { TooltipService } from "../../services/tooltip-service";
 
 @Component({
-    selector: 'app-mips',
-    templateUrl: './mips.component.html',
-    styleUrls: ['./mips.component.scss'],
+    selector: "app-mips",
+    templateUrl: "./mips.component.html",
+    styleUrls: ["./mips.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class MipsComponent implements OnInit
-{
+export class MipsComponent implements OnInit {
     public svg: any;
 
-    public constructor (
+    public constructor(
         private svgService: SvgService,
         private cpuService: CPUService,
-        private tooltipService: TooltipService
+        private tooltipService: TooltipService,
     ) {
         //
     }
 
-    public ngOnInit (): void
-    {
-        this.svgService.elements = document.querySelectorAll('text,path,circle,g,rect');
+    public ngOnInit(): void {
+        this.svgService.elements = document.querySelectorAll("text,path,circle,g,rect");
     }
 
-    public handleMouseMove ($event)
-    {
+    public handleMouseMove($event) {
         this.svgService.mouseMove($event);
         this.tooltipService.mouseMove($event);
     }

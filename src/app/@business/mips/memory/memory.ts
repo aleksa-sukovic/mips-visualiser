@@ -1,29 +1,23 @@
-export class Memory
-{
+export class Memory {
     protected _store: any;
 
-    public constructor ()
-    {
+    public constructor() {
         this._store = {};
     }
 
-    public set (key: string, value: any): void
-    {
+    public set(key: string, value: any): void {
         this._store[key] = value;
     }
 
-    public get (key: string): any
-    {
+    public get(key: string): any {
         return this._store[key];
     }
 
-    public destroy (key: string): void
-    {
+    public destroy(key: string): void {
         delete this._store[key];
     }
 
-    public reset (): void
-    {
+    public reset(): void {
         for (const key in this._store) {
             if (this._store.hasOwnProperty(key)) {
                 delete this._store[key];
@@ -31,8 +25,7 @@ export class Memory
         }
     }
 
-    public addresses (): any[]
-    {
+    public addresses(): any[] {
         const result = [];
         for (const key in this._store) {
             if (this._store.hasOwnProperty(key)) {
@@ -42,8 +35,7 @@ export class Memory
         return result;
     }
 
-    public store (): any
-    {
+    public store(): any {
         return this._store;
     }
 }

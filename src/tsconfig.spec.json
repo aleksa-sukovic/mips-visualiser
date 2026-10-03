@@ -4,11 +4,7 @@
         "outDir": "../out-tsc/spec",
         "types": []
     },
-    "include": [
-        "polyfills.ts",
-        "**/*.spec.ts",
-        "**/*.d.ts"
-    ],
+    "include": ["polyfills.ts", "**/*.spec.ts", "**/*.d.ts"],
     "angularCompilerOptions": {
         "extendedDiagnostics": {
             "checks": {

@@ -1,51 +1,48 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CPUService } from '../../services/cpu.services';
-import { SvgService } from '../../services/svg.service';
-import { RegistersService } from '../../services/registers.service';
-import { MemoryService } from '../../services/memory.service';
-import { ToastService } from '../../../../@shared/services/toast.service';
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { CPUService } from "../../services/cpu.services";
+import { SvgService } from "../../services/svg.service";
+import { RegistersService } from "../../services/registers.service";
+import { MemoryService } from "../../services/memory.service";
+import { ToastService } from "../../../../@shared/services/toast.service";
 
 @Component({
-    selector: 'app-visualiser-controller',
-    templateUrl: './visualiser-controller.html',
-    styleUrls: ['./visualiser-controller.component.scss'],
+    selector: "app-visualiser-controller",
+    templateUrl: "./visualiser-controller.html",
+    styleUrls: ["./visualiser-controller.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    standalone: false,
 })
-export class VisualiserControllerComponent
-{
+export class VisualiserControllerComponent {
     private _interval: any = null;
     public _intervalSpeed = 0;
 
-    public constructor (
+    public constructor(
         private cpuService: CPUService,
         private registersService: RegistersService,
         private memoryService: MemoryService,
         private svgService: SvgService,
         private toastrService: ToastService,
     ) {
-        this._intervalSpeed  = this.svgService.animationDuration;
+        this._intervalSpeed = this.svgService.animationDuration;
     }
 
-    public handleInstructionLoad (instruction): void
-    {
+    public handleInstructionLoad(instruction): void {
         try {
             this.cpuService.load(instruction);
             this.registersService.refreshRegisters();
             this.memoryService.refreshMemory();
-            this.toastrService.success('Instruction loaded');
+            this.toastrService.success("Instruction loaded");
             this.svgService.reset();
-            this.scrollTo('MIPS');
+            this.scrollTo("MIPS");
         } catch (e) {
-            this.toastrService.error('Instruction is either not valid or unsupported');
+            this.toastrService.error("Instruction is either not valid or unsupported");
         }
     }
 
-    public handleSimulateClick ()
-    {
+    public handleSimulateClick() {
         if (!this.cpuService.loaded) {
-            this.toastrService.warning('Please load instruction.');
-            this.scrollTo('HEADER');
+            this.toastrService.warning("Please load instruction.");
+            this.scrollTo("HEADER");
             return;
         }
 
@@ -53,20 +50,18 @@ export class VisualiserControllerComponent
         this._interval = setInterval(() => this.handleForwardClick(), this._intervalSpeed);
     }
 
-    public handleReset (): void
-    {
+    public handleReset(): void {
         this.cpuService.cpu.reset();
         this.registersService.refreshRegisters();
         this.memoryService.refreshMemory();
         this.svgService.reset();
     }
 
-    public handleForwardClick ()
-    {
+    public handleForwardClick() {
         // Check if instruction is loaded
         if (!this.cpuService.loaded) {
-            this.toastrService.warning('Please load instruction.');
-            this.scrollTo('HEADER');
+            this.toastrService.warning("Please load instruction.");
+            this.scrollTo("HEADER");
             return;
         }
 
@@ -80,22 +75,20 @@ export class VisualiserControllerComponent
         if (!this.cpuService.executing) {
             if (this._interval) clearInterval(this._interval);
 
-            this.toastrService.success('Successfully executed instruction');
+            this.toastrService.success("Successfully executed instruction");
         }
     }
 
-    public handleAnimationSpeedChange (speed): void
-    {
+    public handleAnimationSpeedChange(speed): void {
         this.svgService.animationDuration = speed;
         this._intervalSpeed = speed * 2;
     }
 
-    protected scrollTo (id: string): void
-    {
+    protected scrollTo(id: string): void {
         const element = document.getElementById(id);
 
         if (element) {
-            (element as HTMLElement).scrollIntoView({ behavior: 'smooth' });
+            (element as HTMLElement).scrollIntoView({ behavior: "smooth" });
         }
     }
 }

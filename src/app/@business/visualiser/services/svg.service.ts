@@ -54,20 +54,24 @@ export class SvgService {
         });
     }
 
-    public deEmphasize(elements): void {
+    public deEmphasize(elements, animated = true): void {
         elements.forEach(element => {
-            if (Config.elementType(element) === Config.ELEMENT_TEXT) {
-                animate(element, { fill: Config.get().visual.deEmphasizeTextColor });
-            } else if (Config.elementType(element) === Config.ELEMENT_LABEL) {
-                animate(element, { fill: Config.get().visual.deEmphasizeLabelColor });
-            } else if (Config.elementType(element) === Config.ELEMENT_COMPONENT) {
-                animate(element, { fill: Config.get().visual.deEmphasizeComponentColor });
-            } else if (Config.elementType(element) === Config.ELEMENT_ARROW) {
-                animate(element, { fill: Config.get().visual.deEmphasizeColor });
-            } else if (Config.elementType(element) === Config.ELEMENT_PATH) {
-                animate(element, { stroke: Config.get().visual.deEmphasizeColor });
+            const type = Config.elementType(element);
+            const attribute = type === Config.ELEMENT_PATH ? "stroke" : "fill";
+            let color = Config.get().visual.deEmphasizeColor;
+
+            if (type === Config.ELEMENT_TEXT) {
+                color = Config.get().visual.deEmphasizeTextColor;
+            } else if (type === Config.ELEMENT_LABEL) {
+                color = Config.get().visual.deEmphasizeLabelColor;
+            } else if (type === Config.ELEMENT_COMPONENT) {
+                color = Config.get().visual.deEmphasizeComponentColor;
+            }
+
+            if (animated) {
+                animate(element, { [attribute]: color });
             } else {
-                animate(element, { fill: Config.get().visual.deEmphasizeColor });
+                element.setAttribute(attribute, color);
             }
         });
     }
@@ -77,7 +81,10 @@ export class SvgService {
 
         values.forEach(it => this._elements.push(it));
 
-        this.deEmphasize(this._elements);
+        // Apply the initial SVG theme synchronously. Anime.js v4 schedules writes
+        // for a later frame, which caused the raw white SVG to flash or remain
+        // visible during Angular's initial render.
+        this.deEmphasize(this._elements, false);
     }
 
     public reset(): void {

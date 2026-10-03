@@ -1,3 +1,26 @@
 @config "../tailwind.config.js";
 @import "tailwindcss";
 @import "./assets/styles/toastr.css";
+
+/*
+ * Tailwind v4's built-in CSS theme takes precedence over our legacy JS
+ * configuration. Clear its palette so the existing project colors are used,
+ * and restore the default radius that v4 no longer reads from the lowercase
+ * `default` key in tailwind.config.js.
+ */
+@theme {
+    --color-*: initial;
+    --color-zinc-600: #52525b;
+    --radius: 0.25rem;
+}
+
+/* Tailwind v3 used our configured gray-300 as the default border color. */
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: #e2e8f0;
+    }
+}
